@@ -18,3 +18,9 @@ Route::get('/', function () {
     // echo("Hello");
     return view('top');
 });
+Route::get('/newReserve',function() {
+    return view('newReserve');
+});
+Route::get('/login',function(){
+    return view('login');
+});
