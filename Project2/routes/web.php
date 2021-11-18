@@ -26,5 +26,6 @@ Route::get('/login',function(){
 //処理有
 Route::get('/selectPlace', 'App\Http\Controllers\VaccineController@place');
 Route::get('/selectDay','App\Http\Controllers\Vaccinecontroller@day');
-// Route::get('/selectPlace', 'App\Http\Controllers\Vaccinecontroller@place');
+Route::get('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
+Route::get('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
 // Route::resource('vaccine','app\Http\Controllers\VaccineController::class');

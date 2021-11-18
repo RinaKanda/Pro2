@@ -25,4 +25,12 @@ class VaccineController extends Controller
     public function day(){
         return view('vaccine/selectDay');
     }
+
+    public function Time(){
+        return view('vaccine/selectTime');
+    }
+
+    public function confirm(){
+        return view('reserveConfirm');
+    }
 }
