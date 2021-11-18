@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 //use request
-//use model
+use App\Models\clinic;
 
 class VaccineController extends Controller
 {
@@ -16,7 +16,7 @@ class VaccineController extends Controller
         return view('newReserve');
     }
     public function place(){
-        // $clinics = clinics::;
+        $clinics = clinic::all();
 
         return view('vaccine/selectPlace',compact('clinics'));
     }
