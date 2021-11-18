@@ -1,17 +1,13 @@
 <!-- 会場選択 -->
-<body>
-    <table class="table text-center">
-                <tr>
-                    <th class="text-center">ID</th> -->
-                </tr> 
-                    <td>{{ $clinics }}</td>
-            @foreach($clinics as $clinic)
-                <tr>
-                    <td>{{ $clinic->clinic_id }}</td>
 
-                </tr>
-            @endforeach
-             
-                                
+<body>
+<table class="table text-center">
+            <tr>
+                <th class="text-center">ID</th> 
+            </tr> 
+            <tr>
+            <td>{{ $clinics ?? '病院が見つからないよ！' }}</td>
+</tr>   
+</table>       
 <a href="/selectDay">送信</a>
 </body>
