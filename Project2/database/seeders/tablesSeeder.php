@@ -28,9 +28,10 @@ class tablesSeeder extends Seeder
             'address' => '京都府京都市伏見区'],
         ]);
 
-        foreach($clinics as $clinic){
-            \App\clinic::create($clinic);
-        }
+
+        // foreach($clinics as $clinic){
+        //     \App\Models\clinic::create($clinic);
+        // }
         
     }
 }

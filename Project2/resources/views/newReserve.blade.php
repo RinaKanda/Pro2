@@ -8,7 +8,7 @@
     <h1>接種券番号</h1>
     <form class="checkform"  method="post" action="***">
         <input type="text" pattern="^[0-9]{10}" required>
-        <p><a href="/selectPlace">a</a><input type="submit" value="送信"></p>
+        <p><a href="/selectPlace">送信</a><input type="submit" value="送信"></p></a>
     </form> 
 </body>
 </html>

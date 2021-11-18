@@ -22,8 +22,9 @@ Route::get('/newReserve',function() {
 Route::get('/login',function(){
     return view('login');
 });
-// Route::get('/selectPlace',function() {
-//     return view('vaccine/selectPlace');
-// });
-Route::get('/selectPlace', 'App\Http\Controllers\Vaccinecontroller@place');
+Route::get('/selectPlace',function() {
+    return view('vaccine/selectPlace');
+});
+Route::get('/selectDay','App\Http\Controllers\Vaccinecontroller@day');
+// Route::get('/selectPlace', 'App\Http\Controllers\Vaccinecontroller@place');
 // Route::resource('vaccine','app\Http\Controllers\VaccineController::class');

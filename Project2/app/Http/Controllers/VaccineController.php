@@ -16,8 +16,11 @@ class VaccineController extends Controller
         return view('newReserve');
     }
     public function place(){
+        
         $clinics = clinic::all();
-
-        return view('vaccine/selectPlace',compact('clinics'));
+            return view('vaccine/selectPlace',compact('clinics'));
+    }
+    public function day(){
+        return view('vaccine/selectDay');
     }
 }
