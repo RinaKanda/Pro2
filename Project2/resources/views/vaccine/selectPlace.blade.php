@@ -15,7 +15,7 @@
             @foreach($clinics as $key => $clinic)
                 <tr>
                     <td>{{ $clinic->clinic_name }}</td>
-
+                    <td>{{ $clinic->address }}</td>
                 </tr>
             @endforeach
 </tr>   

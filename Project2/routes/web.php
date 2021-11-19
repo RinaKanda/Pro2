@@ -22,6 +22,9 @@ Route::get('/newReserve',function() {
 Route::get('/login',function(){
     return view('login');
 });
+Route::get('reserveFinish',function(){
+    return view('reserveFinish');
+});
 
 //処理有
 Route::get('/selectPlace', 'App\Http\Controllers\VaccineController@place');
