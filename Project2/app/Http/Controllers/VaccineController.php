@@ -11,11 +11,6 @@ class VaccineController extends Controller
 {
     //
 
-    public function show(){
-        echo("HEllo");
-        return view('newReserve');
-    }
-
     public function place(){
         
         $clinics = clinic::all();
