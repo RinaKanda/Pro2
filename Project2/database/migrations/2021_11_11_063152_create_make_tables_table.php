@@ -56,9 +56,13 @@ class CreateMakeTablesTable extends Migration
      */
     public function down()
     {
+<<<<<<< HEAD
         Schema::dropIfExists('reserves');
         Schema::dropIfExists('reserve_people');
         Schema::dropIfExists('vaccination_datas');
         Schema::dropIfExists('clinics');
+=======
+        Schema::dropIfExists('make_tables');
+>>>>>>> c2063d861c90a8398e304f06a3ad7184119c1261
     }
 }
