@@ -14,7 +14,6 @@ class tablesSeeder extends Seeder
      */
     public function run()
     {
-<<<<<<< HEAD
         //DB::table('reserves')->truncate();
         //DB::table('reserve_people')->truncate();
         //DB::table('vaccination_datas')->truncate();
@@ -169,26 +168,6 @@ class tablesSeeder extends Seeder
         foreach($vaccination_datas as $vaccination_data){
             \App\Models\Vaccination_data::create($vaccination_data);
         } */
-=======
-        //DB::table('clinics')->truncate();
-
-        \DB::table('clinics')->insert([
-            ['clinic_id' => 1000,
-            'clinic_name' => 'A病院',
-            'address' => '京都府京都市左京区'],
-            ['clinic_id' => 2000,
-            'clinic_name' => 'B病院',
-            'address' => '京都府京都市左京区'],
-            ['clinic_id' => 3000,
-            'clinic_name' => 'Cクリニック',
-            'address' => '京都府京都市伏見区'],
-        ]);
-
-
-        // foreach($clinics as $clinic){
-        //     \App\Models\clinic::create($clinic);
-        // }
->>>>>>> c2063d861c90a8398e304f06a3ad7184119c1261
         
     }
 }
