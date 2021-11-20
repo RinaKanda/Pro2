@@ -12,10 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//処理なし
 Route::get('/', function () {
-    //return view('welcome');
-    // echo("Hello");
     return view('top');
 });
 Route::get('/newReserve',function() {
@@ -24,3 +22,13 @@ Route::get('/newReserve',function() {
 Route::get('/login',function(){
     return view('login');
 });
+Route::get('reserveFinish',function(){
+    return view('reserveFinish');
+});
+
+//処理有
+Route::get('/selectPlace', 'App\Http\Controllers\VaccineController@place');
+Route::get('/selectDay','App\Http\Controllers\Vaccinecontroller@day');
+Route::get('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
+Route::get('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
+// Route::resource('vaccine','app\Http\Controllers\VaccineController::class');
