@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 //use request
 use App\Models\clinic;
+use App\Models\vaccination_data;
+
 
 class VaccineController extends Controller
 {
@@ -18,11 +20,15 @@ class VaccineController extends Controller
     }
 
     public function day(){
-        return view('vaccine/selectDay');
+
+        $vacdatas = vaccination_data::all();
+        return view('vaccine/selectDay',compact('vacdatas'));
     }
 
     public function Time(){
-        return view('vaccine/selectTime');
+
+        $vacdatas = vaccination_data::all();
+        return view('vaccine/selectTime',compact('vacdatas'));
     }
 
     public function confirm(){
