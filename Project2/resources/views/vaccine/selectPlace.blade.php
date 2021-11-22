@@ -8,7 +8,8 @@
 <body>
 <table class="table text-center">
             <tr>
-                <th class="text-center">ID</th> 
+                <th class="text-center">病院名</th> 
+                <th class="text-center">住所</th> 
             </tr> 
             <tr>
             <!-- <td>{{ $clinics ?? '病院が見つからないよ！' }}</td> -->
