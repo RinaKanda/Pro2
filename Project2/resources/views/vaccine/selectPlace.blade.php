@@ -8,10 +8,13 @@
 <!-- <script src="resources/js/jquery/jquey-2.1.3.js"></script> -->
 <script>
         function ok(key){
-            alert("ok:key" + key);
+            console.log("ok:key" + key);
+            var key01 = key;
+            console.log(key01);
         }
         $(function(){
-            $('#colums').click(function(){
+            $('.colums').click(function(){
+                $("*").removeClass("selected");
                 $(this).addClass("selected");
             })
         });
@@ -28,13 +31,13 @@
             <tr>
             <!-- <td>{{ $clinics ?? '病院が見つからないよ！' }}</td> -->
             @foreach($clinics as $key => $clinic)
-                <tr id="colums" onclick="ok({{ $clinic->clinic_id }})">
+                <tr class="colums" onclick="ok({{ $clinic->clinic_id }})">
                     <td>{{ $clinic->clinic_name }}</td>
                     <td>{{ $clinic->address }}</td>
                 </tr>
             @endforeach
 </tr>   
 </table>       
-<a href="/selectDay">送信</a>
+<a href="/selectDay(key01)">送信</a>
 </body>
 </html>
