@@ -15,10 +15,12 @@
             <tr>
             
             @foreach($vacdatas as $key => $vacdata)
+                <div onclick="ok">
                 <tr>
                     <td>{{ $vacdata->clinic_id }}</td>
                     <td>{{ $vacdata->vaccination_time }}</td>
                 </tr>
+                </div>
             @endforeach
 </tr>   
 </table>       
