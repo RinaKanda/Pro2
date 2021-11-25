@@ -4,8 +4,9 @@
 <head>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script>
-        function ok(){
-            alert("ok");
+        function ok(key){
+            alert("ok:key" + key);
+            
         }
     </script>
     <meta charset="UTF-8">
@@ -20,7 +21,7 @@
             <tr>
             <!-- <td>{{ $clinics ?? '病院が見つからないよ！' }}</td> -->
             @foreach($clinics as $key => $clinic)
-                <tr>
+                <tr onclick="ok({{ $clinic->clinic_id }})">
                     <td>{{ $clinic->clinic_name }}</td>
                     <td>{{ $clinic->address }}</td>
                 </tr>
