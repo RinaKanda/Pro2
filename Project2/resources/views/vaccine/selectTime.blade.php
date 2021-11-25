@@ -3,11 +3,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <script>
-        function ok(){
-            alert("ok");
-        }
-    </script>
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
@@ -20,10 +15,12 @@
             <tr>
             
             @foreach($vacdatas as $key => $vacdata)
-                <tr onclick="ok">
+                <div onclick="ok">
+                <tr>
                     <td>{{ $vacdata->clinic_id }}</td>
                     <td>{{ $vacdata->vaccination_time }}</td>
                 </tr>
+                </div>
             @endforeach
 </tr>   
 </table>       

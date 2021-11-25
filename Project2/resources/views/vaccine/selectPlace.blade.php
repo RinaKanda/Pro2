@@ -2,6 +2,12 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+        function ok(){
+            alert("ok");
+        }
+    </script>
     <meta charset="UTF-8">
     <title>Document</title>
 </head>
