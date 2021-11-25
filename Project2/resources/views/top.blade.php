@@ -8,4 +8,4 @@
     <a href="/newReserve">新規予約</a><br>
     
     <a href="/login">予約を確認・変更</a>
-    
+</body>   

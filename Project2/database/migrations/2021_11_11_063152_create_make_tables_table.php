@@ -41,7 +41,6 @@ class CreateMakeTablesTable extends Migration
             $table->integer('reserve_person_id');
             $table->integer('vaccination_data_id');
             $table->string('email');
-            $table->time('vaccination_time');
             $table->dateTime('created_at');
 
             $table->foreign('vaccination_data_id')->references('vaccination_data_id')->on('vaccination_datas');
