@@ -26,6 +26,7 @@ class CreateMakeTablesTable extends Migration
             $table->time('vaccination_time');
             $table->integer('capacity');
             $table->integer('reserve_counts');
+            $table->integer('cancel');
 
             $table->foreign('clinic_id')->references('clinic_id')->on('clinics');
         });
