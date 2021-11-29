@@ -7,17 +7,24 @@
 
 <!-- <script src="resources/js/jquery/jquey-2.1.3.js"></script> -->
 <script>
+    var key01 = null;
         function ok(key){
             console.log("ok:key" + key);
             var key01 = key;
             console.log(key01);
+            $(function(){
+                $("#place").val(key01);
+            })
+            // var value = $('input[value="value"]').attr('value', key01);
         }
+        
         $(function(){
             $('.colums').click(function(){
                 $("*").removeClass("selected");
                 $(this).addClass("selected");
-            })
+            });
         });
+        
     </script>
     <meta charset="UTF-8">
     <title>Document</title>
@@ -37,7 +44,15 @@
                 </tr>
             @endforeach
 </tr>   
-</table>       
-<a href="/selectDay(key01)">送信</a>
+</table>
+<form action="/selectDay/{key01}" method="post">
+	<input type="hidden" id="place" name="place" value="value">
+    @csrf
+    <input type="submit">
+</form>
+<!-- <a href='/selectDay/{key01}'><button class="button">送信</button></a> -->
+
+
 </body>
 </html>
+

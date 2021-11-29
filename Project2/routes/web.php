@@ -25,10 +25,14 @@ Route::get('/login',function(){
 Route::get('reserveFinish',function(){
     return view('reserveFinish');
 });
+// Route::get('/selectDay/{key01}',function($key01){
+//     return 'key01 '.$key01;
+// });
 
 //処理有
 Route::get('/selectPlace', 'App\Http\Controllers\VaccineController@place');
-Route::get('/selectDay','App\Http\Controllers\Vaccinecontroller@day');
+Route::get('/selectDay/{key01}','App\Http\Controllers\Vaccinecontroller@day');
+Route::post('/selectDay/{key01}','App\Http\Controllers\Vaccinecontroller@day');
 Route::get('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
 Route::get('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
 // Route::resource('vaccine','app\Http\Controllers\VaccineController::class');
