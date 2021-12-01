@@ -4,7 +4,13 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/css/all.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
+<style>
+    body{
+        margin-right: auto;
+        margin-left: auto;
+        width: 400px;
+    }
+</style>
 <!-- <script src="resources/js/jquery/jquey-2.1.3.js"></script> -->
 <script>
     var key01 = null;

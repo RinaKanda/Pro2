@@ -4,6 +4,10 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/css/all.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="/demos/style.css" />
 <script>
     var key01 = null;
         function ok(day){
@@ -17,10 +21,20 @@
                 $(this).addClass("selected");
             });
         });
-        
+
+        $(function() {
+    $( "#datepicker" ).datepicker();
+  });
 </script>
     <meta charset="UTF-8">
     <title>Document</title>
+    <style>
+        body{
+            margin-right: auto;
+            margin-left: auto;
+            width: 400px;
+        }
+    </style>
 </head>
 <body>
             @foreach($place as $key => $clinic)
@@ -39,5 +53,7 @@
 </tr>   
 </table>       
 <a href="/selectTime">選択</a>
+
+<div id="datepicker"></div>
 </body>
 </html>
