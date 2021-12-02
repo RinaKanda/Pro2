@@ -4,14 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-//use request
+//use Model
 use App\Models\clinic;
 use App\Models\vaccination_data;
 
 
 class VaccineController extends Controller
 {
-    //
+    //新規登録
+    public function register(Request $request){
+        $return  = $request->input('val');
+
+        if($return == "top"){
+            return view('top');
+        } else {
+            return view("newReserve");
+        } 
+    }
     //新規予約
     public function newRegister(Request $request){
         $keyReg = $request->input('val');
@@ -30,8 +39,6 @@ class VaccineController extends Controller
         $vacdatas = vaccination_data::where('clinic_id',$key)->get();
         $place = clinic::select('clinic_name')->where('clinic_id',$key)->get();
         
-        // $vacdatas = vaccination_data::all();clinic_name
-        // echo $place;
         return view('vaccine/selectDay',compact('vacdatas','place'));
     }
 
