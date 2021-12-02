@@ -13,38 +13,41 @@ class CreateMakeTablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('clinics', function (Blueprint $table) {
-            $table->integer('clinic_id')->primary();
-            $table->string('clinic_name');
+        Schema::create('places', function (Blueprint $table) {
+            $table->integer('place_id')->primary();
+            $table->string('place_name');
             $table->string('address');
         });
 
-        Schema::create('vaccination_datas', function (Blueprint $table) {
-            $table->integer('vaccination_data_id')->primary();
-            $table->integer('clinic_id');
-            $table->date('vaccination_date');
-            $table->time('vaccination_time');
+        Schema::create('reservation_datas', function (Blueprint $table) {
+            $table->integer('reservation_data_id')->primary();
+            $table->integer('place_id');
+            $table->date('reservation_date');
+            $table->time('reservation_time');
             $table->integer('capacity');
             $table->integer('reserve_counts');
-            $table->integer('cancel');
+            $table->integer('cancel')->nullable();
 
-            $table->foreign('clinic_id')->references('clinic_id')->on('clinics');
+            $table->foreign('place_id')->references('place_id')->on('places');
         });
 
         Schema::create('reserve_people', function (Blueprint $table) {
             $table->integer('Reserve_person_id')->primary();
             $table->string('tickets_number');
             $table->string('birthday');
+            $table->string('pass');
+            $table->string('email');
+            $table->string('family_name');
+            $table->string('firsta_name');
         });
 
         Schema::create('reserves', function (Blueprint $table) {
             $table->integer('reserve_id')->primary();
             $table->integer('reserve_person_id');
-            $table->integer('vaccination_data_id');
-            $table->string('email');
+            $table->integer('reservation_data_id');
             $table->dateTime('created_at');
 
-            $table->foreign('vaccination_data_id')->references('vaccination_data_id')->on('vaccination_datas');
+            $table->foreign('reservation_data_id')->references('reservation_data_id')->on('reservation_datas');
             $table->foreign('reserve_person_id')->references('reserve_person_id')->on('reserve_people');
         });
     }
@@ -58,7 +61,7 @@ class CreateMakeTablesTable extends Migration
     {
         Schema::dropIfExists('reserves');
         Schema::dropIfExists('reserve_people');
-        Schema::dropIfExists('vaccination_datas');
-        Schema::dropIfExists('clinics');
+        Schema::dropIfExists('reservation_datas');
+        Schema::dropIfExists('places');
     }
 }
