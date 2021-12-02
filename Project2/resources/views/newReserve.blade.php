@@ -25,6 +25,7 @@
         <h2>生年月日</h2>
         <input type="text" pattern="^[0-9]{4}" id="year" required>年<input type="text" pattern="[0-9]{2}" id="month" required>月<input type="text" pattern="[0-9]{2}" id="date" required>日
         <p><input type="submit" value="送信"></p>
+        <a href="/selectPlace">次へ</a>
     </form> 
 </body>
 </html>
