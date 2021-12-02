@@ -39,3 +39,6 @@ Route::post('/selectDay','App\Http\Controllers\Vaccinecontroller@day');
 Route::get('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
 Route::get('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
 // Route::resource('vaccine','app\Http\Controllers\VaccineController::class');
+
+//処理のみ
+Route::post('/register', 'App\Http\Controllers\VaccineController@register');
