@@ -20,7 +20,7 @@ class VaccineController extends Controller
     }
 
     public function day(Request $request){
-        $key = $request->input('place','1001');
+        $key = $request->input('place');
         $vacdatas = vaccination_data::where('clinic_id',$key)->get();
         $place = clinic::select('clinic_name')->where('clinic_id',$key)->get();
         // $vacdatas = vaccination_data::all();clinic_name
