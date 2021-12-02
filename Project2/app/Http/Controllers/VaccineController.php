@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 //use Model
-use App\Models\clinic;
-use App\Models\vaccination_data;
+use App\Models\place;
+use App\Models\resercvation_data;
 
 
 class VaccineController extends Controller
