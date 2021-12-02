@@ -34,5 +34,9 @@
         <p><input type="submit" value="送信"></p>
         <a href="/selectPlace">次へ</a>
     </form> 
+    <form action="/newRegister" method="post">
+        <input type="hidden" name="val" value="newReserve">
+        @csrf
+        <button type="submit">新規登録</button>はこちら
 </body>
 </html>
