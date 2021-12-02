@@ -13,7 +13,7 @@ class VaccineController extends Controller
 {
     //
 
-    public function place(){
+    public function place(Request $request){
         
         $clinics = clinic::all();
         return view('vaccine/selectPlace',compact('clinics'));

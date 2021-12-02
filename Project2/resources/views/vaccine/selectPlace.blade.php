@@ -45,12 +45,11 @@
             @endforeach
 </tr>   
 </table>
-<form action="/selectDay/{key01}" method="post">
+<form action="/selectDay" method="post">
 	<input type="hidden" id="place" name="place" value="value">
     @csrf
     <input type="submit">
 </form>
-<!-- <a href='/selectDay/{key01}'><button class="button">送信</button></a> -->
 
 
 </body>
