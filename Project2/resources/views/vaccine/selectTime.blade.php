@@ -5,6 +5,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <style>
+        body{
+            margin-right: auto;
+            margin-left: auto;
+            width: 400px;
+        }
+    </style>
 </head>
 <body>
 <table class="table text-center">

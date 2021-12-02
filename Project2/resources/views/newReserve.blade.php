@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <title>新規予約</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <style>
+        body{
+            margin-right: auto;
+            margin-left: auto;
+            width: 700px;
+        }
+    </style>
 </head>
 <script>
 	$(function(){
