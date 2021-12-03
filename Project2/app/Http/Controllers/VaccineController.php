@@ -7,13 +7,40 @@ use App\Http\Controllers\Controller;
 //use Model
 use App\Models\place;
 use App\Models\resercvation_data;
+use App\Models\reserve_person;
+use Illuminate\Support\Facades\DB;
+
 
 
 class VaccineController extends Controller
 {
+    
     //新規登録
     public function register(Request $request){
         $return  = $request->input('val');
+
+        $familyNM  = $request->input('familyname');
+        $firstNM  = $request->input('firstname');
+        $num  = $request->input('number');
+
+        $yaer  = $request->input('yaer');
+        $month  = $request->input('month');
+        $date  = $request->input('date');
+
+        $mail  = $request->input('mailad');
+        $pass  = $request->input('password');
+
+        $rowCount = reserve_person::count();
+
+        DB::table('reserve_people')->insert([
+            'Reserve_person_id' => $rowCount+1,
+            'tickets_number' => $num,
+            'birthday' => $yaer . '-' . $month . '-' . $date,
+            'pass' => $pass,
+            'email' => $mail,
+            'family_name' => $familyNM,
+            'firsta_name' => $firstNM
+        ]);
 
         if($return == "top"){
             return view('top');
