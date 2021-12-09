@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 //use Model
 use App\Models\place;
 
-use App\Models\resercvation_data;
+use App\Models\reservation_data;
 use App\Models\reserve_person;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\DB;
 
 class VaccineController extends Controller
 
-=======
 {
     
     //新規登録

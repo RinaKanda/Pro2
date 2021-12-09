@@ -161,6 +161,25 @@ class tablesSeeder extends Seeder
             ],
         ]);
 
+        DB::table('reserve_people')->insert([
+            ['Reserve_person_id' => 1,
+            'tickets_number' => '123456780',
+            'birthday' => '2000-01-01',
+            'pass' => 'pass',
+            'email' => 'abc@gmail.com',
+            'family_name' => '田中',
+            'firsta_name' => '太郎',
+            ],
+            ['Reserve_person_id' => 2,
+            'tickets_number' => '0987654321',
+            'birthday' => '2000-01-02',
+            'pass' => 'word',
+            'email' => 'xyz@gmail.com',
+            'family_name' => '佐藤',
+            'firsta_name' => '花子',
+            ],
+        ]);
+
 
         /*foreach($places as $place){
             \App\Models\place::create($place);
