@@ -10,10 +10,16 @@
 
 <script>
     var key01 = null;
-        function ok(day){
+    var day = "1";
+        function select(day,pla){
             console.log("day:" + day);
             var day01 = day;
-            console.log(day01);
+            console.log("place:" + pla);
+            var placekey = pla;
+            $(function(){
+                $("#date").val(day01);
+                $("#place").val(placekey);
+            })
         }
         $(function(){
             $('.colums').click(function(){
@@ -21,10 +27,9 @@
                 $(this).addClass("selected");
             });
         });
-
         $(function() {
-    $( "#datepicker" ).datepicker();
-  });
+            $( "#datepicker" ).datepicker();
+        });
 </script>
     <meta charset="UTF-8">
     <title>Document</title>
@@ -37,21 +42,28 @@
     </style>
 </head>
 <body>
-            @foreach($place as $key => $clinic)
-                <h2>選択している病院:{{ $clinic->clinic_name }}</h2>
+            @foreach($place as $key => $place)
+                <h2>選択している病院:{{ $place->place_name }}</h2>
             @endforeach
 <table class="table text-center">
             <tr>
                 <th class="text-center">日付</th> 
             </tr> 
-            
-            @foreach($vacdatas as $key => $vacdata)
-                <tr class="colums" onclick="ok({{ $vacdata->vaccination_date }})">
-                    <td>{{ $vacdata->vaccination_date }}</td>
+            <input type="date" value="val">
+            @foreach($resdatas as  $resdata)
+                <tr class="colums" onclick="select('{{ $resdata->reservation_date }}' ,{{ $resdata->place_id }})">
+                    <td>{{ $resdata->reservation_date }}</td>
+
                 </tr>
             @endforeach
 </tr>   
 </table>       
+<form action="/selectTime" method="post">
+    <input type="hidden" id="date" name="date" value="value">
+    <input type="hidden" id="place" name="place" value="val">
+        @csrf
+    <button type="submit">送信</button>
+</form>
 <a href="/selectTime">選択</a>
 
 <div id="datepicker"></div>
