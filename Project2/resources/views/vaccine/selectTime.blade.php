@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<link rel="stylesheet" type="text/css" href="/css/all.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
@@ -11,26 +13,50 @@
             margin-left: auto;
             width: 400px;
         }
+
     </style>
+    <script>
+        function select(day){
+            console.log("day:" + day);
+            var day01 = day;
+            console.log(day01);
+            $(function(){
+                $("#time").val(day01);
+            })
+        }
+        $(function(){
+            $('.colums').click(function(){
+                $("*").removeClass("selected");
+                $(this).addClass("selected");
+            });
+        });
+    </script>
 </head>
 <body>
-<table class="table text-center">
+        @foreach($place as $key => $place)
+            <h2>選択している病院:{{ $place->place_name }}</h2>
+        @endforeach
+        <table class="table text-center">
             <tr>
-                <th class="text-center">病院名</th> 
                 <th class="text-center">時間</th> 
+                <th class="text-center">日</th>  
+                <th class="text-center">人数</th> 
             </tr> 
-            <tr>
             
-            @foreach($vacdatas as $key => $vacdata)
-                <div onclick="ok">
-                <tr>
-                    <td>{{ $vacdata->clinic_id }}</td>
-                    <td>{{ $vacdata->vaccination_time }}</td>
+            @foreach($resdatas as $key => $resdata)
+                <tr class="colums" onclick="select({{ $resdata->capacity }})">
+                    <td>{{ $resdata->reservation_time }}</td>
+                    <td>{{ $resdata->reservation_date }}</td>
+                    <td>{{ $resdata->capacity }}</td>
                 </tr>
-                </div>
             @endforeach
 </tr>   
-</table>       
+</table>
+<form action="/reserveConfirm" method="post">
+    <input type="hidden" id="time" name="time" value="value">
+    @csrf
+    <button type="submit">送信</button>
+</form>    
 <a href="/reserveConfirm">選ぶ</a>
 </body>
 </html>

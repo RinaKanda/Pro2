@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('top');
 });
+Route::post('/newRegister',function() {
+    return view('newRegister');
+});
 Route::get('/newReserve',function() {
     return view('newReserve');
 });
@@ -30,10 +33,15 @@ Route::get('reserveFinish',function(){
 // });
 
 //処理有
-Route::get('/selectPlace', 'App\Http\Controllers\VaccineController@place');
 Route::post('/selectPlace','App\Http\Controllers\VaccineController@place');
-Route::get('/selectDay/{key01}','App\Http\Controllers\Vaccinecontroller@day');
+Route::get('/selectPlace','App\Http\Controllers\VaccineController@place');
+Route::post('/newRegister','App\Http\Controllers\VaccineController@newRegister');
 Route::post('/selectDay','App\Http\Controllers\Vaccinecontroller@day');
 Route::get('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
+Route::post('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
 Route::get('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
+Route::post('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
 // Route::resource('vaccine','app\Http\Controllers\VaccineController::class');
+
+//処理のみ
+Route::post('/register', 'App\Http\Controllers\VaccineController@register');
