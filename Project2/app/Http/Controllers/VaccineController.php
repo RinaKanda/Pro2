@@ -25,20 +25,17 @@ class VaccineController extends Controller
         $familyNM  = $request->input('familyname');
         $firstNM  = $request->input('firstname');
         $num  = $request->input('number');
-
         $yaer  = $request->input('yaer');
         $month  = $request->input('month');
         $date  = $request->input('date');
-
         $mail  = $request->input('mailad');
         $pass  = $request->input('password');
-
         $rowCount = reserve_person::count();
 
         DB::table('reserve_people')->insert([
             'Reserve_person_id' => $rowCount+1,
             'tickets_number' => $num,
-            'birthday' => $yaer . '-' . $month . '-' . $date,
+            'birthday' => $yaer.'-'.$month.'-'.$date,
             'pass' => $pass,
             'email' => $mail,
             'family_name' => $familyNM,
