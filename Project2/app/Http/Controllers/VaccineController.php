@@ -12,7 +12,6 @@ use App\Models\reserve_person;
 use Illuminate\Support\Facades\DB;
 
 
-
 //入れる配列
 
 class VaccineController extends Controller
