@@ -34,7 +34,7 @@ class CreateMakeTablesTable extends Migration
         Schema::create('reserve_people', function (Blueprint $table) {
             $table->integer('Reserve_person_id')->primary();
             $table->string('tickets_number');
-            $table->string('birthday');
+            $table->date('birthday');
             $table->string('pass');
             $table->string('email');
             $table->string('family_name');
