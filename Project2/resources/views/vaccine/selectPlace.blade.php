@@ -14,7 +14,7 @@
 <!-- <script src="resources/js/jquery/jquey-2.1.3.js"></script> -->
 <script>
     var key01 = null;
-        function ok(key){
+        function select(key){
             console.log("ok:key" + key);
             var key01 = key;
             console.log(key01);
@@ -42,11 +42,10 @@
                 <th class="text-center">住所</th> 
             </tr> 
             <tr>
-            <!-- <td>{{ $clinics ?? '病院が見つからないよ！' }}</td> -->
-            @foreach($clinics as $key => $clinic)
-                <tr class="colums" onclick="ok({{ $clinic->clinic_id }})">
-                    <td>{{ $clinic->clinic_name }}</td>
-                    <td>{{ $clinic->address }}</td>
+            @foreach($places as $key => $place)
+                <tr class="colums" onclick="select({{ $place->place_id }})">
+                    <td>{{ $place->place_name }}</td>
+                    <td>{{ $place->address }}</td>
                 </tr>
             @endforeach
 </tr>   
