@@ -26,11 +26,12 @@
 <body>
     <h1>新規予約</h1>
     
-    <form class="checkform"  method="post" action="/selectPlace">
+    <form class="checkform"  method="post" action="/checkuser">
         <h2>接種券番号</h2>
         <input type="text" pattern="^[0-9]{10}" id="vaccination_num" required><br>
         <h2>生年月日</h2>
         <input type="text" pattern="^[0-9]{4}" id="year" required>年<input type="text" pattern="[0-9]{2}" id="month" required>月<input type="text" pattern="[0-9]{2}" id="date" required>日
+        @csrf
         <p><input type="submit" value="送信"></p>
         <a href="/selectPlace" method="post">次へ</a>
     </form> 
