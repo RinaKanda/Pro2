@@ -45,3 +45,4 @@ Route::post('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
 
 //処理のみ
 Route::post('/register', 'App\Http\Controllers\VaccineController@register');
+Route::post('checkuser','App\Http\Controllers\VaccineController@checkuser');

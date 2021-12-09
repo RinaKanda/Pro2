@@ -25,20 +25,17 @@ class VaccineController extends Controller
         $familyNM  = $request->input('familyname');
         $firstNM  = $request->input('firstname');
         $num  = $request->input('number');
-
         $yaer  = $request->input('yaer');
         $month  = $request->input('month');
         $date  = $request->input('date');
-
         $mail  = $request->input('mailad');
         $pass  = $request->input('password');
-
         $rowCount = reserve_person::count();
 
         DB::table('reserve_people')->insert([
             'Reserve_person_id' => $rowCount+1,
             'tickets_number' => $num,
-            'birthday' => $yaer . '-' . $month . '-' . $date,
+            'birthday' => $yaer.'-'.$month.'-'.$date,
             'pass' => $pass,
             'email' => $mail,
             'family_name' => $familyNM,
@@ -51,11 +48,24 @@ class VaccineController extends Controller
             return view("newReserve");
         } 
     }
-    //新規予約
+    //新規予約画面へ
     public function newRegister(Request $request){
         $keyReg = $request->input('val');
         return view('/newRegister', compact('keyReg'));
     }
+
+    //DBに入力されたデータがあるかチェック
+    public function checkuser(Request $request){
+        //認証成功したらcheck変数をtrueに
+        $check = true;
+
+        if($check){
+            $places = place::all();
+            return view('vaccine/selectPlace',compact('places'));
+        } else {
+            return view("newReserve",compact("misscheck"));
+        }
+    } 
 
     //場所選択
     public function place(Request $request){    
