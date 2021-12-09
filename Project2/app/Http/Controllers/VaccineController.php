@@ -57,8 +57,9 @@ class VaccineController extends Controller
     //DBに入力されたデータがあるかチェック
     public function checkuser(Request $request){
         //認証成功したらcheck変数をtrueに
-        $check = true;
+        $check = false;
 
+        
         if($check){
             $places = place::all();
             return view('vaccine/selectPlace',compact('places'));
