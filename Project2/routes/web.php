@@ -34,10 +34,13 @@ Route::get('reserveFinish',function(){
 
 //処理有
 Route::post('/selectPlace','App\Http\Controllers\VaccineController@place');
+Route::get('/selectPlace','App\Http\Controllers\VaccineController@place');
 Route::post('/newRegister','App\Http\Controllers\VaccineController@newRegister');
 Route::post('/selectDay','App\Http\Controllers\Vaccinecontroller@day');
 Route::get('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
+Route::post('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
 Route::get('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
+Route::post('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
 // Route::resource('vaccine','app\Http\Controllers\VaccineController::class');
 
 //処理のみ
