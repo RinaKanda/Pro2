@@ -71,13 +71,29 @@ class VaccineController extends Controller
         $place = place::select('place_name')->where('place_id',$key)->get();
         
         // $capkey = array();
-        $a = reservation_data::select('reservation_date')->where('place_id',$key)->distinct()->get();
-        echo $a[0]['reservation_date'];
-        $abc = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date','2022_03_08')->sum('capacity');
-        echo $abc;
-        // array_push($capkey,$a);
-
-        // print_r($capkey);
+        $resdatas = reservation_data::select('reservation_date')->where('place_id',$key)->distinct()->get();
+        $keynum = 0;
+        foreach($resdatas as $value){
+            //placeid
+            $resdatas[$keynum]['place_id'] = $key;
+            //キャパ計算
+            $cap = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('capacity');
+            $resdatas[$keynum]['capacity'] = $cap ;
+            //予約可能人数計算
+            $Reserved = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('reserve_counts');
+            $resdatas[$keynum]['reserve_avail'] = $cap - $Reserved ;
+            //割合
+            $resdatas[$keynum]['ratio'] = $Reserved / $cap ;
+            //予約6割以上で△
+            if($resdatas[$keynum]['ratio'] == 1){
+                $resdatas[$keynum]['mark'] = "✕";
+            } else if($resdatas[$keynum]['ratio'] >= 0.6){
+                $resdatas[$keynum]['mark'] = "△";
+            } else {
+                $resdatas[$keynum]['mark'] = '○';
+            }
+            $keynum++;
+        }
         return view('vaccine/selectDay',compact('resdatas','place'));
     }
 
