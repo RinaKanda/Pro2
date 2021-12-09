@@ -163,7 +163,7 @@ class tablesSeeder extends Seeder
 
         DB::table('reserve_people')->insert([
             ['Reserve_person_id' => 1,
-            'tickets_number' => '123456780',
+            'tickets_number' => '1234567890',
             'birthday' => '2000-01-01',
             'pass' => 'pass',
             'email' => 'abc@gmail.com',
