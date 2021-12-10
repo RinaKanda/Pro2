@@ -57,11 +57,27 @@ class VaccineController extends Controller
     //DBに入力されたデータがあるかチェック
     public function checkuser(Request $request){
         //認証成功したらcheck変数をtrueに
-        $check = true;
+
+        $check = false;
+
+        //認証
+        $Vnum = $request->input('vaccination_num');
+        $year = $request->input('year');
+        $month = $request->input('month');
+        $date = $request->input('date');
+        $ymd = $year.'-'.$month.'-'.$date;
+
+        $item = reserve_person::where('tickets_number',$Vnum)->where('birthday',$ymd)->first();
+
+        if($item != null){
+            $check = true;
+            $resePid = $item['Reserve_person_id'];
+            echo($resePid);
+        }
 
         if($check){
             $places = place::all();
-            return view('vaccine/selectPlace',compact('places'));
+            return view('vaccine/selectPlace',compact('places',$resePid));
         } else {
             return view("newReserve",compact("misscheck"));
         }
