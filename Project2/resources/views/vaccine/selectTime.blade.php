@@ -1,11 +1,8 @@
-<!-- 日付選択 -->
-時間選択
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <link rel="stylesheet" type="text/css" href="/css/all.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <meta charset="UTF-8">
     <title>Document</title>
     <style>
         body{
@@ -33,9 +30,12 @@
     </script>
 </head>
 <body>
-        @foreach($place as $key => $place)
+        @foreach($place as $place)
             <h2>選択している病院:{{ $place->place_name }}</h2>
         @endforeach
+
+        
+            <h2>選択している日付:{{ $date }}</h2>
         <table class="table text-center">
             <tr>
                 <th class="text-center">時間</th> 
@@ -43,11 +43,11 @@
                 <th class="text-center">人数</th> 
             </tr> 
             
-            @foreach($resdatas as $key => $resdata)
-                <tr class="colums" onclick="select({{ $resdata->capacity }})">
+            @foreach($resdatas as $resdata)
+                <tr class="colums" onclick="select({{ $resdata->reservation_data_id }})">
                     <td>{{ $resdata->reservation_time }}</td>
                     <td>{{ $resdata->reservation_date }}</td>
-                    <td>{{ $resdata->capacity }}</td>
+                    <td>{{ $resdata->reserve_avail }}</td>
                 </tr>
             @endforeach
 </tr>   

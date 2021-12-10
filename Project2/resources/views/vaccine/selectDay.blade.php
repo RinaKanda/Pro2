@@ -10,20 +10,22 @@
 
 <script>
     var key01 = null;
+    
         function select(day,pla,mrk){
-            if(mrk !== "✕"){
-            console.log("day:" + day);
-            var day01 = day;
-            console.log("place:" + pla);
-            var placekey = pla;
-            $(function(){
-                $("#date").val(day01);
-                $("#place").val(placekey);
-            })
+            if(mrk !== "✕"){                
+                console.log("day:" + day);
+                var day01 = day;
+                console.log("place:" + pla);
+                var placekey = pla;
+                $(function(){
+                    $("#date").val(day01);
+                    $("#place").val(placekey);    
+                })
+            }
         }
         $(function(){
             $('.colums').click(function(){
-                if(this. !== "✕"){
+                if(this.id !== "✕"){
                     $("*").removeClass("selected");
                     $(this).addClass("selected");
                 }
@@ -52,7 +54,9 @@
                 <th class="text-center">日付</th> 
             </tr> 
             @foreach($resdatas as  $resdata)
-                <tr class="colums" onclick="select({{ $resdata->reservation_date }} ,{{ $resdata->place_id }},'{{ $resdata->mark }}')">
+                <tr class="colums" id="{{ $resdata->mark }}" 
+                onclick="select('{{ $resdata->reservation_date }}' ,
+                {{ $resdata->place_id }},'{{ $resdata->mark }}')">
                     <td>{{ $resdata->reservation_date }}</td>
                     <td>{{ $resdata->mark }}</td>
                 </tr>

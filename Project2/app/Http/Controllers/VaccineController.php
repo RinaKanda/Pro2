@@ -57,7 +57,7 @@ class VaccineController extends Controller
     //DBに入力されたデータがあるかチェック
     public function checkuser(Request $request){
         //認証成功したらcheck変数をtrueに
-        $check = true;
+        $check = false;
 
         if($check){
             $places = place::all();
@@ -103,6 +103,7 @@ class VaccineController extends Controller
                 $resdatas[$keynum]['mark'] = '○';
             }
             $keynum++;
+             
         }
         return view('vaccine/selectDay',compact('resdatas','place'));
     }
@@ -111,12 +112,24 @@ class VaccineController extends Controller
     public function Time(Request $request){
         $key = $request->input('place');
         $keyday=$request->input('date');
-       
-        
-        
-        $resdatas = reservation_data::where('reservation_date',$keyday)->get();
-        $place = place::select('place_name')->where('place_id',$key)->get();        
-        return view('vaccine/selectTime',compact('resdatas','place'));
+        $resdatas = reservation_data::where('reservation_date',$keyday)->where('place_id',$key)->get();
+        $keynum = 0;
+        foreach($resdatas as $value){
+            //placeid
+            $resdatas[$keynum]['place_id'] = $key;
+            //date
+            $resdatas[$keynum]['reservation_date'] = $keyday;
+            //キャパ計算
+            $cap = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('capacity');
+            $resdatas[$keynum]['capacity'] = $cap ;
+            //予約可能人数計算
+            $Reserved = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('reserve_counts');
+            $resdatas[$keynum]['reserve_avail'] = $cap - $Reserved ;
+            $keynum++;   
+        }
+        $place = place::select('place_name')->where('place_id',$key)->get();
+        $date =   $keyday;     
+        return view('vaccine/selectTime',compact('resdatas','place','date'));
     }
 
     public function confirm(){
