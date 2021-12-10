@@ -72,7 +72,6 @@ class VaccineController extends Controller
         if($item != null){
             $check = true;
             $resePid = $item['Reserve_person_id'];
-            echo($resePid);
         }
 
         if($check){
