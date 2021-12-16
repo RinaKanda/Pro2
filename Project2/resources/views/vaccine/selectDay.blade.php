@@ -60,6 +60,7 @@
                 {{ $resdata->place_id }},'{{ $resdata->mark }}')">
                     <td>{{ $resdata->reservation_date }}</td>
                     <td>{{ $resdata->mark }}</td>
+
                 </tr>
             @endif
             @endforeach

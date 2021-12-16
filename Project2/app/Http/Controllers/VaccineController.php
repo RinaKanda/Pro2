@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 //use Model
 use App\Models\place;
 
@@ -57,8 +58,6 @@ class VaccineController extends Controller
     //DBに入力されたデータがあるかチェック
     public function checkuser(Request $request){
         //認証成功したらcheck変数をtrueに
-
-
         $check = false;
 
         //認証
@@ -95,10 +94,12 @@ class VaccineController extends Controller
         $key = $request->input('place');
         
         $resdatas = reservation_data::where('place_id',$key)->get();
+        $now = new Carbon('today');
+        echo $now;
         $place = place::select('place_name')->where('place_id',$key)->get();
-        
+        //現在日時
         // $capkey = array();
-        $resdatas = reservation_data::select('reservation_date')->where('place_id',$key)->distinct()->get();
+        $resdatas = reservation_data::select('reservation_date')->where('place_id',$key)->whereDate('reservation_date',">=",$now)->distinct()->get();
         $keynum = 0;
         foreach($resdatas as $value){
             //placeid
@@ -133,13 +134,18 @@ class VaccineController extends Controller
         $key = $request->input('place');
         $keyday=$request->input('date');
         $resdatas = reservation_data::where('reservation_date',$keyday)->where('place_id',$key)->get();
+        //time
+        $now = new Carbon('now');
+        echo $now;
+        if($keyday == $now){
+            $resdatas[$keynum]['reservation_time'] = reservation_data::where('reservation_date',$keyday)->where('place_id',$key)->whereDate('reservation_date',">=",$now)->get();
+        }
         $keynum = 0;
         foreach($resdatas as $value){
             //placeid
             $resdatas[$keynum]['place_id'] = $key;
             //date
             $resdatas[$keynum]['reservation_date'] = $keyday;
-            
             //キャパ計算
             $cap = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('capacity');
 
