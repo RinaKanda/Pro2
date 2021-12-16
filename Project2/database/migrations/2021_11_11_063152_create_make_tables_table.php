@@ -26,7 +26,7 @@ class CreateMakeTablesTable extends Migration
             $table->time('reservation_time');
             $table->integer('capacity');
             $table->integer('reserve_counts');
-            $table->integer('cancel')->nullable();
+            $table->integer('cancel')->default(0);
 
             $table->foreign('place_id')->references('place_id')->on('places');
         });
@@ -45,7 +45,8 @@ class CreateMakeTablesTable extends Migration
             $table->integer('reserve_id')->primary();
             $table->integer('reserve_person_id');
             $table->integer('reservation_data_id');
-            $table->dateTime('created_at');
+            $table->date('created_at');
+            $table->date('updated_at')->nullable();
 
             $table->foreign('reservation_data_id')->references('reservation_data_id')->on('reservation_datas');
             $table->foreign('reserve_person_id')->references('reserve_person_id')->on('reserve_people');
