@@ -3,7 +3,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/css/all.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>Document</title>
+    <title>時間選択</title>
     <style>
         body{
             margin-right: auto;
@@ -13,15 +13,15 @@
 
     </style>
     <script>
-        function select(day){
-            console.log("day:" + day);
-            var day01 = day;
-            console.log(day01);
+        function select(res){
+            var keydid = res;
             $(function(){
-                $("#time").val(day01);
+                $("#Did").val(keydid);
             })
         }
         $(function(){
+            var keyid = '{{$resPid}}';
+            $("#Pid").val(keyid);
             $('.colums').click(function(){
                 $("*").removeClass("selected");
                 $(this).addClass("selected");
@@ -51,10 +51,10 @@
 </tr>   
 </table>
 <form action="/reserveConfirm" method="post">
-    <input type="hidden" id="time" name="time" value="value">
+    <input type="hidden" id="Did" name="Did" value="value">
+    <input type="hidden" id="Pid" name="Pid" value="value">
     @csrf
     <button type="submit">送信</button>
 </form>    
-<a href="/reserveConfirm">選ぶ</a>
 </body>
 </html>
