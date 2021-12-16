@@ -57,11 +57,28 @@ class VaccineController extends Controller
     //DBに入力されたデータがあるかチェック
     public function checkuser(Request $request){
         //認証成功したらcheck変数をtrueに
-        $check = true;
+
+
+        $check = false;
+
+        //認証
+        $Vnum = $request->input('vaccination_num');
+        $year = $request->input('year');
+        $month = $request->input('month');
+        $date = $request->input('date');
+        $ymd = $year.'-'.$month.'-'.$date;
+
+        $item = reserve_person::where('tickets_number',$Vnum)->where('birthday',$ymd)->first();
+
+        if($item != null){
+            $check = true;
+            $resePid = $item['Reserve_person_id'];
+        }
+
 
         if($check){
             $places = place::all();
-            return view('vaccine/selectPlace',compact('places'));
+            return view('vaccine/selectPlace',compact('places',$resePid));
         } else {
             return view("newReserve",compact("misscheck"));
         }
@@ -81,13 +98,33 @@ class VaccineController extends Controller
         $place = place::select('place_name')->where('place_id',$key)->get();
         
         // $capkey = array();
-        $a = reservation_data::select('reservation_date')->where('place_id',$key)->distinct()->get();
-        echo $a[0]['reservation_date'];
-        $abc = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date','2022_03_08')->sum('capacity');
-        echo $abc;
-        // array_push($capkey,$a);
-
-        // print_r($capkey);
+        $resdatas = reservation_data::select('reservation_date')->where('place_id',$key)->distinct()->get();
+        $keynum = 0;
+        foreach($resdatas as $value){
+            //placeid
+            $resdatas[$keynum]['place_id'] = $key;
+            //日付データ関連
+            $resdatas[$keynum]['year'] =  date('Y', strtotime($resdatas[$keynum]['reservation_date']));
+            $resdatas[$keynum]['month'] =  date('m', strtotime($resdatas[$keynum]['reservation_date']));
+            //キャパ計算
+            $cap = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('capacity');
+            $resdatas[$keynum]['capacity'] = $cap ;
+            //予約可能人数計算
+            $Reserved = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('reserve_counts');
+            $resdatas[$keynum]['reserve_avail'] = $cap - $Reserved ;
+            //割合
+            $resdatas[$keynum]['ratio'] = $Reserved / $cap ;
+            //予約6割以上で△
+            if($resdatas[$keynum]['ratio'] == 1){
+                $resdatas[$keynum]['mark'] = "✕";
+            } else if($resdatas[$keynum]['ratio'] >= 0.6){
+                $resdatas[$keynum]['mark'] = "△";
+            } else {
+                $resdatas[$keynum]['mark'] = '○';
+            }
+            $keynum++;
+             
+        }
         return view('vaccine/selectDay',compact('resdatas','place'));
     }
 
@@ -95,12 +132,26 @@ class VaccineController extends Controller
     public function Time(Request $request){
         $key = $request->input('place');
         $keyday=$request->input('date');
-       
-        
-        
-        $resdatas = reservation_data::where('reservation_date',$keyday)->get();
-        $place = place::select('place_name')->where('place_id',$key)->get();        
-        return view('vaccine/selectTime',compact('resdatas','place'));
+        $resdatas = reservation_data::where('reservation_date',$keyday)->where('place_id',$key)->get();
+        $keynum = 0;
+        foreach($resdatas as $value){
+            //placeid
+            $resdatas[$keynum]['place_id'] = $key;
+            //date
+            $resdatas[$keynum]['reservation_date'] = $keyday;
+            
+            //キャパ計算
+            $cap = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('capacity');
+
+            $resdatas[$keynum]['capacity'] = $cap ;
+            //予約可能人数計算
+            $Reserved = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('reserve_counts');
+            $resdatas[$keynum]['reserve_avail'] = $cap - $Reserved ;
+            $keynum++;   
+        }
+        $place = place::select('place_name')->where('place_id',$key)->get();
+        $date =   $keyday;     
+        return view('vaccine/selectTime',compact('resdatas','place','date'));
     }
 
     public function confirm(){
