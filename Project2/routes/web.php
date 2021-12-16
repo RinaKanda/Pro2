@@ -25,8 +25,8 @@ Route::get('/newReserve',function() {
 Route::get('/login',function(){
     return view('login');
 });
-Route::get('reserveFinish',function(){
-    return view('reserveFinish');
+Route::get('/reserveFinish',function(){
+    return view('/reserveFinish');
 });
 // Route::get('/selectDay/{key01}',function($key01){
 //     return 'key01 '.$key01;
@@ -37,12 +37,14 @@ Route::post('/selectPlace','App\Http\Controllers\VaccineController@place');
 Route::get('/selectPlace','App\Http\Controllers\VaccineController@place');
 Route::post('/newRegister','App\Http\Controllers\VaccineController@newRegister');
 Route::post('/selectDay','App\Http\Controllers\Vaccinecontroller@day');
-Route::get('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
+// Route::get('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
 Route::post('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
-Route::get('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
+// Route::get('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
 Route::post('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
 // Route::resource('vaccine','app\Http\Controllers\VaccineController::class');
 
 //処理のみ
 Route::post('/register', 'App\Http\Controllers\VaccineController@register');
 Route::post('checkuser','App\Http\Controllers\VaccineController@checkuser');
+Route::get('/resRegister','App\Http\Controllers\VaccineController@resRegister');
+Route::post('/resRegister','App\Http\Controllers\VaccineController@resRegister');

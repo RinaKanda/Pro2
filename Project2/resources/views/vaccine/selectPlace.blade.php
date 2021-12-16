@@ -15,16 +15,14 @@
 <script>
     var key01 = null;
         function select(key){
-            console.log("ok:key" + key);
-            var key01 = key;
-            console.log(key01);
-            $(function(){
-                $("#place").val(key01);
-            })
-            // var value = $('input[value="value"]').attr('value', key01);
+            var keypl = key;
+                $("#place").val(keypl);
         }
         
         $(function(){
+            var keyid = '{{$resPid}}';
+            $("#Pid").val(keyid);      
+
             $('.colums').click(function(){
                 $("*").removeClass("selected");
                 $(this).addClass("selected");
@@ -43,7 +41,7 @@
             </tr> 
             <tr>
             @foreach($places as $key => $place)
-                <tr class="colums" onclick="select({{ $place->place_id }})">
+                <tr class="colums" onclick="select({{ $place->place_id }},{{ $resPid }})">
                     <td>{{ $place->place_name }}</td>
                     <td>{{ $place->address }}</td>
                 </tr>
@@ -51,9 +49,11 @@
 </tr>   
 </table>
 <form action="/selectDay" method="post">
-	<input type="hidden" id="place" name="place" value="value">
-    @csrf
-    <input type="submit">
+    @csrf	
+    <input type="hidden" id="place" name="place" value="value">
+    <input type="hidden" id="Pid" name="Pid" value="value">
+    
+    <button type="submit">送信</button>
 </form>
 
 
