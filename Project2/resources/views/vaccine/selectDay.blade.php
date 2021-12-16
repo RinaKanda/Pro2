@@ -54,12 +54,14 @@
                 <th class="text-center">日付</th> 
             </tr> 
             @foreach($resdatas as  $resdata)
+            @if($resdata->year ==  2022 && $resdata->month == 03)
                 <tr class="colums" id="{{ $resdata->mark }}" 
                 onclick="select('{{ $resdata->reservation_date }}' ,
                 {{ $resdata->place_id }},'{{ $resdata->mark }}')">
                     <td>{{ $resdata->reservation_date }}</td>
                     <td>{{ $resdata->mark }}</td>
                 </tr>
+            @endif
             @endforeach
 </tr>   
 </table>       

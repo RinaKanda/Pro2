@@ -86,6 +86,9 @@ class VaccineController extends Controller
         foreach($resdatas as $value){
             //placeid
             $resdatas[$keynum]['place_id'] = $key;
+            //日付データ関連
+            $resdatas[$keynum]['year'] =  date('Y', strtotime($resdatas[$keynum]['reservation_date']));
+            $resdatas[$keynum]['month'] =  date('m', strtotime($resdatas[$keynum]['reservation_date']));
             //キャパ計算
             $cap = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('capacity');
             $resdatas[$keynum]['capacity'] = $cap ;
@@ -119,8 +122,10 @@ class VaccineController extends Controller
             $resdatas[$keynum]['place_id'] = $key;
             //date
             $resdatas[$keynum]['reservation_date'] = $keyday;
+            
             //キャパ計算
             $cap = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('capacity');
+
             $resdatas[$keynum]['capacity'] = $cap ;
             //予約可能人数計算
             $Reserved = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('reserve_counts');

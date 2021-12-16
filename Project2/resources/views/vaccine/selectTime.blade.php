@@ -39,14 +39,12 @@
         <table class="table text-center">
             <tr>
                 <th class="text-center">時間</th> 
-                <th class="text-center">日</th>  
-                <th class="text-center">人数</th> 
+                <th class="text-center">残り人数</th> 
             </tr> 
             
             @foreach($resdatas as $resdata)
                 <tr class="colums" onclick="select({{ $resdata->reservation_data_id }})">
                     <td>{{ $resdata->reservation_time }}</td>
-                    <td>{{ $resdata->reservation_date }}</td>
                     <td>{{ $resdata->reserve_avail }}</td>
                 </tr>
             @endforeach
