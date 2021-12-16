@@ -10,21 +10,25 @@
 
 <script>
     var key01 = null;
-    var day = "1";
-        function select(day,pla){
-            console.log("day:" + day);
-            var day01 = day;
-            console.log("place:" + pla);
-            var placekey = pla;
-            $(function(){
-                $("#date").val(day01);
-                $("#place").val(placekey);
-            })
+    
+        function select(day,pla,mrk){
+            if(mrk !== "✕"){                
+                console.log("day:" + day);
+                var day01 = day;
+                console.log("place:" + pla);
+                var placekey = pla;
+                $(function(){
+                    $("#date").val(day01);
+                    $("#place").val(placekey);    
+                })
+            }
         }
         $(function(){
             $('.colums').click(function(){
-                $("*").removeClass("selected");
-                $(this).addClass("selected");
+                if(this.id !== "✕"){
+                    $("*").removeClass("selected");
+                    $(this).addClass("selected");
+                }
             });
         });
         $(function() {
@@ -42,19 +46,22 @@
     </style>
 </head>
 <body>
-            @foreach($place as $key => $place)
+            @foreach($place as $place)
                 <h2>選択している病院:{{ $place->place_name }}</h2>
             @endforeach
 <table class="table text-center">
             <tr>
                 <th class="text-center">日付</th> 
             </tr> 
-            <input type="date" value="val">
             @foreach($resdatas as  $resdata)
-                <tr class="colums" onclick="select('{{ $resdata->reservation_date }}' ,{{ $resdata->place_id }})">
+            @if($resdata->year ==  2022 && $resdata->month == 03)
+                <tr class="colums" id="{{ $resdata->mark }}" 
+                onclick="select('{{ $resdata->reservation_date }}' ,
+                {{ $resdata->place_id }},'{{ $resdata->mark }}')">
                     <td>{{ $resdata->reservation_date }}</td>
-
+                    <td>{{ $resdata->mark }}</td>
                 </tr>
+            @endif
             @endforeach
 </tr>   
 </table>       
