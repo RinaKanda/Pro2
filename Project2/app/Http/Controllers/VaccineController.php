@@ -178,9 +178,11 @@ class VaccineController extends Controller
         $time = $resdata[0]['reservation_time'];
         //病院名
         $keypl = reservation_data::select('place_id')->where('reservation_data_id',$keyDid)->get();
+        // $pl = place::where('place_id',$keypl[0]['place_id'])->get();
         $pl = place::where('place_id',$keypl[0]['place_id'])->get();
         $place = $pl[0]['place_name'];
-        return view('reserveConfirm',compact('keyDid','keyPid','Tnum','date','time','place'));
+        $placeid = $pl[0]['place_id'];
+        return view('reserveConfirm',compact('keyDid','keyPid','Tnum','date','time','place','placeid'));
     }
 
     public function resRegister(Request $request){
