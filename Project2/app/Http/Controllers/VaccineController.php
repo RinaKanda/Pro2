@@ -17,10 +17,9 @@ use Illuminate\Support\Facades\DB;
 class VaccineController extends Controller
 
 {
-    
     //新規登録
     public function register(Request $request){
-        $return  = $request->input('val');
+        $return  = $request->input('from');
 
         $familyNM  = $request->input('familyname');
         $firstNM  = $request->input('firstname');
@@ -45,12 +44,18 @@ class VaccineController extends Controller
         if($return == "top"){
             return view('top');
         } else {
-            return view("newReserve");
+            return view("login");
         } 
+    }
+    //ログイン
+    public function login(Request $request){
+        $keyReg = $request->input('obje');
+        echo $keyReg;
+        return view('/login', compact('keyReg'));
     }
     //新規予約画面へ
     public function newRegister(Request $request){
-        $keyReg = $request->input('val');
+        $keyReg = $request->input('from');
         return view('/newRegister', compact('keyReg'));
     }
 
@@ -178,9 +183,11 @@ class VaccineController extends Controller
         $time = $resdata[0]['reservation_time'];
         //病院名
         $keypl = reservation_data::select('place_id')->where('reservation_data_id',$keyDid)->get();
+        // $pl = place::where('place_id',$keypl[0]['place_id'])->get();
         $pl = place::where('place_id',$keypl[0]['place_id'])->get();
         $place = $pl[0]['place_name'];
-        return view('reserveConfirm',compact('keyDid','keyPid','Tnum','date','time','place'));
+        $placeid = $pl[0]['place_id'];
+        return view('reserveConfirm',compact('keyDid','keyPid','Tnum','date','time','place','placeid'));
     }
 
     public function resRegister(Request $request){

@@ -13,25 +13,32 @@
             margin-left: auto;
             width: 400px;
         }
-        a.btn{
-            background-color:orange;
-            color:white;
+        .btn{
+            /* 一旦リセット */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            /* border: 0;
+            border-radius: 0; */
+            margin: 5px;
+            background-color:lightgrey;
+            color:black;
             font-size:13px;
+        }
+        .inlineSet{
+            display:inline-flex;
         }
     </style>
     <script>
-        function select(res,id){
-            var keydid = res;
-            var keyid = id;
-            console.log(keydid + "+" + keyid);
-                $("#Did").val(keydid);
-                $("#Pid").val(keyid);
-        }
         $(function(){
+            var keypl = '{{$placeid}}'
+            var keydate = '{{$date}}'
             var keydid = '{{$keyDid}}';
             var keyid = '{{$keyPid}}';
             $("#Did").val(keydid);
             $("#Pid").val(keyid);
+            $("#place").val(keypl);
+            $('#date').val(keydate);
 
             $('.colums').click(function(){
                 $("*").removeClass("selected");
@@ -43,21 +50,39 @@
 <body>
     <h2>予約確認画面</h2>
     <div>
-        <div>
-            <h3>接種券番号:{{ $Tnum }}  </h3>
-        </div>
-        <div>
-            <h3>選択している病院:{{ $place }}  <a href="" class="btn">変更する</a></h3>
+        <form method="post">
+            <div>
+                <h3>接種券番号:{{ $Tnum }}
+                    <input type="hidden" id="Pid" name="Pid" value="value">
+                </h3>
+            </div>
+            <div>
+                <h3>選択している病院:{{ $place }}
+                    <div class="inlineSet">
+                        <button formaction="/selectPlace" type="submit" class="btn">変更する</button>
+                    </div>
+                </h3>
                 <h5>※接種場所を変更すると、日時も選択していただくことになります。</h5>
-        </div>
-        <div>
-            <h3>選択している日:{{ $date }}  <a href="" class="btn">変更する</a></h3>
+            </div>
+            <div>
+                <h3>選択している日:{{ $date }}  
+                    <div class="inlineSet">
+                        <input type="hidden" id="place" name="place" value="value">
+                        <button formaction="/selectDay" type="submit" class="btn">変更する</button>
+                    </div>
+                </h3>
                 <h5>※時間も選択していただくことになります。</h5>
-        </div>
-        <div>
-            <h3>選択している時間:{{ $time }}  <a href="" class="btn">変更する</a></h3>
-        </div>
-
+            </div>
+            <div>
+                <h3>選択している時間:{{ $time }} 
+                    <div class="inlineSet">
+                        <input type="hidden" id="date" name="date" value="value">
+                        <button formaction="/selectTime" type="submit" class="btn">変更する</a>
+                    </div>
+                </h3>
+            </div>
+            @csrf
+        </form>
     </div>
 <form action="/resRegister" method="post">
     <input type="hidden" id="Did" name="Did" value="value">
