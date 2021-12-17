@@ -1,3 +1,4 @@
+<!-- 使わない -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -24,7 +25,9 @@
 	});
 </script>
 <body>
-    <h1>新規予約</h1>
+    @if()
+        <h1>新規予約</h1>
+    @endif
     
     <form class="checkform"  method="post" action="/checkuser">
         <h2>接種券番号</h2>
