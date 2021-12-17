@@ -57,7 +57,7 @@
                 </h3>
             </div>
             <div>
-                    <h3>選択している病院:{{ $place }}
+                <h3>選択している病院:{{ $place }}
                     <div class="inlineSet">
                         <button formaction="/selectPlace" type="submit" class="btn">変更する</button>
                     </div>
