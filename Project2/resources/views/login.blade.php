@@ -2,7 +2,11 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>新規予約</title>
+    @if( $keyReg == 'new')
+        <title>新規予約</title>
+    @else
+        <title>ログイン</title>
+    @endif
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <style>
         body{
@@ -14,6 +18,9 @@
 </head>
 <script>
 	$(function(){
+        var keyR = '{{$keyReg}}';
+        $("#keyreg").val(keyR);
+        console.log(keyR);
 			$("#vaccination_num, #year, #month, #date").change(function(){
 					var str = $(this).val();
 					str = str.replace( /[Ａ-Ｚａ-ｚ０-９－！”＃＄％＆’（）＝＜＞，．？＿［］｛｝＠＾～￥]/g, function(s) {
@@ -36,7 +43,10 @@
         <h2>生年月日</h2>
         <input type="text" pattern="^[0-9]{4}" id="year" name="year" required>年<input type="text" pattern="[0-9]{2}" id="month" name="month" required>月<input type="text" pattern="[0-9]{2}" id="date" name="date" required>日
         @csrf
-        <p><input type="submit" value="送信"></p>
+        <input type="hidden" id="keyreg" name="keyreg" value="">
+        <p>
+            <input type="submit" value="送信">
+        </p>
         <a href="/selectPlace" method="post">次へ</a>
     </form> 
     <form action="/newRegister" method="post">

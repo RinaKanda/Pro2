@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 //use Model
 use App\Models\place;
-
 use App\Models\reservation_data;
+use App\Models\reserve;
 use App\Models\reserve_person;
 use Illuminate\Support\Facades\DB;
 
@@ -50,7 +50,6 @@ class VaccineController extends Controller
     //ログイン
     public function login(Request $request){
         $keyReg = $request->input('obje');
-        echo $keyReg;
         return view('/login', compact('keyReg'));
     }
     //新規予約画面へ
@@ -79,12 +78,20 @@ class VaccineController extends Controller
         }
         $misscheck ="oo";
 
+        $keyReg = $request->input('keyreg');
         if($check){
-            $places = place::all();
-
-            return view('vaccine/selectPlace',compact('places','resPid'));
+            if($keyReg == "new"){
+            //新規登録からの場合
+                $places = place::all();
+                return view('vaccine/selectPlace',compact('places','resPid'));
+            } else {
+            //予約確認の場合
+                $reserves = reserve::where('reserve_person_id',$resPid)->get();
+                echo $reserves;
+                return view('mypage',compact('reserves'));
+            }
         } else {
-            return view("newReserve",compact("misscheck"));
+            return view("login",compact('misscheck','keyReg'));
         }
     } 
 

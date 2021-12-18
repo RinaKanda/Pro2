@@ -1,6 +1,5 @@
 <!-- 予約確認 -->
 
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
