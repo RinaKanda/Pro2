@@ -47,6 +47,10 @@
     </script>
 </head>
 <body>
+    <!-- <dialog open>
+        <p>Greetings, one and all!</p>
+        <button>OK</button>
+    </dialog> -->
     <h2>予約確認画面</h2>
     <div>
         <form method="post">
@@ -81,13 +85,11 @@
                 </h3>
             </div>
             @csrf
-        </form>
+            <input type="hidden" id="Did" name="Did" value="value">
+            <input type="hidden" id="Pid" name="Pid" value="value">
+            @csrf
+            <button formaction="/resRegister" type="submit">予約する</button>
+        </form>    
     </div>
-<form action="/resRegister" method="post">
-    <input type="hidden" id="Did" name="Did" value="value">
-    <input type="hidden" id="Pid" name="Pid" value="value">
-    @csrf
-    <button type="submit">予約する</button>
-</form>    
 </body>
 </html>

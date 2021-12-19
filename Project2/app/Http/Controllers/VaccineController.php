@@ -86,17 +86,32 @@ class VaccineController extends Controller
                 return view('vaccine/selectPlace',compact('places','resPid'));
             } else {
             //予約確認の場合
-                $reserves = reserve::where('reserve_person_id',$resPid)->get();
-                echo $reserves;
-                return view('mypage',compact('reserves'));
+                //予約情報
+                $residgets = reserve::select('reservation_data_id')->where('reserve_person_id',$resPid)->get();
+                $keynum = 0;
+                foreach($residgets as $residget){
+                    $reserves[$keynum] = reservation_data::where('reservation_data_id',$residget['reservation_data_id'])->first();
+                    //場所の名前
+                    $pid = $reserves[$keynum]['place_id'];
+                    // echo $pid;
+                    echo "<br><br>1" . $reserves[$keynum];
+                    $pname = place::where('place_id',$pid)->first();
+                    $reserves[$keynum]['place_name'] = $pname['place_name'];
+                    echo "<br>2" . $reserves[$keynum];
+                    $keynum++;
+                    // $reserves[$keynum] = 
+                }
+                //予約者情報
+                $userdata = reserve_person::where('reserve_person_id',$resPid)->first();
+                return view('/mypage',compact('reserves','userdata'));
             }
         } else {
-            return view("login",compact('misscheck','keyReg'));
+            return view("/login",compact('misscheck','keyReg'));
         }
     } 
 
     //場所選択
-    public function place(Request $request){    
+    public function place(){    
         $places = place::all();
         $resPid = 2;
         return view('vaccine/selectPlace',compact('places','resPid'));

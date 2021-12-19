@@ -7,14 +7,8 @@
     @else
         <title>ログイン</title>
     @endif
+    <link rel="stylesheet" type="text/css" href="/css/all.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <style>
-        body{
-            margin-right: auto;
-            margin-left: auto;
-            width: 700px;
-        }
-    </style>
 </head>
 <script>
 	$(function(){
@@ -33,21 +27,25 @@
 <body>
     @if( $keyReg == 'new')
         <h1>新規予約</h1>
+        <form class="checkform"  method="post" action="/selectPlace">
     @else
         <h1>ログイン</h1>
+        <form class="checkform"  method="post" action="/mypage">
     @endif
-    
-    <form class="checkform"  method="post" action="/checkuser">
         <h2>接種券番号</h2>
-        <input type="text" pattern="^[0-9]{10}" id="vaccination_num" name="vaccination_num" required><br>
+        <input type="text" value="1234567890" pattern="^[0-9]{10}" id="vaccination_num" name="vaccination_num" required><br>
         <h2>生年月日</h2>
-        <input type="text" pattern="^[0-9]{4}" id="year" name="year" required>年<input type="text" pattern="[0-9]{2}" id="month" name="month" required>月<input type="text" pattern="[0-9]{2}" id="date" name="date" required>日
+        <input type="text" value="2000" pattern="^[0-9]{4}" id="year" name="year" required>年<input type="text" value="01" pattern="[0-9]{2}" id="month" name="month" required>月<input type="text" value="01" pattern="[0-9]{2}" id="date" name="date" required>日
         @csrf
         <input type="hidden" id="keyreg" name="keyreg" value="">
         <p>
             <input type="submit" value="送信">
         </p>
-        <a href="/selectPlace" method="post">次へ</a>
+        @if( $keyReg == 'new')
+            <a href="/selectPlace" >次へ</a>
+        @else
+            <a href="/mypage">次へ</a>
+        @endif
     </form> 
     <form action="/newRegister" method="post">
         <input type="hidden" name="from" value="newReserve">
