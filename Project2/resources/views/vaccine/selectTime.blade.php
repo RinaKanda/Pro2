@@ -4,14 +4,6 @@
 <link rel="stylesheet" type="text/css" href="/css/all.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <title>時間選択</title>
-    <style>
-        body{
-            margin-right: auto;
-            margin-left: auto;
-            width: 400px;
-        }
-
-    </style>
     <script>
         function select(res){
             var keydid = res;

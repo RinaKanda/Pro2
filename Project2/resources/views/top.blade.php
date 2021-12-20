@@ -36,7 +36,7 @@
         </form>
     </div>
         <div class="border">
-        <form action="/login" method="post">
+        <form action="/newReserve" method="post">
             @csrf
             <input type="hidden" name="obje" value="new">
             <button type="submit">新規予約</button><br>
