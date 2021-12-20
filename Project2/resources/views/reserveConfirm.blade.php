@@ -56,7 +56,7 @@
         <form method="post">
             <div>
                 <h3>接種券番号:{{ $Tnum }}
-                    <input type="hidden" id="Pid" name="Pid" value="value">
+                    <!-- <input type="hidden" id="Pid" name="Pid" value="value"> -->
                 </h3>
             </div>
             <div>
