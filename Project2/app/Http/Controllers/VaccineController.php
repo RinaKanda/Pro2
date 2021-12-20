@@ -61,7 +61,13 @@ class VaccineController extends Controller
     //DBに入力されたデータがあるかチェック
     public function checkuser(Request $request){
         //認証成功したらcheck変数をtrueに
+        $keyReg = $request->input('keyreg');
         $check = false;
+
+        //予約変更でselectplaceに行くときは認証はいらないので飛ばす
+        if($keyReg =="change"){
+            $check = true;
+        }
 
         //認証
         $Vnum = $request->input('vaccination_num');
@@ -78,13 +84,13 @@ class VaccineController extends Controller
         }
         $misscheck ="oo";
 
-        $keyReg = $request->input('keyreg');
         if($check){
             if($keyReg == "new"){
             //新規登録からの場合
                 $places = place::all();
                 return view('vaccine/selectPlace',compact('places','resPid'));
-            } else {
+            
+            } else if($keyReg == "conf"){
             //予約確認の場合
                 //予約情報
                 $residgets = reserve::select('reservation_data_id')->where('reserve_person_id',$resPid)->get();
@@ -94,16 +100,21 @@ class VaccineController extends Controller
                     //場所の名前
                     $pid = $reserves[$keynum]['place_id'];
                     // echo $pid;
-                    echo "<br><br>1" . $reserves[$keynum];
+                    // echo "<br><br>1" . $reserves[$keynum];
                     $pname = place::where('place_id',$pid)->first();
                     $reserves[$keynum]['place_name'] = $pname['place_name'];
-                    echo "<br>2" . $reserves[$keynum];
+                    // echo "<br>2" . $reserves[$keynum];
                     $keynum++;
-                    // $reserves[$keynum] = 
                 }
                 //予約者情報
                 $userdata = reserve_person::where('reserve_person_id',$resPid)->first();
                 return view('/mypage',compact('reserves','userdata'));
+            
+            } else if ($keyReg == "change"){
+                //予約変更の場合
+                $places = place::all();
+                $resPid = $request->input('Pid');
+                return view('vaccine/selectPlace',compact('places','resPid'));
             }
         } else {
             return view("/login",compact('misscheck','keyReg'));
@@ -111,11 +122,11 @@ class VaccineController extends Controller
     } 
 
     //場所選択
-    public function place(){    
-        $places = place::all();
-        $resPid = 2;
-        return view('vaccine/selectPlace',compact('places','resPid'));
-    }
+    // public function place(){    
+    //     $places = place::all();
+    //     $resPid = 2;
+    //     return view('vaccine/selectPlace',compact('places','resPid'));
+    // }
 
     //日選択
     public function day(Request $request){

@@ -35,7 +35,7 @@
             var keydid = '{{$keyDid}}';
             var keyid = '{{$keyPid}}';
             $("#Did").val(keydid);
-            $("#Pid").val(keyid);
+            $(".Pid").val(keyid);
             $("#place").val(keypl);
             $('#date').val(keydate);
 
@@ -56,12 +56,13 @@
         <form method="post">
             <div>
                 <h3>接種券番号:{{ $Tnum }}
-                    <!-- <input type="hidden" id="Pid" name="Pid" value="value"> -->
+                    <input type="hidden" class="Pid" name="Pid" value="value">
                 </h3>
             </div>
             <div>
                 <h3>選択している病院:{{ $place }}
                     <div class="inlineSet">
+                        <input type="hidden" name="keyreg" value="change">
                         <button formaction="/selectPlace" type="submit" class="btn">変更する</button>
                     </div>
                 </h3>
@@ -86,7 +87,7 @@
             </div>
             @csrf
             <input type="hidden" id="Did" name="Did" value="value">
-            <input type="hidden" id="Pid" name="Pid" value="value">
+            <input type="hidden" class="Pid" name="Pid" value="value">
             @csrf
             <button formaction="/resRegister" type="submit">予約する</button>
         </form>    

@@ -41,16 +41,18 @@
         <p>
             <input type="submit" value="送信">
         </p>
-        @if( $keyReg == 'new')
+        <!-- @if( $keyReg == 'new')
             <a href="/selectPlace" >次へ</a>
         @else
             <a href="/mypage">次へ</a>
-        @endif
+        @endif -->
     </form> 
+    <p>
     <form action="/newRegister" method="post">
         <input type="hidden" name="from" value="newReserve">
         @csrf
         <button type="submit">新規登録</button>はこちら
     </form>
+    </p>
 </body>
 </html>
