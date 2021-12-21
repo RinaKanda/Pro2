@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 //use Model
 use App\Models\place;
-
 use App\Models\reservation_data;
+use App\Models\reserve;
 use App\Models\reserve_person;
 use Illuminate\Support\Facades\DB;
 
@@ -50,7 +50,6 @@ class VaccineController extends Controller
     //ログイン
     public function login(Request $request){
         $keyReg = $request->input('obje');
-        echo $keyReg;
         return view('/login', compact('keyReg'));
     }
     //新規予約画面へ
@@ -62,7 +61,13 @@ class VaccineController extends Controller
     //DBに入力されたデータがあるかチェック
     public function checkuser(Request $request){
         //認証成功したらcheck変数をtrueに
+        $keyReg = $request->input('keyreg');
         $check = false;
+
+        //予約変更でselectplaceに行くときは認証はいらないので飛ばす
+        if($keyReg =="change"){
+            $check = true;
+        }
 
         //認証
         $Vnum = $request->input('vaccination_num');
@@ -80,20 +85,48 @@ class VaccineController extends Controller
         $misscheck ="oo";
 
         if($check){
-            $places = place::all();
-
-            return view('vaccine/selectPlace',compact('places','resPid'));
+            if($keyReg == "new"){
+            //新規登録からの場合
+                $places = place::all();
+                return view('vaccine/selectPlace',compact('places','resPid'));
+            
+            } else if($keyReg == "conf"){
+            //予約確認の場合
+                //予約情報
+                $residgets = reserve::select('reservation_data_id')->where('reserve_person_id',$resPid)->get();
+                $keynum = 0;
+                foreach($residgets as $residget){
+                    $reserves[$keynum] = reservation_data::where('reservation_data_id',$residget['reservation_data_id'])->first();
+                    //場所の名前
+                    $pid = $reserves[$keynum]['place_id'];
+                    // echo $pid;
+                    // echo "<br><br>1" . $reserves[$keynum];
+                    $pname = place::where('place_id',$pid)->first();
+                    $reserves[$keynum]['place_name'] = $pname['place_name'];
+                    // echo "<br>2" . $reserves[$keynum];
+                    $keynum++;
+                }
+                //予約者情報
+                $userdata = reserve_person::where('reserve_person_id',$resPid)->first();
+                return view('/mypage',compact('reserves','userdata'));
+            
+            } else if ($keyReg == "change"){
+                //予約変更の場合
+                $places = place::all();
+                $resPid = $request->input('Pid');
+                return view('vaccine/selectPlace',compact('places','resPid'));
+            }
         } else {
-            return view("newReserve",compact("misscheck"));
+            return view("/login",compact('misscheck','keyReg'));
         }
     } 
 
     //場所選択
-    public function place(Request $request){    
-        $places = place::all();
-        $resPid = 2;
-        return view('vaccine/selectPlace',compact('places','resPid'));
-    }
+    // public function place(){    
+    //     $places = place::all();
+    //     $resPid = 2;
+    //     return view('vaccine/selectPlace',compact('places','resPid'));
+    // }
 
     //日選択
     public function day(Request $request){

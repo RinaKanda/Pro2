@@ -12,34 +12,33 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 //処理なし
 Route::get('/', function () {
     return view('top');
 });
-Route::get('/newReserve',function() {
-    return view('newReserve');
-});
 Route::get('/reserveFinish',function(){
     return view('/reserveFinish');
 });
-// Route::get('/selectDay/{key01}',function($key01){
-//     return 'key01 '.$key01;
-// });
+
 
 //処理有
-Route::post('/login','App\Http\Controllers\VaccineController@login');
-Route::post('/selectPlace','App\Http\Controllers\VaccineController@place');
-Route::get('/selectPlace','App\Http\Controllers\VaccineController@place');
 Route::post('/newRegister','App\Http\Controllers\VaccineController@newRegister');
+
+Route::post('/newReserve','App\Http\Controllers\VaccineController@login');
+Route::post('/login','App\Http\Controllers\VaccineController@login');
+
+Route::post('/selectPlace','App\Http\Controllers\VaccineController@checkuser');
+Route::post('/mypage','App\Http\Controllers\Vaccinecontroller@checkuser');
+Route::get('/selectPlace','App\Http\Controllers\VaccineController@place');
 Route::post('/selectDay','App\Http\Controllers\Vaccinecontroller@day');
 // Route::get('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
 Route::post('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
 // Route::get('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
 Route::post('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
-// Route::resource('vaccine','app\Http\Controllers\VaccineController::class');
+// Route::post('/mypage','App\Http\Controllers\Vaccinecontroller@mypage');
 
 //処理のみ
 Route::post('/register', 'App\Http\Controllers\VaccineController@register');
-Route::post('/checkuser','App\Http\Controllers\VaccineController@checkuser');
 Route::get('/resRegister','App\Http\Controllers\VaccineController@resRegister');
 Route::post('/resRegister','App\Http\Controllers\VaccineController@resRegister');
