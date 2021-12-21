@@ -82,6 +82,9 @@
             border-color:#4f85a7;
             background-color:#68c6d7;
         }
+        select{
+            width: 100px;
+        }        
     </style>
 </head>
 <body>

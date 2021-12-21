@@ -10,6 +10,7 @@ use App\Models\place;
 use App\Models\reservation_data;
 use App\Models\reserve;
 use App\Models\reserve_person;
+use App\Models\reserve;
 use Illuminate\Support\Facades\DB;
 
 
@@ -119,7 +120,7 @@ class VaccineController extends Controller
         } else {
             return view("/login",compact('misscheck','keyReg'));
         }
-    } 
+    }
 
     //場所選択
     // public function place(){    
@@ -226,6 +227,18 @@ class VaccineController extends Controller
     public function resRegister(Request $request){
         $reservation_data_id = $request->input('Did');
         $reserve_person_id = $request->input('Pid');
+        $rowCount = reserve::count();
+        $today = date("Y-m-d");
+        echo($reservation_data_id);
+
+        DB::table('reserves')->insert([
+            'reserve_id' => $rowCount+1,
+            'reserve_person_id' => 1,
+            'reservation_data_id' => $reservation_data_id,
+            'created_at' => $today,
+            'updated_at' => null,
+        ]);
+
         return view('/reserveFinish');
     }
 
