@@ -10,7 +10,6 @@ use App\Models\place;
 use App\Models\reservation_data;
 use App\Models\reserve;
 use App\Models\reserve_person;
-use App\Models\reserve;
 use Illuminate\Support\Facades\DB;
 
 
@@ -229,11 +228,10 @@ class VaccineController extends Controller
         $reserve_person_id = $request->input('Pid');
         $rowCount = reserve::count();
         $today = date("Y-m-d");
-        echo($reservation_data_id);
 
         DB::table('reserves')->insert([
             'reserve_id' => $rowCount+1,
-            'reserve_person_id' => 1,
+            'reserve_person_id' => $reserve_person_id,
             'reservation_data_id' => $reservation_data_id,
             'created_at' => $today,
             'updated_at' => null,
