@@ -97,7 +97,6 @@
     </style>
 </head>
 <body>
-    @if(Session::has('flashmessage'))
         <!-- モーダルウィンドウの中身 -->
         <div class="modal fade" id="myModal" tabindex="-1"
             role="dialog" aria-labelledby="label1" aria-hidden="true">
@@ -116,7 +115,6 @@
                 </div>
             </div>
         </div>
-    @endif
     <title>新規登録</title>
     <h1>新規登録</h1>
 
