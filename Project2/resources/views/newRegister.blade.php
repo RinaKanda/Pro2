@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+    <!-- <link rel="stylrsheet" type="text/css" src="css/all.css"> -->
     <link rel="stylesheet" href="/css/validationEngine.jquery.css" type="text/css"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="/js/languages/jquery.validationEngine-ja.js" type="text/javascript" charset="utf-8"></script>
@@ -11,6 +12,10 @@
     <script>
         jQuery(document).ready(function(){
         jQuery("#regiForm").validationEngine();
+        });
+
+        $(window).on('load',function(){
+            $('#myModal').modal('show');
         });
 
 	    $(function(){
@@ -33,8 +38,11 @@
             document.getElementById("inputlength").innerHTML = str.length + "文字入力";
         }
     </script>
-
+    <title>新規登録</title>
     <style>
+        /* *{
+            overflow:hidden;
+        } */
         body{
             margin-right: auto;
             margin-left: auto;
@@ -88,6 +96,7 @@
             border-color:#4f85a7;
             background-color:#68c6d7;
         }
+       
         select{
             width: 100px;
         }     
@@ -97,27 +106,6 @@
     </style>
 </head>
 <body>
-    @if(Session::has('flashmessage'))
-        <!-- モーダルウィンドウの中身 -->
-        <div class="modal fade" id="myModal" tabindex="-1"
-            role="dialog" aria-labelledby="label1" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center">
-                        {{ session('flashmessage') }}
-                    </div>
-                    <div class="modal-footer text-center">
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
-    <title>新規登録</title>
     <h1>新規登録</h1>
 
     <form action="/register" method="post" id="regiForm">
@@ -127,6 +115,7 @@
         
         <h3>接種券番号(10桁)</h3>
         <span style="color:navy;">10桁の接種券番号を入力してください。</span><br>
+
         <input type="text" name="number" value="" placeholder="10桁の接種券番号を入力" maxlength="" id="number" class=validate[required,custom[number],minSize[10],maxSize[10]]] onkeyup="ShowLength(value);">
         <div class="inlineSet"><p id="inputlength">0文字入力</p></div>
 
@@ -144,6 +133,7 @@
         
         <h3>メールアドレス</h3>
         <span style="color:navy;">予約情報を受け取るメールアドレスを入力してください。</span><br>
+
         <input type="text" name="mailad" value="" placeholder="メールアドレス" class="validate[required,custom[email]]">
         
         <h3>パスワード</h3>
@@ -151,11 +141,12 @@
         <div class="col-sm-8">
 			<input type="password" name="password" value="" placeholder="パスワード" id="passwd" class=validate[required]>
 		</div>
-        <div id="pm-indicator" class="pm-indicator"></div>
-        <!-- <input type="text" name="password" value="abcd" placeholder="パスワード" id="passwd"> -->
+        <div id="pm-indicator" class="pm-indicator"></div> 
+         <!-- <input type="text" name="password" value="abcd" placeholder="パスワード" id="passwd"> --> 
         
         <h3>パスワード(二回目)</h3>
         <span style="color:navy;">パスワードを再入力してください。</span><br>
+
         <input type="password"  name="password" value="" placeholder="パスワード(二回目)" class=validate[required]>
         <p>
             @if ($keyReg === 'top')
@@ -169,5 +160,6 @@
         @csrf
         <button type="submit" id="button" >送信</button>
     </form>
+    
 </body>   
 </html>

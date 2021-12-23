@@ -40,12 +40,16 @@ class VaccineController extends Controller
             'family_name' => $familyNM,
             'first_name' => $firstNM
         ]);
-
+        //まずmodal
+        session()->flash('flashmessage','登録完了しました');
+        return view("login");
+        //
         if($return == "top"){
             return view('top');
         } else {
             $keyReg = "login";
             $misscheck = "✕";
+            echo $misscheck;
             return view("login",compact('keyReg','misscheck'));
         } 
     }
