@@ -24,3 +24,8 @@ body{
     padding: 10px 30px 10px 20px;
     margin: 20px;
 }
+.usergroup{
+    border-radius: 5px;
+    border: dimgrey solid;
+    padding: 10px 5px 5px 5px;
+}
