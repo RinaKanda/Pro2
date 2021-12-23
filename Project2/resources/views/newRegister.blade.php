@@ -127,10 +127,10 @@
         <p>
             @if ($keyReg === 'top')
                 top
-                <input type="hidden" name="val" value="top">
+                <input type="hidden" name="from" value="top">
             @else
                 newReserve
-                <input type="hidden" name="val" value="newReserve">
+                <input type="hidden" name="from" value="newReserve">
             @endif
         </p>
         @csrf

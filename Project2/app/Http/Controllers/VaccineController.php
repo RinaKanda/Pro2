@@ -44,7 +44,8 @@ class VaccineController extends Controller
         if($return == "top"){
             return view('top');
         } else {
-            return view("login");
+            $keyReg = "login";
+            return view("login",compact('keyReg'));
         } 
     }
     //ログイン
