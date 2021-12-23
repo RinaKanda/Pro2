@@ -739,7 +739,7 @@ class tablesSeeder extends Seeder
             'pass' => 'pass',
             'email' => 'abc@gmail.com',
             'family_name' => '田中',
-            'firsta_name' => '太郎',
+            'first_name' => '太郎',
             ],
             ['Reserve_person_id' => 2,
             'tickets_number' => '0987654321',
@@ -747,7 +747,7 @@ class tablesSeeder extends Seeder
             'pass' => 'word',
             'email' => 'xyz@gmail.com',
             'family_name' => '佐藤',
-            'firsta_name' => '花子',
+            'first_name' => '花子',
             ],
         ]);
 

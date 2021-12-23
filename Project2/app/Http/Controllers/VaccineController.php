@@ -38,7 +38,7 @@ class VaccineController extends Controller
             'pass' => $pass,
             'email' => $mail,
             'family_name' => $familyNM,
-            'firsta_name' => $firstNM
+            'first_name' => $firstNM
         ]);
 
         if($return == "top"){
