@@ -45,13 +45,15 @@ class VaccineController extends Controller
             return view('top');
         } else {
             $keyReg = "login";
-            return view("login",compact('keyReg'));
+            $misscheck = "✕";
+            return view("login",compact('keyReg','misscheck'));
         } 
     }
     //ログイン
     public function login(Request $request){
         $keyReg = $request->input('obje');
-        return view('/login', compact('keyReg'));
+        $misscheck = "✕";
+        return view('/login', compact('keyReg','misscheck'));
     }
     //新規予約画面へ
     public function newRegister(Request $request){
@@ -76,15 +78,15 @@ class VaccineController extends Controller
         $month = $request->input('month');
         $date = $request->input('date');
         $ymd = $year.'-'.$month.'-'.$date;
+        $pas = $request->input('password');
 
-        $item = reserve_person::where('tickets_number',$Vnum)->where('birthday',$ymd)->first();
+        $item = reserve_person::where('tickets_number',$Vnum)->where('birthday',$ymd)->where('pass',$pas)->first();
 
         if($item != null){
             $check = true;
             $resPid = $item['Reserve_person_id'];
         }
 
-        $misscheck ="oo";
 
         if($check){
             if($keyReg == "new"){
@@ -123,6 +125,7 @@ class VaccineController extends Controller
                 return view('vaccine/selectPlace',compact('places','resPid'));
             }
         } else {
+            $misscheck ="入力されたデータが間違っています";
             return view("/login",compact('misscheck','keyReg'));
         }
     }
