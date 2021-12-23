@@ -82,6 +82,9 @@
             border-color:#4f85a7;
             background-color:#68c6d7;
         }
+        select{
+            width: 100px;
+        }        
     </style>
 </head>
 <body>
@@ -124,10 +127,10 @@
         <p>
             @if ($keyReg === 'top')
                 top
-                <input type="hidden" name="val" value="top">
+                <input type="hidden" name="from" value="top">
             @else
                 newReserve
-                <input type="hidden" name="val" value="newReserve">
+                <input type="hidden" name="from" value="newReserve">
             @endif
         </p>
         @csrf

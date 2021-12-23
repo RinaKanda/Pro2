@@ -12,6 +12,7 @@
 </head>
 <script>
 	$(function(){
+        var keyR = null;
         var keyR = '{{$keyReg}}';
         $("#keyreg").val(keyR);
         console.log(keyR);
