@@ -38,7 +38,7 @@ class CreateMakeTablesTable extends Migration
             $table->string('pass');
             $table->string('email');
             $table->string('family_name');
-            $table->string('firsta_name');
+            $table->string('first_name');
         });
 
         Schema::create('reserves', function (Blueprint $table) {
