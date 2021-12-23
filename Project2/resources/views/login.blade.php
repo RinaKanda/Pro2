@@ -12,6 +12,10 @@
 </head>
 <script>
 	$(function(){
+        // var error = '{{$misscheck}}';
+        // if(error ==  ){
+        //     alert(error);
+        // }
         var keyR = null;
         var keyR = '{{$keyReg}}';
         $("#keyreg").val(keyR);
@@ -37,6 +41,8 @@
         <input type="text" value="1234567890" pattern="^[0-9]{10}" id="vaccination_num" name="vaccination_num" required><br>
         <h2>生年月日</h2>
         <input type="text" value="2000" pattern="^[0-9]{4}" id="year" name="year" required>年<input type="text" value="01" pattern="[0-9]{2}" id="month" name="month" required>月<input type="text" value="01" pattern="[0-9]{2}" id="date" name="date" required>日
+        <h2>パスワード</h2>
+        <input type="password" name="password">
         @csrf
         <input type="hidden" id="keyreg" name="keyreg" value="">
         <p>
