@@ -19,9 +19,10 @@
             $('.colums').click(function(){
                 $("*").removeClass("selected");
                 $(this).addClass("selected");
+                document.getElementById("button").disabled = false;
             });
         });
-        
+    
     </script>
     <meta charset="UTF-8">
     <title>Document</title>
@@ -46,7 +47,7 @@
     <input type="hidden" id="place" name="place" value="value">
     <input type="hidden" id="Pid" name="Pid" value="value">
     
-    <button type="submit">送信</button>
+    <button type="submit" id="button" disabled>送信</button>
 </form>
 
 

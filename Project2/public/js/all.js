@@ -9,8 +9,10 @@ $(function() {
     var selected_year = document.getElementById("year").value;
     var selected_month = document.getElementById("month").value;
 
+    
+
     // 年(初期): 1900〜現在の年 の値を設定
-    for (var i = year; i >= 1900 ; i--) {
+    for (var i = (year-12); i >= 1900 ; i--) {
         $('#year').append('<option value="' + i + '">' + i + '</option>');
     }
 
