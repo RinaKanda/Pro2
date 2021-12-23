@@ -19,11 +19,14 @@
                 var placekey = pla;
                 $(function(){
                     $("#date").val(day01);
-                    $("#place").val(placekey);    
+                    $("#place").val(placekey);  
                 })
             }
         }
         $(function(){
+            var keyid = '{{$resPid}}';
+            $("#Pid").val(keyid);  
+
             $('.colums').click(function(){
                 if(this.id !== "✕"){
                     $("*").removeClass("selected");
@@ -37,13 +40,6 @@
 </script>
     <meta charset="UTF-8">
     <title>Document</title>
-    <style>
-        body{
-            margin-right: auto;
-            margin-left: auto;
-            width: 400px;
-        }
-    </style>
 </head>
 <body>
             @foreach($place as $place)
@@ -54,20 +50,21 @@
                 <th class="text-center">日付</th> 
             </tr> 
             @foreach($resdatas as  $resdata)
-            @if($resdata->year ==  2022 && $resdata->month == 03)
+            {{-- @if($resdata->year ==  2022 && $resdata->month == 03) --}}
                 <tr class="colums" id="{{ $resdata->mark }}" 
                 onclick="select('{{ $resdata->reservation_date }}' ,
                 {{ $resdata->place_id }},'{{ $resdata->mark }}')">
                     <td>{{ $resdata->reservation_date }}</td>
                     <td>{{ $resdata->mark }}</td>
                 </tr>
-            @endif
+            {{-- @endif --}}
             @endforeach
 </tr>   
 </table>       
 <form action="/selectTime" method="post">
     <input type="hidden" id="date" name="date" value="value">
     <input type="hidden" id="place" name="place" value="val">
+    <input type="hidden" id="Pid" name="Pid" value="value">
         @csrf
     <button type="submit">送信</button>
 </form>

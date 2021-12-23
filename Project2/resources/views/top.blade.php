@@ -30,16 +30,23 @@
     <h1>〇〇市ワクチン予約サイト</h1>
     <div class="border">
         <form action="/newRegister" method="post">
-            <input type="hidden" name="val" value="top">
+            <input type="hidden" name="from" value="top">
             @csrf
             <button type="submit">新規登録</button>
         </form>
     </div>
-        <!-- <a href="/newRegister">新規登録</a> -->
-    <div class="border">
-        <a href="/newReserve">新規予約</a><br>
-    </div>
-    <div class="border">
-        <a href="/login">予約を確認・変更</a>
-    </div>
+        <div class="border">
+        <form action="/newReserve" method="post">
+            @csrf
+            <input type="hidden" name="obje" value="new">
+            <button type="submit">新規予約</button><br>
+        </form>
+        </div>
+        <div class="border">
+        <form action="/login" method="post">
+            @csrf
+            <input type="hidden" name="obje" value="conf">
+            <button type="submit">予約を確認・変更</button>
+        </form>
+        </div>
 </body>   
