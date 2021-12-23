@@ -21,8 +21,11 @@
 			    });
 				$(this).val(str);
 			}).change();
-	    });
 
+            // $("*").focusin(function(){
+            //     if()
+            // });
+	    });
         $(function () {
 			$('#passwd').pwdMeasure();
 		});
@@ -93,10 +96,10 @@
 
     <form action="/register" method="post" id="regiForm">
         <h3>name<span class="red">※</div></h3>
-        <input type="text" value="佐々木" name="familyname" placeholder="姓" class=validate[required]> <input type="text" value="太郎" name="firstname" placeholder="名前" class="validate[required]">
+        <input type="text" value="" name="familyname" placeholder="姓" class=validate[required]> <input type="text" value="" name="firstname" placeholder="名前" class="validate[required]">
         
         <h3>接種券番号</h3>
-        <input type="text" name="number" value="0003843293" placeholder="10桁の接種券番号を入力" id="number" class=validate[required,custom[number],minSize[10],maxSize[10]]]>
+        <input type="text" name="number" value="" placeholder="10桁の接種券番号を入力" id="number" class=validate[required,custom[number],minSize[10],maxSize[10]]]>
 
         <h3>生年月日</h3>
         <select id="year" name="yaer" class=validate[required]>
@@ -113,17 +116,17 @@
         <input type="text" pattern="^[0-9]{4}" id="year" name="yaer" value="1980" class=validate[required]>年<input type="text" pattern="[0-9]{2}" id="month" name="month" value="09" class=validate[required]>月<input type="text" pattern="[0-9]{2}" id="date" name="date" value="03" required>日 -->
         
         <h3>メールアドレス</h3>
-        <input type="text" name="mailad" value="abc@gmail.com" placeholder="メールアドレス" class="validate[required,custom[email]]">
+        <input type="text" name="mailad" value="" placeholder="メールアドレス" class="validate[required,custom[email]]">
         
         <h3>パスワード</h3>
         <div class="col-sm-8">
-			<input type="password" name="password" value="abcd" placeholder="パスワード" id="passwd" class=validate[required]>
+			<input type="password" name="password" value="" placeholder="パスワード" id="passwd" class=validate[required]>
 		</div>
         <div id="pm-indicator" class="pm-indicator"></div>
         <!-- <input type="text" name="password" value="abcd" placeholder="パスワード" id="passwd"> -->
         
         <h3>パスワード(二回目)</h3>
-        <input type="text"  name="password" value="abcd" placeholder="パスワード(二回目)" class=validate[required]>
+        <input type="text"  name="password" value="" placeholder="パスワード(二回目)" class=validate[required]>
         <p>
             @if ($keyReg === 'top')
                 top
@@ -134,7 +137,7 @@
             @endif
         </p>
         @csrf
-        <button type="submit">送信</button>
+        <button type="submit" id="button" disabled>送信</button>
     </form>
 </body>   
 </html>

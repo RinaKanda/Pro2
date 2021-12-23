@@ -31,6 +31,7 @@
                 if(this.id !== "✕"){
                     $("*").removeClass("selected");
                     $(this).addClass("selected");
+                    document.getElementById("button").disabled = false;
                 }
             });
         });
@@ -66,10 +67,9 @@
     <input type="hidden" id="place" name="place" value="val">
     <input type="hidden" id="Pid" name="Pid" value="value">
         @csrf
-    <button type="submit">送信</button>
+    <button type="submit" id="button" disabled>送信</button>
 </form>
-<a href="/selectTime">選択</a>
 
-<div id="datepicker"></div>
+<!-- <div id="datepicker"></div> -->
 </body>
 </html>
