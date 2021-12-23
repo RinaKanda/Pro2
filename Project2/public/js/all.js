@@ -1,6 +1,7 @@
 $(function() {
     // 現在の年月日を取得
     var time = new Date();
+    console.log(time);
     var year = time.getFullYear();
     var month = time.getMonth() + 1;
     var date = time.getDate();
