@@ -20,10 +20,14 @@ Route::get('/', function () {
 Route::get('/reserveFinish',function(){
     return view('/reserveFinish');
 });
+Route::get('/newRegister',function(){
+    return view('newRegister');
+});
 
 
 //処理有
 Route::post('/newRegister','App\Http\Controllers\VaccineController@newRegister');
+Route::get('/newRegister','App\Http\Controllers\VaccineController@newRegister');
 
 Route::post('/newReserve','App\Http\Controllers\VaccineController@login');
 Route::post('/login','App\Http\Controllers\VaccineController@login');
