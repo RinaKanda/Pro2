@@ -29,6 +29,9 @@
         $(function () {
 			$('#passwd').pwdMeasure();
 		});
+        function ShowLength( str ) {
+            document.getElementById("inputlength").innerHTML = str.length + "文字入力";
+        }
     </script>
 
     <style>
@@ -87,7 +90,10 @@
         }
         select{
             width: 100px;
-        }        
+        }     
+        .inlineSet{
+            display:inline-flex;
+        }   
     </style>
 </head>
 <body>
@@ -98,8 +104,10 @@
         <h3>name<span class="red">※</div></h3>
         <input type="text" value="" name="familyname" placeholder="姓" class=validate[required]> <input type="text" value="" name="firstname" placeholder="名前" class="validate[required]">
         
-        <h3>接種券番号</h3>
-        <input type="text" name="number" value="" placeholder="10桁の接種券番号を入力" id="number" class=validate[required,custom[number],minSize[10],maxSize[10]]]>
+        <h3>接種券番号(10桁)</h3>
+        
+        <input type="text" name="number" value="" placeholder="10桁の接種券番号を入力" maxlength="" id="number" class=validate[required,custom[number],minSize[10],maxSize[10]]] onkeyup="ShowLength(value);">
+        <div class="inlineSet"><p id="inputlength">0文字入力</p></div>
 
         <h3>生年月日</h3>
         <select id="year" name="yaer" class=validate[required]>
@@ -137,7 +145,7 @@
             @endif
         </p>
         @csrf
-        <button type="submit" id="button" disabled>送信</button>
+        <button type="submit" id="button" >送信</button>
     </form>
 </body>   
 </html>
