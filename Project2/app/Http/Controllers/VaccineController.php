@@ -97,6 +97,7 @@ class VaccineController extends Controller
                 //予約情報
                 $residgets = reserve::select('reservation_data_id')->where('reserve_person_id',$resPid)->get();
                 $keynum = 0;
+                $reserves = null;
                 foreach($residgets as $residget){
                     $reserves[$keynum] = reservation_data::where('reservation_data_id',$residget['reservation_data_id'])->first();
                     //場所の名前
@@ -110,6 +111,9 @@ class VaccineController extends Controller
                 }
                 //予約者情報
                 $userdata = reserve_person::where('reserve_person_id',$resPid)->first();
+                if($reserves == null){
+                    $reserves = "notdata";
+                }
                 return view('/mypage',compact('reserves','userdata'));
             
             } else if ($keyReg == "change"){
