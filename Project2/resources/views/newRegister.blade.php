@@ -106,19 +106,21 @@
     </style>
 </head>
 <body>
-
     <h1>新規登録</h1>
 
     <form action="/register" method="post" id="regiForm">
-        <h3>name<span class="red">※</div></h3>
+        <h3>氏名</h3>
+        <span style="color:navy;">ワクチン接種希望者の氏名を入力してください。</span><br>
         <input type="text" value="" name="familyname" placeholder="姓" class=validate[required]> <input type="text" value="" name="firstname" placeholder="名前" class="validate[required]">
         
-         <h3>接種券番号(10桁)</h3>
-        
+        <h3>接種券番号(10桁)</h3>
+        <span style="color:navy;">10桁の接種券番号を入力してください。</span><br>
+
         <input type="text" name="number" value="" placeholder="10桁の接種券番号を入力" maxlength="" id="number" class=validate[required,custom[number],minSize[10],maxSize[10]]] onkeyup="ShowLength(value);">
         <div class="inlineSet"><p id="inputlength">0文字入力</p></div>
 
         <h3>生年月日</h3>
+        <span style="color:navy;">ワクチン接種希望者の生年月日を入力してください。</span><br>
         <select id="year" name="yaer" class=validate[required]>
             <option value="" class=validate[required]>----</option>
         </select> 年
@@ -127,22 +129,24 @@
         </select> 月
         <select id="date" name="date" class=validate[required]>
             <option value="" class=validate[required]>--</option>
-        </select> 日 
-
-        <!-- <h3>生年月日</h3>
-        <input type="text" pattern="^[0-9]{4}" id="year" name="yaer" value="1980" class=validate[required]>年<input type="text" pattern="[0-9]{2}" id="month" name="month" value="09" class=validate[required]>月<input type="text" pattern="[0-9]{2}" id="date" name="date" value="03" required>日 -->
+        </select> 日
         
-         <h3>メールアドレス</h3>
+        <h3>メールアドレス</h3>
+        <span style="color:navy;">予約情報を受け取るメールアドレスを入力してください。</span><br>
+
         <input type="text" name="mailad" value="" placeholder="メールアドレス" class="validate[required,custom[email]]">
         
         <h3>パスワード</h3>
+        <span style="color:navy;">お好きなパスワードを入力してください。（ログインに必要です）</span><br>
         <div class="col-sm-8">
 			<input type="password" name="password" value="" placeholder="パスワード" id="passwd" class=validate[required]>
 		</div>
         <div id="pm-indicator" class="pm-indicator"></div> 
          <!-- <input type="text" name="password" value="abcd" placeholder="パスワード" id="passwd"> --> 
         
-         <h3>パスワード(二回目)</h3>
+        <h3>パスワード(二回目)</h3>
+        <span style="color:navy;">パスワードを再入力してください。</span><br>
+
         <input type="password"  name="password" value="" placeholder="パスワード(二回目)" class=validate[required]>
         <p>
             @if ($keyReg === 'top')
