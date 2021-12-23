@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+    <!-- <link rel="stylrsheet" type="text/css" src="css/all.css"> -->
     <link rel="stylesheet" href="/css/validationEngine.jquery.css" type="text/css"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="/js/languages/jquery.validationEngine-ja.js" type="text/javascript" charset="utf-8"></script>
@@ -11,6 +12,10 @@
     <script>
         jQuery(document).ready(function(){
         jQuery("#regiForm").validationEngine();
+        });
+
+        $(window).on('load',function(){
+            $('#myModal').modal('show');
         });
 
 	    $(function(){
@@ -33,8 +38,11 @@
             document.getElementById("inputlength").innerHTML = str.length + "文字入力";
         }
     </script>
-
+    <title>新規登録</title>
     <style>
+        /* *{
+            overflow:hidden;
+        } */
         body{
             margin-right: auto;
             margin-left: auto;
@@ -88,6 +96,7 @@
             border-color:#4f85a7;
             background-color:#68c6d7;
         }
+       
         select{
             width: 100px;
         }     
@@ -97,34 +106,14 @@
     </style>
 </head>
 <body>
-    @if(Session::has('flashmessage'))
-        <!-- モーダルウィンドウの中身 -->
-        <div class="modal fade" id="myModal" tabindex="-1"
-            role="dialog" aria-labelledby="label1" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center">
-                        {{ session('flashmessage') }}
-                    </div>
-                    <div class="modal-footer text-center">
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
-    <title>新規登録</title>
+
     <h1>新規登録</h1>
 
     <form action="/register" method="post" id="regiForm">
         <h3>name<span class="red">※</div></h3>
         <input type="text" value="" name="familyname" placeholder="姓" class=validate[required]> <input type="text" value="" name="firstname" placeholder="名前" class="validate[required]">
         
-        <h3>接種券番号(10桁)</h3>
+         <h3>接種券番号(10桁)</h3>
         
         <input type="text" name="number" value="" placeholder="10桁の接種券番号を入力" maxlength="" id="number" class=validate[required,custom[number],minSize[10],maxSize[10]]] onkeyup="ShowLength(value);">
         <div class="inlineSet"><p id="inputlength">0文字入力</p></div>
@@ -138,23 +127,23 @@
         </select> 月
         <select id="date" name="date" class=validate[required]>
             <option value="" class=validate[required]>--</option>
-        </select> 日
+        </select> 日 
 
         <!-- <h3>生年月日</h3>
         <input type="text" pattern="^[0-9]{4}" id="year" name="yaer" value="1980" class=validate[required]>年<input type="text" pattern="[0-9]{2}" id="month" name="month" value="09" class=validate[required]>月<input type="text" pattern="[0-9]{2}" id="date" name="date" value="03" required>日 -->
         
-        <h3>メールアドレス</h3>
+         <h3>メールアドレス</h3>
         <input type="text" name="mailad" value="" placeholder="メールアドレス" class="validate[required,custom[email]]">
         
         <h3>パスワード</h3>
         <div class="col-sm-8">
 			<input type="password" name="password" value="" placeholder="パスワード" id="passwd" class=validate[required]>
 		</div>
-        <div id="pm-indicator" class="pm-indicator"></div>
-        <!-- <input type="text" name="password" value="abcd" placeholder="パスワード" id="passwd"> -->
+        <div id="pm-indicator" class="pm-indicator"></div> 
+         <!-- <input type="text" name="password" value="abcd" placeholder="パスワード" id="passwd"> --> 
         
-        <h3>パスワード(二回目)</h3>
-        <input type="text"  name="password" value="" placeholder="パスワード(二回目)" class=validate[required]>
+         <h3>パスワード(二回目)</h3>
+        <input type="password"  name="password" value="" placeholder="パスワード(二回目)" class=validate[required]>
         <p>
             @if ($keyReg === 'top')
                 top
@@ -167,5 +156,6 @@
         @csrf
         <button type="submit" id="button" >送信</button>
     </form>
+    
 </body>   
 </html>
