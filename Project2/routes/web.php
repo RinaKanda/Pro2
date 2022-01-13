@@ -46,3 +46,7 @@ Route::post('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
 Route::post('/register', 'App\Http\Controllers\VaccineController@register');
 Route::get('/resRegister','App\Http\Controllers\VaccineController@resRegister');
 Route::post('/resRegister','App\Http\Controllers\VaccineController@resRegister');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
