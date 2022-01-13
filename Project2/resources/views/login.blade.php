@@ -12,10 +12,7 @@
 </head>
 <script>
 	$(function(){
-        // var error = '{{$misscheck}}';
-        // if(error ==  ){
-        //     alert(error);
-        // }
+        
         var keyR = null;
         var keyR = '{{$keyReg}}';
         $("#keyreg").val(keyR);

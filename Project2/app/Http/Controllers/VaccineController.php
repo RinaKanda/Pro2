@@ -19,7 +19,7 @@ class VaccineController extends Controller
 {
     //新規登録
     public function register(Request $request){
-        $return  = $request->input('from');
+        $keyReg  = $request->input('from');
 
         $familyNM  = $request->input('familyname');
         $firstNM  = $request->input('firstname');
@@ -42,9 +42,9 @@ class VaccineController extends Controller
         ]);
         //まずmodal
         session()->flash('flashmessage','登録完了しました');
-        return view("login");
+        return view("newRegister",compact('keyReg'));
         //
-        if($return == "top"){
+        if($keyReg == "top"){
             return view('top');
         } else {
             $keyReg = "login";
