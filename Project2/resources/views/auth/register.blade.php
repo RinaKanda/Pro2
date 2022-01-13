@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" href="/css/validationEngine.jquery.css" type="text/css"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/js/languages/jquery.validationEngine-ja.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.pwdMeasure.min.js"></script>
+    <script type="text/javascript"></script>
+    <script type="text/javascript" src="js/all.js"></script>
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -70,12 +78,63 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="birthday" class="col-md-4 col-form-label text-md-end">{{ __('birthday') }}</label>
+
+                        <!-- <div class="row mb-3">
+                            <label for="year" class="col-md-4 col-form-label text-md-end">{{ __('birthday') }}</label>
 
                             <div class="col-md-6">
-                                <input id="birthday" type="text" class="form-control" name="birthday" required>
+                                <input id="year" class="form-control" name="year" required>
                             </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="month" class="col-md-4 col-form-label text-md-end">{{ __('birthday') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="month" class="form-control" name="month" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="date" class="col-md-4 col-form-label text-md-end">{{ __('birthday') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="date" class="form-control" name="date" required>
+                            </div>
+                        </div> -->
+                        
+                        <!-- <div class="row mb-3">
+                            <div class="col-md-6">
+                                <select id="year" name="year" class="form-control">
+                                    <option value="">----</option>
+                                </select> 年
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <select id="month" name="month" class="form-control">
+                                    <option value="">--</option>
+                                </select> 月            
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <select id="date" name="date" class="form-control">
+                                    <option value="">--</option>
+                                </select> 日  
+                            </div>
+                        </div> -->
+
+
+                        <div class="row mb-3">
+                            <label for="year" class="col-md-4 col-form-label text-md-end">{{ __('birthday') }}</label>
+                            <select id="year" name="year" class="form-control">
+                                <option value="">----</option>
+                            </select> 年                                            
+                            <select id="month" name="month" class="form-control">
+                                <option value="">--</option>
+                            </select> 月                                                        
+                            <select id="date" name="date" class="form-control">
+                                <option value="">--</option>
+                            </select> 日  
                         </div>
 
                         <div class="row mb-0">
