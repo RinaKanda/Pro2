@@ -190,7 +190,7 @@
     <title>〇〇市ワクチン予約サイト</title>
     <h1>〇〇市ワクチン予約サイト
         <div id ="link">
-            <a href="/auth/login">新規登録・ログイン</a></div>
+            <a href="../auth/login.blade.php">新規登録・ログイン</a></div>
     </h1>
     
     <div class="wrapper">

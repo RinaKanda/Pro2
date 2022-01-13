@@ -50,3 +50,4 @@ Route::post('/resRegister','App\Http\Controllers\VaccineController@resRegister')
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
