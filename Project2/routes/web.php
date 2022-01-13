@@ -23,6 +23,9 @@ Route::get('/reserveFinish',function(){
 Route::get('/newRegister',function(){
     return view('newRegister');
 });
+Route::get('/index', function () {//テスト追加
+    return view('index');
+});
 
 
 //処理有
@@ -46,3 +49,12 @@ Route::post('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
 Route::post('/register', 'App\Http\Controllers\VaccineController@register');
 Route::get('/resRegister','App\Http\Controllers\VaccineController@resRegister');
 Route::post('/resRegister','App\Http\Controllers\VaccineController@resRegister');
+
+
+//テスト
+Route::get('session','App\Http\Controllers\VaccineController@ses_get');
+Route::post('session','App\Http\Controllers\VaccineController@ses_put');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
