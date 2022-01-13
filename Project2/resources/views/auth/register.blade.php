@@ -61,6 +61,23 @@
                             </div>
                         </div>
 
+                        <!-- 追加 -->
+                        <div class="row mb-3">
+                            <label for="tickets_number" class="col-md-4 col-form-label text-md-end">{{ __('tickets_number') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="tickets_number" type="text" class="form-control" name="tickets_number" required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="birthday" class="col-md-4 col-form-label text-md-end">{{ __('birthday') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="birthday" type="text" class="form-control" name="birthday" required>
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
