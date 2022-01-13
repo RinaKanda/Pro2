@@ -3,11 +3,12 @@
 <!-- <link rel="stylesheet" type="text/css" href="/css/all.css"> -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <style>
-        /* body{
+        body{
+            background-color:#eee;
             margin-right: auto;
             margin-left: auto;
             width: 400px;
-        } */
+        }
         .border{
             border:solid 2px;
             width: 160px;
@@ -24,50 +25,7 @@
             -moz-appearance: none;
             appearance: none;
         }
-        .menu {
-            display: block;
-            position: relative;
-            width: 1.75rem;
-            height: 1.5rem;
-        }
-        .open-menu {
-            width: 50%;   
-        }
-        nav{
-            position: fixed;
-            overflow: hidden;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            text-align: center;
-            width: 0; 
-            transition: 0.2s;
-        }
-        nav ul {
-            padding: 50px 20px;
-        }
-        nav li {
-            list-style: none;
-            text-align: left;
-            padding: 10px 0;
-        }
-        .radio-menu{
-            /* display: none; */
-            position: absolute;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            background-color:grey;
-        }
-
-        .radio-menu li{
-            padding: 5px;
-        }
-        .open {
-        width: 100%;
-        height: 100%;
-        }
-
+        
     /* new */
     .wrapper {
         height: 100%;
@@ -90,7 +48,7 @@
         .overlay.open {
         width: 100%;
         height: 100%;
-        opacity: 1;
+        /* opacity: 1; */
         }
         main {
         height: 100%;
@@ -102,9 +60,6 @@
         flex-direction: column;
         justify-content: center;
         }
-        main.open {
-        transform: translateX(-250px);
-        }
         main h1 {
         text-align: center;
         font-weight: 500;
@@ -114,22 +69,23 @@
         }
         .menu-trigger {
         display: inline-block;
-        width: 36px;
-        height: 28px;
+        width: 20%;
+        height: 5%;
         vertical-align: middle;
         cursor: pointer;
         position: fixed;
-        top: 30px;
-        right: 30px;
+        top: 10%;
+        left: 20px;
         z-index: 100;
-        
         transform: translateX(0);
-        /*transition: transform .5s;
-        */}
-        .menu-trigger.active {
-        transform: translateX(-250px);
+        transition: transform .5s;
+        font-size:18px;
+        background-color:white;
         }
-       .menu-trigger span {
+        /* .menu-trigger.active {
+        transform: translateX(250px);
+        } */
+        .menu-trigger span {
         display: inline-block;
         box-sizing: border-box;
         position: absolute;
@@ -137,12 +93,11 @@
         width: 100%;
         height: 4px;
         background-color: #000;
-        transition: all .5s;
         }
         .menu-trigger.active span {
         background-color: #fff;
         }
-        .menu-trigger span:nth-of-type(1) {
+        /* .menu-trigger span:nth-of-type(1) {
         top: 0;
         }
         .menu-trigger.active span:nth-of-type(1) {
@@ -156,109 +111,114 @@
         }
         .menu-trigger span:nth-of-type(3) {
         bottom: 0;
-        }
+        } */
         .menu-trigger.active span:nth-of-type(3) {
         transform: translateY(-12px) rotate(45deg);
         }
 
         nav {
-        width: 250px;
+        width: 30%;
         height: 100%;
         padding-top: 100px;
-        background-color: rgb(16, 69, 153, 0.8);
+        /* background-color: snow; */
+        border:solid;
         position: fixed;
-        top: 0;
-        right: 0;
+        top: 15%;
+        left: -30%;
         z-index: 10;
-        transform: translate(250px);
+        /* transform: translate(250px); */
         transition: all .5s;
         }
         nav.open {
-        transform: translateZ(0);
+        transform: translate(100%);
         }
         nav li {
-        color: #fff;
+        /* color: #fff; */
         text-align: center;
         padding: 10px 0;
         }
+
+        * {
+        box-sizing: border-box;
+        }
+        ul {
+        list-style: none;
+        }
+
+        /* link */
+        #link{
+            position:fixed;
+            right:0;
+            margin:3%;
+            display: inline-block;
+            font-size:20px;
+        }
+        a:link,a:visited{
+            color:midnightblue;
+        }    
+
     </style>
     <script>
         $(function(){
-    //         $('.nav').hide();
-    //         $('.menu').on('click',function(){
-    //             $('.nav').toggle();
-    //         })        
-    //     var menu = document.getElementById("menu");
-    //     const back = document.getElementById("back");
-    //     const nav = document.getElementById("nav");
-    //     console.log(menu,back,nav);
+            $('.menu-trigger').on('click',function(){
+                if($(this).hasClass('active')){
+                    $(this).removeClass('active');
+                    $('nav').removeClass('open');
+                    $('.overlay').removeClass('open');
+                } else {
+                    $(this).addClass('active');
+                    $('nav').addClass('open');
+                    $('.overlay').addClass('open');
+                }
+            });
+            $('.overlay').on('click',function(){
+                if($(this).hasClass('open')){
+                    $(this).removeClass('open');
+                    $('.menu-trigger').removeClass('active');
+                    $('nav').removeClass('open');      
+                }
+            });
 
-    //     menu.addEventListener("click", () => {
-    //     if (nav.className === "navi") {
-    //         nav.classList.add("open-menu");
-    //         back.classList.add("open");
-    //         menu.textContent = "閉じる";
-    //     }else {nav.classList.remove("open-menu");
-    //         back.classList.remove("open");
-    //             menu.textContent = "menu";
-    //         }
-    //     });
-        
-    //     back.addEventListener("click", () => {
-    //         back.classList.remove("open");
-    //         nav.classList.remove("open-menu");
-    //         menu.textContent = "menu";
-    //     });
-    // });
-
-    $('.menu-trigger').on('click',function(){
-        if($(this).hasClass('active')){
-            $(this).removeClass('active');
-            $('main').removeClass('open');
-            $('nav').removeClass('open');
-            $('.overlay').removeClass('open');
-        } else {
-            $(this).addClass('active');
-            $('main').addClass('open');
-            $('nav').addClass('open');
-            $('.overlay').addClass('open');
-        }
-    });
-$('.overlay').on('click',function(){
-  if($(this).hasClass('open')){
-    $(this).removeClass('open');
-    $('.menu-trigger').removeClass('active');
-    $('main').removeClass('open');
-    $('nav').removeClass('open');      
-  }
-});
+            if(true){
+                    $('#reser').text('AA様の現在の予約');
+            }
         });
     </script>
 </head>
 
 <body>
     <title>〇〇市ワクチン予約サイト</title>
-    <h1>〇〇市ワクチン予約サイト</h1>
-    <!-- <div>
-        <p id="menu">
-            AA
-        </p>
-        <nav id="nav">
-            <ul class="radio-menu" id="rmenu">
-                AAA様
-                <li><a href="#">予約データa</a></li>
-                <li><a href="#">予約データb</a></li>
-                <li><a href="#">予約データc</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div id="back" class="menu-background"></div> -->
-
+    <h1>〇〇市ワクチン予約サイト
+        <div id ="link">
+            <a href="/auth/login">新規登録・ログイン</a></div>
+    </h1>
+    
     <div class="wrapper">
+        <main>
+            <div class="border">
+                <form action="/newRegister" method="post">
+                    <input type="hidden" name="from" value="top">
+                    @csrf
+                    <button type="submit">新規登録</button>
+                </form>
+            </div>
+            <div class="border">
+                <form action="/newReserve" method="post">
+                    @csrf
+                    <input type="hidden" name="obje" value="new">
+                    <button type="submit">新規予約</button><br>
+                </form>
+            </div>
+            <div class="border">
+                <form action="/login" method="post">
+                    @csrf
+                    <input type="hidden" name="obje" value="conf">
+                    <button type="submit">予約を確認・変更</button>
+                </form>
+            </div>
+         </main>
         <div class="menu-trigger" href="">
-            <span></span>
-            <span></span>
-            <span></span>
+            <div id="reser">現在の予約</div>
         </div>
         <nav>
             <ul>
@@ -270,25 +230,25 @@ $('.overlay').on('click',function(){
         <div class="overlay"></div>
     </div>
 
-    <div class="border">
+    <!-- <div class="border">
         <form action="/newRegister" method="post">
             <input type="hidden" name="from" value="top">
             @csrf
             <button type="submit">新規登録</button>
         </form>
     </div>
-        <div class="border">
+    <div class="border">
         <form action="/newReserve" method="post">
             @csrf
             <input type="hidden" name="obje" value="new">
             <button type="submit">新規予約</button><br>
         </form>
-        </div>
-        <div class="border">
+    </div>
+    <div class="border">
         <form action="/login" method="post">
             @csrf
             <input type="hidden" name="obje" value="conf">
             <button type="submit">予約を確認・変更</button>
         </form>
-        </div>
+    </div> -->
 </body>   
