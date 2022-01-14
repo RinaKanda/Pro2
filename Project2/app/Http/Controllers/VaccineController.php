@@ -261,22 +261,23 @@ class VaccineController extends Controller
 
         foreach($places as $place){
             $key = $place->place_id;
-            echo $key;
+            // echo $key;
             $resdatas[$keynum2] = reservation_data::select('reservation_date')->where('place_id',$key)->whereDate('reservation_date',">=",$now)->distinct()->get();
-            echo $resdatas[$keynum2];
+            // echo $resdatas[$keynum2];
             $keynum = 0;
-            foreach($resdatas as $value){
+            foreach($resdatas[$keynum2] as $value){
                 //placeid
+                
                 $resdatas[$keynum2][$keynum]['place_id'] = $key;
                 //日付データ関連
                 $resdatas[$keynum2][$keynum]['year'] =  date('Y', strtotime($resdatas[$keynum2][$keynum]['reservation_date']));
                 $resdatas[$keynum2][$keynum]['month'] =  date('m', strtotime($resdatas[$keynum2][$keynum]['reservation_date']));
                 //キャパ計算
-                $cap = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value[$keynum2]['reservation_date'])->sum('capacity');
-                $resdatas[$keynum]['capacity'] = $cap ;
+                $cap = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('capacity');
+                $resdatas[$keynum2][$keynum]['capacity'] = $cap ;
                 //予約可能人数計算
-                $Reserved = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value[$keynum2]['reservation_date'])->sum('reserve_counts');
-                $cancel = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value[$keynum2]['reservation_date'])->sum('cancel');
+                $Reserved = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('reserve_counts');
+                $cancel = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('cancel');
                 $resdatas[$keynum2][$keynum]['reserve_avail'] = $cap - $Reserved + $cancel;
                 //割合
                 $resdatas[$keynum2][$keynum]['ratio'] = $Reserved / $cap ;
@@ -288,13 +289,17 @@ class VaccineController extends Controller
                 } else {
                     $resdatas[$keynum2][$keynum]['mark'] = '○';
                 }
+                // echo $resdatas[$keynum2][$keynum];
+                // echo "<br>";
                 $keynum++;
                 
             }
+            // echo $resdatas[$keynum2];
+            
             $keynum2++;
         }
-        echo $resdatas[$keynum2];
-
+        // var_dump($places);
+        // var_dump($resdatas);
         return view('/top',compact('places','resdatas'));
     }
 

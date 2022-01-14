@@ -240,8 +240,8 @@
                     <td>{{ $place->place_name }}</td>
                     <td>{{ $place->address }}</td>
                     @foreach($resdatas as  $resdata)
-                        {{-- @if($resdata->year ==  2022 && $resdata->month == 03) --}}
-                            @foreach($resdata as $res)
+                        {{-- @if($resdata->year ==  2022 && $resdata->month == 03) --}}   
+                        @foreach($resdata as $res)
                                 <tr>
                                     <td>{{ $res->reservation_date }}</td>
                                     <td>{{ $res->mark }}</td>
