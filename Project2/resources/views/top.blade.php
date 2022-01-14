@@ -252,6 +252,7 @@
                 </tr>
             @endforeach
             </tr>   
+
         </table>
             <!-- <div class="border">
                 <form action="/newRegister" method="post">
