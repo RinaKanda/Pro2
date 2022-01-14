@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <head>
 <!-- <link rel="stylesheet" type="text/css" href="/css/all.css"> -->
+<link rel="stylesheet" type="text/css" href="/css/all.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <style>
         body{
             background-color:#eee;
             margin-right: auto;
             margin-left: auto;
-            width: 400px;
+            /* width: 800; */
+            font-size:20px;
+        }
+        #title{
+            /* width: 600px; */
+            margin-right: 10%;
+            margin-left: 25%;
         }
         .border{
             border:solid 2px;
@@ -29,8 +36,13 @@
     /* new */
     .wrapper {
         height: 100%;
-        overflow-x: hidden;
-        position: relative;
+        width: 70%;
+        /* weight:800px; */
+        /* overflow-x: hidden; */
+        overflow:auto;
+        /* position: relative; */
+        position:fixed;
+        left:35%;
         }
         .overlay {
         content: "";
@@ -51,9 +63,11 @@
         /* opacity: 1; */
         }
         main {
-        height: 100%;
-        min-height: 100vh;
-        padding: 0 50px;
+        /* height: 100%; */
+        /* min-height: 100vh; */
+        width:50%;
+        background-color:green;
+        padding: 10px 10px;
         background-color: #eee;
         transition: all .5s;
         display: flex;
@@ -79,8 +93,8 @@
         z-index: 100;
         transform: translateX(0);
         transition: transform .5s;
-        font-size:18px;
-        background-color:white;
+        font-size:20px;
+        /* background-color:white; */
         }
         /* .menu-trigger.active {
         transform: translateX(250px);
@@ -91,7 +105,7 @@
         position: absolute;
         left: 0;
         width: 100%;
-        height: 4px;
+        height: 10px;
         background-color: #000;
         }
         .menu-trigger.active span {
@@ -119,11 +133,11 @@
         nav {
         width: 30%;
         height: 100%;
-        padding-top: 100px;
+        padding-top: 30px;
         /* background-color: snow; */
         border:solid;
         position: fixed;
-        top: 15%;
+        top: 20%;
         left: -30%;
         z-index: 10;
         /* transform: translate(250px); */
@@ -133,9 +147,9 @@
         transform: translate(100%);
         }
         nav li {
-        /* color: #fff; */
+        /* color: #fff;
         text-align: center;
-        padding: 10px 0;
+        padding: 10px 0; */
         }
 
         * {
@@ -156,7 +170,15 @@
         a:link,a:visited{
             color:midnightblue;
         }    
-
+        #reser {
+            font-weight:bold;
+            font-size:20px;
+        }
+        /* table */
+        .table{
+            /* width:400px; */
+            background-color:green;
+        }
     </style>
     <script>
         $(function(){
@@ -179,23 +201,59 @@
                 }
             });
 
-            if(true){
-                    $('#reser').text('AA様の現在の予約');
-            }
+            $('.colums').click(function(){
+                $("*").removeClass("selected");
+                $(this).addClass("selected");
+                // document.getElementById("button").disabled = false;
+            });
+
+            // if(true){
+            //         $('#reser').text('AA様の現在の予約');
+            // }
         });
+
+        function select(){
+            
+        }
     </script>
 </head>
 
 <body>
     <title>〇〇市ワクチン予約サイト</title>
-    <h1>〇〇市ワクチン予約サイト
+    <h1><span id="title">〇〇市ワクチン予約サイト</span>
         <div id ="link">
-            <a href="../auth/login.blade.php">新規登録・ログイン</a></div>
+            <a href="/register">新規登録</a> /
+            <a href="/login">ログイン</a>
+        </div>
     </h1>
     
     <div class="wrapper">
         <main>
-            <div class="border">
+        <table class="table">
+            <tr>
+                <th>病院名</th> 
+                <th>住所</th> 
+            </tr> 
+            <tr>
+            @foreach($places as $key => $place)
+                <tr class="colums" onclick="select({{ $place->place_id }})">
+                    <td>{{ $place->place_name }}</td>
+                    <td>{{ $place->address }}</td>
+                    @foreach($resdatas as  $resdata)
+                        {{-- @if($resdata->year ==  2022 && $resdata->month == 03) --}}
+                            @foreach($resdata as $res)
+                                <tr>
+                                    <td>{{ $res->reservation_date }}</td>
+                                    <td>{{ $res->mark }}</td>
+                                </tr>
+                            @endforeach
+                        {{-- @endif --}}
+                    @endforeach
+                </tr>
+            @endforeach
+            </tr>   
+        </table>
+            <!-- <div class="border">
                 <form action="/newRegister" method="post">
                     <input type="hidden" name="from" value="top">
                     @csrf
@@ -210,15 +268,15 @@
                 </form>
             </div>
             <div class="border">
-                <form action="/login" method="post">
+                <form action="/login2" method="post">
                     @csrf
                     <input type="hidden" name="obje" value="conf">
                     <button type="submit">予約を確認・変更</button>
                 </form>
-            </div>
+            </div> -->
          </main>
         <div class="menu-trigger" href="">
-            <div id="reser">現在の予約</div>
+            <div id="reser"><a href="#">現在の予約</a></div>
         </div>
         <nav>
             <ul>
@@ -229,26 +287,5 @@
         </nav>
         <div class="overlay"></div>
     </div>
-
-    <!-- <div class="border">
-        <form action="/newRegister" method="post">
-            <input type="hidden" name="from" value="top">
-            @csrf
-            <button type="submit">新規登録</button>
-        </form>
-    </div>
-    <div class="border">
-        <form action="/newReserve" method="post">
-            @csrf
-            <input type="hidden" name="obje" value="new">
-            <button type="submit">新規予約</button><br>
-        </form>
-    </div>
-    <div class="border">
-        <form action="/login" method="post">
-            @csrf
-            <input type="hidden" name="obje" value="conf">
-            <button type="submit">予約を確認・変更</button>
-        </form>
-    </div> -->
 </body>   
+</html>

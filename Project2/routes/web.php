@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 //処理なし
-Route::get('/', function () {
-    return view('top');
-});
+// Route::get('/', function () {
+//     return view('top');
+// });
 Route::get('/reserveFinish',function(){
     return view('/reserveFinish');
 });
@@ -29,6 +29,8 @@ Route::get('/index', function () {//テスト追加
 
 
 //処理有
+Route::get('/','App\Http\Controllers\VaccineController@toppage');
+
 Route::post('/newRegister','App\Http\Controllers\VaccineController@newRegister');
 Route::get('/newRegister','App\Http\Controllers\VaccineController@newRegister');
 

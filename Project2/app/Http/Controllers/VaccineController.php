@@ -253,6 +253,13 @@ class VaccineController extends Controller
         return view('/reserveFinish');
     }
 
+    //top
+    public function toppage(){
+        echo "OK";
+
+        return view('/top');
+    }
+
     public function ses_get(Request $request){
         $sesdata = $request->session()->get('msg');
         return view('/session',['session_data' => $sesdata]);
