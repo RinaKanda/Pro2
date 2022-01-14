@@ -128,13 +128,13 @@
                             <label for="year" class="col-md-4 col-form-label text-md-end">{{ __('birthday') }}</label>
                             <select id="year" name="year" class="form-control">
                                 <option value="">----</option>
-                            </select> 年                                            
+                            </select>年                                            
                             <select id="month" name="month" class="form-control">
                                 <option value="">--</option>
-                            </select> 月                                                        
+                            </select>月                                                        
                             <select id="date" name="date" class="form-control">
                                 <option value="">--</option>
-                            </select> 日  
+                            </select>日  
                         </div>
 
                         <div class="row mb-0">
