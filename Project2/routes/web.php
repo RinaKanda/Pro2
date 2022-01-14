@@ -53,13 +53,10 @@ Route::get('/resRegister','App\Http\Controllers\VaccineController@resRegister');
 Route::post('/resRegister','App\Http\Controllers\VaccineController@resRegister');
 
 
-
 //テスト
 Route::get('session','App\Http\Controllers\VaccineController@ses_get');
 Route::post('session','App\Http\Controllers\VaccineController@ses_put');
 
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
