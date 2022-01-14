@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 <link rel="stylesheet" href="/css/validationEngine.jquery.css" type="text/css"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="/js/languages/jquery.validationEngine-ja.js" type="text/javascript" charset="utf-8"></script>
@@ -70,7 +69,6 @@
                             </div>
                         </div>
 
-
                         <!-- 追加 -->
                         <div class="row mb-3">
                             <label for="tickets_number" class="col-md-4 col-form-label text-md-end">{{ __('tickets_number') }}</label>
@@ -138,7 +136,6 @@
                                 <option value="">--</option>
                             </select>日  
                         </div>
-
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
