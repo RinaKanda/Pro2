@@ -29,7 +29,7 @@ Route::get('/index', function () {//テスト追加
 
 
 //処理有
-Route::get('/','App\Http\Controllers\VaccineController@toppage');
+Route::get('/','App\Http\Controllers\topController@toppage');
 
 Route::post('/newRegister','App\Http\Controllers\VaccineController@newRegister');
 Route::get('/newRegister','App\Http\Controllers\VaccineController@newRegister');
