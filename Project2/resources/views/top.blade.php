@@ -225,8 +225,16 @@
     <title>〇〇市ワクチン予約サイト</title>
     <h1><span id="title">〇〇市ワクチン予約サイト</span>
         <div id ="link">
+            @guest
             <a href="/register">新規登録</a> /
             <a href="/login">ログイン</a>
+            @endguest
+            @auth
+            <a href="/logout">ログアウト</a>
+            <!-- <form action="/logout" method="POST">
+                <button>ログアウト</button>
+            </form> -->
+            @endauth
         </div>
     </h1>
     
@@ -280,7 +288,14 @@
             </div> -->
          </main>
         <div class="menu-trigger" href="">
-            <div id="reser"><a href="#">現在の予約</a></div>
+            <div id="reser">
+                @guest
+                <a href="#">現在の予約</a>
+                @endguest
+                @auth
+                <a href="#">{{$auths->name}}さんの予約</a>
+                @endauth
+            </div>
         </div>
         <nav>
             <ul>

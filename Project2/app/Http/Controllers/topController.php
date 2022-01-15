@@ -18,10 +18,8 @@ class topController extends Controller
      //top
      public function toppage(){
         //ユーザ認証関連
-        if( Auth::check()){
+            //ログイン情報取得
             $auths = Auth::user();
-            echo $auths;
-        }
 
         //  予約情報関連
         $places = place::all();
@@ -69,7 +67,12 @@ class topController extends Controller
         }
         // var_dump($places);
         // var_dump($resdatas);
-        return view('/top',compact('places','resdatas'));
+        return view('/top',compact('places','resdatas','auths'));
     }
+
+    //logout処理
+    public function logout(){
+        return view('/top');
+    } 
 
 }

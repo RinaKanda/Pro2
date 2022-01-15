@@ -29,7 +29,7 @@ Route::get('/index', function () {//テスト追加
 
 
 //処理有
-Route::get('/','App\Http\Controllers\topController@toppage');
+Route::get('/','App\Http\Controllers\TopController@toppage');
 
 Route::post('/newRegister','App\Http\Controllers\VaccineController@newRegister');
 Route::get('/newRegister','App\Http\Controllers\VaccineController@newRegister');
@@ -60,3 +60,4 @@ Route::post('session','App\Http\Controllers\VaccineController@ses_put');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/logout','App\Http\Controllers\TopController@logout');

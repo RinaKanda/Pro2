@@ -46,4 +46,9 @@ class LoginController extends Controller
         return 'tickets_number';
     }
 
+    //logout
+    // protected function loggedOut(Request $request){
+    //     return view('/');
+    // }
+
 }
