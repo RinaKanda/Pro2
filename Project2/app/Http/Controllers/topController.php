@@ -17,6 +17,13 @@ class topController extends Controller
 {
      //top
      public function toppage(){
+        //ユーザ認証関連
+        if( Auth::check()){
+            $auths = Auth::user();
+            echo $auths;
+        }
+
+        //  予約情報関連
         $places = place::all();
         $now = new Carbon('today');
         $keynum2 = 0;
