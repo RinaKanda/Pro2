@@ -17,7 +17,7 @@ class topController extends Controller
 {
      //top
      public function toppage(){
-        //ユーザ認証関連
+        //  ユーザ認証関連
             //ログイン情報取得
             $auths = Auth::user();
 
@@ -61,13 +61,35 @@ class topController extends Controller
                 $keynum++;
                 
             }
-            // echo $resdatas[$keynum2];
             
             $keynum2++;
         }
-        // var_dump($places);
-        // var_dump($resdatas);
-        return view('/top',compact('places','resdatas','auths'));
+
+        //  ユーザの予約
+        if ( Auth::check() ) {
+            // ログイン済みのときの処理
+            $residgets = reserve::select('reservation_data_id')->where('reserve_person_id',$auths->id)->get();
+
+            $keynum = 0;
+            $reserves = null;
+            foreach($residgets as $residget){
+                $reserves[$keynum] = reservation_data::where('reservation_data_id',$residget['reservation_data_id'])->first();
+                //場所の名前
+                $pid = $reserves[$keynum]['place_id'];
+                // echo $pid;
+                // echo "<br><br>1" . $reserves[$keynum];
+                $pname = place::where('place_id',$pid)->first();
+                $reserves[$keynum]['place_name'] = $pname['place_name'];
+                // echo "<br>2" . $reserves[$keynum];
+                $keynum++;
+            }
+            
+            return view('/top',compact('places','resdatas','auths','reserves'));
+        } else {
+          // ログインしていないときの処理
+          return view('/top',compact('places','resdatas','auths'));
+          }
+        
     }
 
     

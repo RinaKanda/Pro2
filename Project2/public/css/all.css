@@ -21,8 +21,9 @@ body{
 .group{
     border-radius: 5px;
     border: black solid;
-    padding: 10px 30px 10px 20px;
-    margin: 20px;
+    /* padding: 10px 30px 10px 20px;
+    margin: 20px; */
+    font-size:0.2rem;
 }
 .usergroup{
     border-radius: 5px;

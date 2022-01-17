@@ -304,11 +304,26 @@
             </div>
         </div>
         <nav>
-            <ul>
+            @guest
+                ログインすれば予約見れます
+            @endguest
+
+            @auth
+                @foreach($reserves as $reserve) 
+                <div class="group">
+                    接種券番号 <span class="lineon">{{ $auths ->tickets_number }}</span><br>
+                    生年月日 <span class="lineon">{{ $auths ->birthday }}</span><br>
+                    予約会場 <span class="lineon">{{ $reserve ->place_name }}</span><br>
+                    予約日時<br> <span class="lineon">{{ $reserve ->reservation_date }}  {{ $reserve ->reservation_time }}</span><br>
+                    <a href="">削除</a> <a href="/">変更</a>
+                </div>
+                @endforeach
+            @endauth
+            <!-- <ul>
             <li>MENU</li>
             <li>MENU</li>
             <li>MENU</li>
-            </ul>
+            </ul> -->
         </nav>
         <div class="overlay"></div>
     </div>
