@@ -5,7 +5,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <style>
         body{
-            background-color:#eee;
+            background-color:#f5f5f5;
             margin-right: auto;
             margin-left: auto;
             /* width: 800; */
@@ -182,6 +182,12 @@
             /* width:400px; */
             background-color:green;
         }
+
+        /*head */
+        #head{
+            font-size:2rem;
+            font-weight:bold;
+        }
     </style>
     <script>
         $(function(){
@@ -223,7 +229,7 @@
 
 <body>
     <title>〇〇市ワクチン予約サイト</title>
-    <h1><span id="title">〇〇市ワクチン予約サイト</span>
+    <div id="head"><span id="title">〇〇市ワクチン予約サイト</span>
         <div id ="link">
             @guest
             <a href="/register">新規登録</a> /
@@ -236,7 +242,7 @@
             </form> -->
             @endauth
         </div>
-    </h1>
+    </div>
     
     <div class="wrapper">
         <main>

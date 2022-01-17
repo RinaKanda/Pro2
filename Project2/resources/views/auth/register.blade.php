@@ -147,6 +147,7 @@
                     </form>
                 </div>
             </div>
+            ログインの場合は<a href="{{ route('login') }}">こちら</a>
         </div>
     </div>
 </div>

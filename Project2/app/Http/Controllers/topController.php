@@ -70,9 +70,6 @@ class topController extends Controller
         return view('/top',compact('places','resdatas','auths'));
     }
 
-    //logout処理
-    public function logout(){
-        return view('/top');
-    } 
+    
 
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\Http\Request;
+
 class LoginController extends Controller
 {
     /*
@@ -46,9 +48,9 @@ class LoginController extends Controller
         return 'tickets_number';
     }
 
-    //logout
-    // protected function loggedOut(Request $request){
-    //     return view('/');
-    // }
+    //logout処理
+    public function loggedout(Request $request){
+        return redirect('/');
+    } 
 
 }
