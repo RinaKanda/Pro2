@@ -730,7 +730,7 @@ class tablesSeeder extends Seeder
             ],
         ]);
 
-        /* DB::table('reserves')->insert([
+        DB::table('reserves')->insert([
             ['reserve_id' => 1,
             'users_id' => 1,
             'reservation_data_id' => 100,
@@ -741,7 +741,7 @@ class tablesSeeder extends Seeder
             'reservation_data_id' => 121,
             'created_at' => '2022-03-15',
             ],
-        ]);  */
+        ]);
 
 
         /*foreach($places as $place){

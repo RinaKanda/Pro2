@@ -38,7 +38,7 @@ class CreateMakeTablesTable extends Migration
             $table->date('created_at');
             $table->date('updated_at')->nullable();
 
-            $table->unique('users_id');
+            $table->index('users_id');
             $table->dropPrimary();
             $table->primary('reserve_id');  
 
