@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
 <!-- <link rel="stylesheet" type="text/css" href="/css/all.css"> -->
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="/css/all.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <style>
@@ -66,7 +67,7 @@
         main {
         /* height: 100%; */
         /* min-height: 100vh; */
-        width:50%;
+        width:90%;
         border:solid;
         background-color:green;
         padding: 10px 10px;
@@ -188,6 +189,30 @@
             font-size:2rem;
             font-weight:bold;
         }
+        /* accordion */
+        .sub-menu-nav {
+            position: fixed;
+            background: #033560;
+            color: #fff;
+            top: 0;
+            padding-top: 90px;
+            left: 260px;
+            width: 0;
+            height: 100%;
+            overflow: hidden;
+            transition: width .2s ease-out;
+        }
+        #global-nav .sub-menu:hover .sub-menu-nav {
+            width: 230px;
+        }
+        #global-nav ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        #global-nav > ul > li {
+            position: relative;
+        }
+
     </style>
     <script>
         $(function(){
@@ -210,7 +235,7 @@
                 }
             });
 
-            $('.colums').click(function(){
+            $('.sub-menu').click(function(){
                 $("*").removeClass("selected");
                 $(this).addClass("selected");
                 // document.getElementById("button").disabled = false;
@@ -219,6 +244,15 @@
             // if(true){
             //         $('#reser').text('AA様の現在の予約');
             // }
+
+            $('.sub-menu').on({
+            'click': function () {
+                $(this).siblings().find("sub-menu-nav")addClass('is-active');
+            },
+            'mouseleave': function () {
+                $(this).removeClass('is-active');
+            }
+        });
         });
 
         function select(){
@@ -249,24 +283,37 @@
         <table class="table">
             <tr>
                 <th>病院名</th> 
-                <th>住所</th> 
+                <th>住所</th>
+                <!-- <th>日付</th>  -->
             </tr> 
             <tr>
+            <nav id="global-nav">
             @foreach($places as $key => $place)
-                <tr class="colums" onclick="select({{ $place->place_id }})">
+            <tbody>
+                <tr class="sub-menu" onclick="select()">
                     <td>{{ $place->place_name }}</td>
                     <td>{{ $place->address }}</td>
+                    <tr class="sub-menu-nav">
+                    <td id ="">日付</td>
                     @foreach($resdatas as  $resdata)
                         {{-- @if($resdata->year ==  2022 && $resdata->month == 03) --}}   
+                        <!-- <tr> -->
                         @foreach($resdata as $res)
-                                <tr>
-                                    <td>{{ $res->reservation_date }}</td>
-                                    <td>{{ $res->mark }}</td>
-                                </tr>
+                        <tr class="sub-menu-nav">
+                                <td colspan="2">
+                                <div>
+                                        {{ $res->reservation_date }}
+                                        {{ $res->mark }}
+                                </div>
+                                </td>
+                        </tr>
                             @endforeach
                         {{-- @endif --}}
+                        <!-- </tr> -->
                     @endforeach
+    </tr>
                 </tr>
+            </tbody>
             @endforeach
             </tr>   
 
