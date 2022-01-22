@@ -36,10 +36,11 @@
         
     /* new */
     .wrapper {
-        height: 100%;
+        height: 80%;
         width: 80%;
         /* weight:800px; */
-        /* overflow-x: hidden; */
+        overflow-x: hidden;
+        
         overflow:auto;
         /* position: relative; */
         position:fixed;
@@ -65,15 +66,16 @@
         /* opacity: 1; */
         }
         main {
-        /* height: 100%; */
-        /* min-height: 100vh; */
-        width:90%;
+        height: 100%;
+        min-height: 100vh;
+        width:80%;
         border:solid;
         background-color:green;
         padding: 10px 10px;
         background-color: #eee;
         transition: all .5s;
-        display: flex;
+        overflow:auto;
+        /* display: flex; */
         
         flex-direction: column;
         justify-content: center;
@@ -103,7 +105,7 @@
         /* .menu-trigger.active {
         transform: translateX(250px);
         } */
-        .menu-trigger span {
+        /* .menu-trigger span {
         display: inline-block;
         box-sizing: border-box;
         position: absolute;
@@ -114,7 +116,7 @@
         }
         .menu-trigger.active span {
         background-color: #fff;
-        }
+        } */
         /* .menu-trigger span:nth-of-type(1) {
         top: 0;
         }
@@ -135,21 +137,22 @@
         }
 
         nav {
+        display:none;
         width: 27%;
-        height: 100%;
+        height: 80%;
         padding-top: 30px;
         /* background-color: snow; */
         border:solid;
         position: fixed;
         top: 15%;
-        left: -27%;
+        left: 2%;
         z-index: 10;
         /* transform: translate(250px); */
-        transition: all .5s;
+        /* transition: all .5s; */
         }
-        nav.open {
-        transform: translate(105%);
-        }
+        /* nav.open {
+        display:
+        } */
         nav li {
         /* color: #fff;
         text-align: center;
@@ -181,7 +184,7 @@
         /* table */
         .table{
             /* width:400px; */
-            background-color:green;
+            /* background-color:green; */
         }
 
         /*head */
@@ -191,17 +194,23 @@
         }
         /* accordion */
         .sub-menu-nav {
-            position: fixed;
-            background: #033560;
-            color: #fff;
+            /* position: fixed; */
+            /* background: #033560;
+            color: #fff; */
+            height:90%;
             top: 0;
             padding-top: 90px;
             left: 260px;
-            width: 0;
+            /* width: 0; */
             height: 100%;
             overflow: hidden;
             transition: width .2s ease-out;
         }
+        
+        #not-active {
+            display:none;
+        }
+
         #global-nav .sub-menu:hover .sub-menu-nav {
             width: 230px;
         }
@@ -212,47 +221,57 @@
         #global-nav > ul > li {
             position: relative;
         }
-
+        .is-active{
+            display:flow;
+        }
+        .reser{
+            display:none;
+        }
     </style>
     <script>
         $(function(){
+            // $('.menu-trigger').on('click',function(){
+            //     if($(this).hasClass('active')){
+            //         $(this).removeClass('active');
+            //         $('nav').removeClass('open');
+            //         $('.overlay').removeClass('open');
+            //     } else {
+            //         $(this).addClass('active');
+            //         $('nav').addClass('open');
+            //         $('.overlay').addClass('open');
+            //     }
+            // });
             $('.menu-trigger').on('click',function(){
-                if($(this).hasClass('active')){
-                    $(this).removeClass('active');
-                    $('nav').removeClass('open');
-                    $('.overlay').removeClass('open');
-                } else {
-                    $(this).addClass('active');
-                    $('nav').addClass('open');
-                    $('.overlay').addClass('open');
-                }
+                $(".reser").toggle();
+                
             });
-            $('.overlay').on('click',function(){
-                if($(this).hasClass('open')){
-                    $(this).removeClass('open');
-                    $('.menu-trigger').removeClass('active');
-                    $('nav').removeClass('open');      
-                }
-            });
+            // $('.overlay').on('click',function(){
+            //     if($(this).hasClass('open')){
+            //         $(this).removeClass('open');
+            //         $('.menu-trigger').removeClass('active');
+            //         $('nav').removeClass('open');      
+            //     }
+            // });
 
             $('.sub-menu').click(function(){
                 $("*").removeClass("selected");
                 $(this).addClass("selected");
+
+               
+                // $("*").removeClass('sub-menu-nav-ac');
+                // $(this).siblings().removeClass('not-active');
+                // if($(".sub-menu-nav").is(':visible')){
+                //     $(".sub-menu-nav").is(':visible').toggle();
+                // }
+                $(this).siblings().toggle();
                 // document.getElementById("button").disabled = false;
             });
 
-            // if(true){
-            //         $('#reser').text('AA様の現在の予約');
-            // }
 
-            $('.sub-menu').on({
-            'click': function () {
-                $(this).siblings().find("sub-menu-nav")addClass('is-active');
-            },
-            'mouseleave': function () {
-                $(this).removeClass('is-active');
-            }
-        });
+            $('.sub-menu').click(function () {
+                
+            });
+        // });
         });
 
         function select(){
@@ -271,9 +290,6 @@
             @endguest
             @auth
             <a href="/logout">ログアウト</a>
-            <!-- <form action="/logout" method="POST">
-                <button>ログアウト</button>
-            </form> -->
             @endauth
         </div>
     </div>
@@ -293,13 +309,13 @@
                 <tr class="sub-menu" onclick="select()">
                     <td>{{ $place->place_name }}</td>
                     <td>{{ $place->address }}</td>
-                    <tr class="sub-menu-nav">
+                    <tr class="sub-menu-nav" id="not-active">
                     <td id ="">日付</td>
                     @foreach($resdatas as  $resdata)
                         {{-- @if($resdata->year ==  2022 && $resdata->month == 03) --}}   
                         <!-- <tr> -->
                         @foreach($resdata as $res)
-                        <tr class="sub-menu-nav">
+                        <tr class="sub-menu-nav" id="not-active">
                                 <td colspan="2">
                                 <div>
                                         {{ $res->reservation_date }}
@@ -318,28 +334,9 @@
             </tr>   
 
         </table>
-            <!-- <div class="border">
-                <form action="/newRegister" method="post">
-                    <input type="hidden" name="from" value="top">
-                    @csrf
-                    <button type="submit">新規登録</button>
-                </form>
-            </div>
-            <div class="border">
-                <form action="/newReserve" method="post">
-                    @csrf
-                    <input type="hidden" name="obje" value="new">
-                    <button type="submit">新規予約</button><br>
-                </form>
-            </div>
-            <div class="border">
-                <form action="/login2" method="post">
-                    @csrf
-                    <input type="hidden" name="obje" value="conf">
-                    <button type="submit">予約を確認・変更</button>
-                </form>
-            </div> -->
+            
          </main>
+        <!-- 共通 -->
         <div class="menu-trigger" href="">
             <div id="reser">
                 @guest
@@ -350,7 +347,8 @@
                 @endauth
             </div>
         </div>
-        <nav>
+        <div class="reser">
+        <nav class="reser">
             @guest
                 ログインすれば予約見れます
             @endguest
@@ -372,6 +370,7 @@
             <li>MENU</li>
             </ul> -->
         </nav>
+        </div>
         <div class="overlay"></div>
     </div>
 </body>   
