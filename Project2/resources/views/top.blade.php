@@ -45,7 +45,7 @@
         /* position: relative; */
         position:fixed;
         left:30%;
-        top:40%;
+        /* top:250px; */
          /* margin-bottom:50px; */
         }
         .overlay {
@@ -144,6 +144,7 @@
         width: 27%;
         height: 80%;
         padding-top: 30px;
+        overflow:auto;
         /* background-color: snow; */
         border:solid;
         position: fixed;
@@ -237,8 +238,25 @@
             margin-bottom:5%;
             margin-top:5%;
         }
+        .th{
+            font-weight:bold;
+        }
+        .Ssize{
+            font-size:1rem;
+        }
     </style>
     <script>
+
+        function select(name){
+            if($('.sub-menu').hasClass('open')){
+                console.log("OO");
+                $('*').removeClass("open");
+                $("#selected").text("");
+            }
+            $('#selected').text(name);
+           console.log(name);
+        }
+
         $(function(){
             // $('.menu-trigger').on('click',function(){
             //     if($(this).hasClass('active')){
@@ -265,7 +283,17 @@
 
             $('.sub-menu').click(function(){
                 $("*").removeClass("selected");
+            
+                if(!($('.sub-menu').hasClass('open'))){
+                    console.log("OO");
+                    // $('*').removeClass("open");
+                    $("#selected").text("");
+                } else {
+
+                }
+
                 $(this).addClass("selected");
+                $(this).addClass("open");
 
                
                 // $("*").removeClass('sub-menu-nav-ac');
@@ -284,9 +312,7 @@
         // });
         });
 
-        function select(){
-            
-        }
+        
     </script>
 </head>
 
@@ -304,10 +330,11 @@
         </div>
     </div>
    <div id="sub">
-   ベイサイド・ステーションではこれまでのラッピングモノレールの写真展示を実施中❗
-1月のアンケートはダッフィー&フレンズをテーマにしたラッピングモノレールです♪
-みなさんの思い出に残っているモノレールは？
-<div>今選択している病院:aa</div>
+        <div class="Ssize">
+        予約したい場所を選択することで、その場所の日毎の空き状況を確認できます。
+        
+        </div>
+        <div class="th">今選択している病院:<span id="selected"></div>
    </div>
 
 
@@ -324,23 +351,26 @@
             <nav id="global-nav">
             @foreach($places as $key => $place)
             <tbody>
-                <tr class="sub-menu" onclick="select()">
+                <tr class="sub-menu" onclick="select('{{ $place->place_name }}')">
                     <td>{{ $place->place_name }}</td>
                     <td>{{ $place->address }}</td>
                     <td>▽</td>
                     <tr class="sub-menu-nav" id="not-active">
-                    <td id ="">日付</td>
+                        <td class="th">日付</td>
+                        <td class="th">空き状況</td>
+                    <td></td>
                     @foreach($resdatas as  $resdata)
                         {{-- @if($resdata->year ==  2022 && $resdata->month == 03) --}}   
                         <!-- <tr> -->
                         @foreach($resdata as $res)
                         <tr class="sub-menu-nav" id="not-active">
-                                <td colspan="2">
+                                <!-- <td colspan="2"> -->
                                 <div>
-                                        {{ $res->reservation_date }}
-                                        {{ $res->mark }}
+                                     <td>{{ $res->reservation_date }}</td>   
+                                     <td>{{ $res->mark }}</td> 
+                                     <!-- <td>選択</td>   -->
                                 </div>
-                                </td>
+                                <!-- </td> -->
                         </tr>
                             @endforeach
                         {{-- @endif --}}
