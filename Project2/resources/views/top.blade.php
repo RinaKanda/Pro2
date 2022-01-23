@@ -36,16 +36,17 @@
         
     /* new */
     .wrapper {
-        height: 80%;
+        height: 60%;
         width: 80%;
         /* weight:800px; */
-        overflow-x: hidden;
+        /* overflow-x: hidden; */
         
-        overflow:auto;
+        /* overflow:scroll; */
         /* position: relative; */
         position:fixed;
         left:30%;
-        top:15%;
+        top:40%;
+         /* margin-bottom:50px; */
         }
         .overlay {
         content: "";
@@ -67,7 +68,7 @@
         }
         main {
         height: 100%;
-        min-height: 100vh;
+        /* min-height: 100vh; */
         width:80%;
         border:solid;
         background-color:green;
@@ -79,6 +80,8 @@
         
         flex-direction: column;
         justify-content: center;
+        /* padding:2% 2% 2% 10%; */
+       
         }
         main h1 {
         text-align: center;
@@ -94,7 +97,7 @@
         vertical-align: middle;
         cursor: pointer;
         position: fixed;
-        top: 10%;
+        top: 5%;
         left: 20px;
         z-index: 100;
         transform: translateX(0);
@@ -170,7 +173,7 @@
         #link{
             position:fixed;
             right:0;
-            margin:3%;
+            margin:5%;
             display: inline-block;
             font-size:20px;
         }
@@ -183,7 +186,7 @@
         }
         /* table */
         .table{
-            /* width:400px; */
+            width:100%;
             /* background-color:green; */
         }
 
@@ -191,6 +194,7 @@
         #head{
             font-size:2rem;
             font-weight:bold;
+            /* position: fixed; */
         }
         /* accordion */
         .sub-menu-nav {
@@ -226,6 +230,12 @@
         }
         .reser{
             display:none;
+        }
+        #sub{
+            margin-right: 10%;
+            margin-left: 30%;
+            margin-bottom:5%;
+            margin-top:5%;
         }
     </style>
     <script>
@@ -293,7 +303,15 @@
             @endauth
         </div>
     </div>
-    
+   <div id="sub">
+   ベイサイド・ステーションではこれまでのラッピングモノレールの写真展示を実施中❗
+1月のアンケートはダッフィー&フレンズをテーマにしたラッピングモノレールです♪
+みなさんの思い出に残っているモノレールは？
+<div>今選択している病院:aa</div>
+   </div>
+
+
+
     <div class="wrapper">
         <main>
         <table class="table">
@@ -309,6 +327,7 @@
                 <tr class="sub-menu" onclick="select()">
                     <td>{{ $place->place_name }}</td>
                     <td>{{ $place->address }}</td>
+                    <td>▽</td>
                     <tr class="sub-menu-nav" id="not-active">
                     <td id ="">日付</td>
                     @foreach($resdatas as  $resdata)
