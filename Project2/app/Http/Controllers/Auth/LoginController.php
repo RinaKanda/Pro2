@@ -48,9 +48,10 @@ class LoginController extends Controller
         return 'tickets_number';
     }
 
-    //logout処理
-    public function loggedout(Request $request){
-        return redirect('/');
-    } 
+
+    public function redirectPath()
+    {
+        return '/';
+    }
 
 }

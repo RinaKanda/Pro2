@@ -31,25 +31,19 @@ class CreateMakeTablesTable extends Migration
             $table->foreign('place_id')->references('place_id')->on('places');
         });
 
-        Schema::create('reserve_people', function (Blueprint $table) {
-            $table->integer('Reserve_person_id')->primary();
-            $table->string('tickets_number');
-            $table->date('birthday');
-            $table->string('pass');
-            $table->string('email');
-            $table->string('family_name');
-            $table->string('first_name');
-        });
-
         Schema::create('reserves', function (Blueprint $table) {
-            $table->integer('reserve_id')->primary();
-            $table->integer('reserve_person_id');
+            $table->integer('reserve_id');
+            $table->id('users_id');
             $table->integer('reservation_data_id');
             $table->date('created_at');
             $table->date('updated_at')->nullable();
 
+            $table->index('users_id');
+            $table->dropPrimary();
+            $table->primary('reserve_id');  
+
             $table->foreign('reservation_data_id')->references('reservation_data_id')->on('reservation_datas');
-            $table->foreign('reserve_person_id')->references('reserve_person_id')->on('reserve_people');
+            $table->foreign('users_id')->references('id')->on('users');
         });
     }
 
@@ -61,7 +55,6 @@ class CreateMakeTablesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('reserves');
-        Schema::dropIfExists('reserve_people');
         Schema::dropIfExists('reservation_datas');
         Schema::dropIfExists('places');
     }
