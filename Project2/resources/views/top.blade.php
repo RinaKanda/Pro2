@@ -6,7 +6,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <style>
         body{
-            background-color:#f5f5f5;
+            /* background-color:#f5f5f5; */
             margin-right: auto;
             margin-left: auto;
             /* width: 800; */
@@ -27,8 +27,8 @@
         }
         button {
             background: none;
-            border: none;
-            outline: none;
+            /* border: none;
+            outline: none; */
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
@@ -36,7 +36,7 @@
         
     /* new */
     .wrapper {
-        height: 60%;
+        height: 55%;
         width: 80%;
         /* weight:800px; */
         /* overflow-x: hidden; */
@@ -71,9 +71,8 @@
         /* min-height: 100vh; */
         width:80%;
         border:solid;
-        background-color:green;
         padding: 10px 10px;
-        background-color: #eee;
+        /* background-color: #eee; */
         transition: all .5s;
         overflow:auto;
         /* display: flex; */
@@ -235,26 +234,35 @@
         #sub{
             margin-right: 10%;
             margin-left: 30%;
-            margin-bottom:5%;
+            margin-bottom:10px;
             margin-top:5%;
         }
         .th{
             font-weight:bold;
+            text-align:center;
         }
         .Ssize{
             font-size:1rem;
+            margin-bottom:5px;
+        }
+        .buttoncss{
+            font-weight:bold;
+            text-align:right;
+            margin-left:70%;
+            font-size:20px;
         }
     </style>
     <script>
 
-        function select(name){
-            if($('.sub-menu').hasClass('open')){
-                console.log("OO");
-                $('*').removeClass("open");
-                $("#selected").text("");
-            }
-            $('#selected').text(name);
-           console.log(name);
+        function select(name,id){
+            $('#selected').text(name);  
+            $('#selectedd').text("");
+            console.log(id);
+            $("#place").val(id);
+        }
+        function selectt(day){
+            $('#selectedd').text(day);
+            $('#date').val(day);
         }
 
         $(function(){
@@ -283,14 +291,6 @@
 
             $('.sub-menu').click(function(){
                 $("*").removeClass("selected");
-            
-                if(!($('.sub-menu').hasClass('open'))){
-                    console.log("OO");
-                    // $('*').removeClass("open");
-                    $("#selected").text("");
-                } else {
-
-                }
 
                 $(this).addClass("selected");
                 $(this).addClass("open");
@@ -306,8 +306,11 @@
             });
 
 
-            $('.sub-menu').click(function () {
-                
+            $('.res').click(function () {
+                $("*").removeClass("selectedd");
+
+                $(this).addClass("selectedd");
+                $(this).addClass("open");
             });
         // });
         });
@@ -331,13 +334,20 @@
     </div>
    <div id="sub">
         <div class="Ssize">
-        予約したい場所を選択することで、その場所の日毎の空き状況を確認できます。
-        
+        予約したい場所をクリックすることで、その場所の日毎の空き状況を確認できます。<br>
+        ○：余裕あり　△:予約残少　✕:空き無し<br>
+        予約したい場所、日付が決定したら「決定」ボタンを押してください。<br>
         </div>
-        <div class="th">今選択している病院:<span id="selected"></div>
+        <div class="th">今選択している病院:<span id="selected"></span></div>
+        <div class="th">今選択している日付:<span id="selectedd"></span></div>
+        
+        <form action = "/selectTime" method="post">
+            <input type="hidden" id="date" name="date" value="value">
+            <input type="hidden" id="place" name="place" value="val">
+                @csrf
+            <button type="submit" id="button" class="buttoncss">決定</button>
+        </form>
    </div>
-
-
 
     <div class="wrapper">
         <main>
@@ -351,7 +361,7 @@
             <nav id="global-nav">
             @foreach($places as $key => $place)
             <tbody>
-                <tr class="sub-menu" onclick="select('{{ $place->place_name }}')">
+                <tr class="sub-menu" onclick="select('{{ $place->place_name }}','{{ $place->place_id }}')">
                     <td>{{ $place->place_name }}</td>
                     <td>{{ $place->address }}</td>
                     <td>▽</td>
@@ -363,7 +373,7 @@
                         {{-- @if($resdata->year ==  2022 && $resdata->month == 03) --}}   
                         <!-- <tr> -->
                         @foreach($resdata as $res)
-                        <tr class="sub-menu-nav" id="not-active">
+                        <tr class="sub-menu-nav res" id="not-active" onclick="selectt('{{ $res->reservation_date }}')">
                                 <!-- <td colspan="2"> -->
                                 <div>
                                      <td>{{ $res->reservation_date }}</td>   
@@ -399,7 +409,10 @@
         <div class="reser">
         <nav class="reser">
             @guest
-                ログインすれば予約見れます
+                ログインをすれば現在の予約を見ることができます。<br>
+                <div class="th"><br>
+                    ログインは<a href="/login">こちら</a>
+                </div>
             @endguest
 
             @auth
