@@ -211,7 +211,7 @@
             transition: width .2s ease-out;
         }
         
-        #not-active {
+        .not-active {
             display:none;
         }
 
@@ -260,9 +260,13 @@
             console.log(id);
             $("#place").val(id);
         }
-        function selectt(day){
-            $('#selectedd').text(day);
-            $('#date').val(day);
+        function selectt(day,mark){
+            console.log(mark);
+            if(mark !=="✕"){
+                $('#selectedd').text(day);
+                $('#date').val(day);
+            }
+           
         }
 
         $(function(){
@@ -365,7 +369,7 @@
                     <td>{{ $place->place_name }}</td>
                     <td>{{ $place->address }}</td>
                     <td>▽</td>
-                    <tr class="sub-menu-nav" id="not-active">
+                    <tr class="sub-menu-nav not-active" id="">
                         <td class="th">日付</td>
                         <td class="th">空き状況</td>
                     <td></td>
@@ -373,7 +377,7 @@
                         {{-- @if($resdata->year ==  2022 && $resdata->month == 03) --}}   
                         <!-- <tr> -->
                         @foreach($resdata as $res)
-                        <tr class="sub-menu-nav res" id="not-active" onclick="selectt('{{ $res->reservation_date }}')">
+                        <tr class="sub-menu-nav res not-active" id="{{ $res->mark }}" onclick="selectt('{{ $res->reservation_date }}','{{ $res->mark }}')">
                                 <!-- <td colspan="2"> -->
                                 <div>
                                      <td>{{ $res->reservation_date }}</td>   
