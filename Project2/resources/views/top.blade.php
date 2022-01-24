@@ -14,8 +14,11 @@
         }
         #title{
             /* width: 600px; */
+            
             margin-right: 10%;
             margin-left: 25%;
+           
+            text-align:center;
         }
         .border{
             border:solid 2px;
@@ -194,6 +197,7 @@
         #head{
             font-size:2rem;
             font-weight:bold;
+            margin-top:15px;
             /* position: fixed; */
         }
         /* accordion */
@@ -257,14 +261,36 @@
         function select(name,id){
             $('#selected').text(name);  
             $('#selectedd').text("");
-            console.log(id);
+            // console.log(id);
             $("#place").val(id);
+            $("*").removeClass("selectedd");   
+            $("#date").val("");
+            if($("#date").val() == ""){
+                document.getElementById("button").disabled = true;
+            }
         }
-        function selectt(day,mark){
-            console.log(mark);
+        function selectt(day,mark,placeI,placeN){
+            // console.log(mark);
+            // console.log(placeN);
             if(mark !=="✕"){
+                if($('.selected').id != placeI){
+                    $("*").removeClass("selected");
+                    $('#' + placeI).addClass("selected");
+                   
+                }
                 $('#selectedd').text(day);
+                $('#selected').text(placeN); 
                 $('#date').val(day);
+                $("#place").val(placeI);
+                
+                //どちらも選択されたら
+                if(($('#selected').text() != "") && ($('#selected').text() != "")){
+                    // console.log("tuua");
+                    document.getElementById("button").disabled = false;
+                }
+            } else {
+                alert(placeN + "の" + day +"は空きがありません！");
+                // $('#selectedd').text("");
             }
            
         }
@@ -296,25 +322,25 @@
             $('.sub-menu').click(function(){
                 $("*").removeClass("selected");
 
-                $(this).addClass("selected");
-                $(this).addClass("open");
-
-               
+                $(this).addClass("selected");               
                 // $("*").removeClass('sub-menu-nav-ac');
                 // $(this).siblings().removeClass('not-active');
                 // if($(".sub-menu-nav").is(':visible')){
                 //     $(".sub-menu-nav").is(':visible').toggle();
                 // }
+                
+               
+                $(this).siblings().addClass("open");
                 $(this).siblings().toggle();
-                // document.getElementById("button").disabled = false;
+                
             });
 
 
             $('.res').click(function () {
-                $("*").removeClass("selectedd");
-
-                $(this).addClass("selectedd");
-                $(this).addClass("open");
+                if(this.id !== "✕"){    
+                    $("*").removeClass("selectedd");            
+                    $(this).addClass("selectedd");
+                }
             });
         // });
         });
@@ -349,7 +375,7 @@
             <input type="hidden" id="date" name="date" value="value">
             <input type="hidden" id="place" name="place" value="val">
                 @csrf
-            <button type="submit" id="button" class="buttoncss">決定</button>
+            <button type="submit" id="button" class="buttoncss" disabled>決定</button>
         </form>
    </div>
 
@@ -365,7 +391,7 @@
             <nav id="global-nav">
             @foreach($places as $key => $place)
             <tbody>
-                <tr class="sub-menu" onclick="select('{{ $place->place_name }}','{{ $place->place_id }}')">
+                <tr class="sub-menu" id="{{ $place->place_id }}" onclick="select('{{ $place->place_name }}','{{ $place->place_id }}')">
                     <td>{{ $place->place_name }}</td>
                     <td>{{ $place->address }}</td>
                     <td>▽</td>
@@ -376,16 +402,20 @@
                     @foreach($resdatas as  $resdata)
                         {{-- @if($resdata->year ==  2022 && $resdata->month == 03) --}}   
                         <!-- <tr> -->
-                        @foreach($resdata as $res)
-                        <tr class="sub-menu-nav res not-active" id="{{ $res->mark }}" onclick="selectt('{{ $res->reservation_date }}','{{ $res->mark }}')">
+                        @foreach( $resdata as $res)
+                        @if($res->place_id == $place->place_id)
+                        <tr class="sub-menu-nav res not-active" id="{{ $res->mark }}" onclick="selectt('{{ $res->reservation_date }}','{{ $res->mark }}','{{$res->place_id}}','{{$place->place_name}}')">
                                 <!-- <td colspan="2"> -->
                                 <div>
+                                    
                                      <td>{{ $res->reservation_date }}</td>   
                                      <td>{{ $res->mark }}</td> 
+                                     <td>{{ $res->place_id}}</td>
                                      <!-- <td>選択</td>   -->
                                 </div>
                                 <!-- </td> -->
                         </tr>
+                        @endif
                             @endforeach
                         {{-- @endif --}}
                         <!-- </tr> -->
