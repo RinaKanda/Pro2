@@ -22,7 +22,6 @@
             @endauth
         </div>
     </div>
-    @yield('content')
     <div class="menu-trigger" href="">
             <div id="reser">
                 @guest
@@ -62,5 +61,6 @@
         </div>
         <div class="overlay"></div>
     </div>
+    @yield('content')
 </body>   
 </html>
