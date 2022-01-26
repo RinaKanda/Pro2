@@ -40,7 +40,7 @@ class CreateMakeTablesTable extends Migration
 
             $table->index('users_id');
             $table->dropPrimary();
-            $table->primary('reserve_id');  
+            $table->primary('reserve_id');
 
             $table->foreign('reservation_data_id')->references('reservation_data_id')->on('reservation_datas');
             $table->foreign('users_id')->references('id')->on('users');
