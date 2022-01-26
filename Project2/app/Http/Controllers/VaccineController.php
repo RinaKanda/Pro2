@@ -256,11 +256,8 @@ class VaccineController extends Controller
          //  ユーザ認証関連
             //ログイン情報取得
             $auths = Auth::user();
+        
         $keyDid = $request->input('Did');
-        // $keyPid = $request->input('Pid');
-        //チケットナンバー
-        // $userid = reserve_person::where('Reserve_person_id',$keyPid)->get();
-        // $Tnum = $userid[0]['tickets_number'];
         //日時
         $resdata = reservation_data::where('reservation_data_id',$keyDid)->get();
         $date = $resdata[0]['reservation_date'];
