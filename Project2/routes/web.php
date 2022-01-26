@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 //処理なし
-Route::get('/', function () {
-    return view('top');
-});
+// Route::get('/', function () {
+//     return view('top');
+// });
 Route::get('/reserveFinish',function(){
     return view('/reserveFinish');
 });
@@ -29,6 +29,8 @@ Route::get('/index', function () {//テスト追加
 
 
 //処理有
+Route::get('/','App\Http\Controllers\TopController@toppage');
+
 Route::post('/newRegister','App\Http\Controllers\VaccineController@newRegister');
 Route::get('/newRegister','App\Http\Controllers\VaccineController@newRegister');
 
@@ -58,3 +60,4 @@ Route::post('session','App\Http\Controllers\VaccineController@ses_put');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/logout','App\Http\Controllers\Auth\LoginController@logout');

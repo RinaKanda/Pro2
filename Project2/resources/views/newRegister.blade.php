@@ -14,9 +14,9 @@
         jQuery("#regiForm").validationEngine();
         });
 
-        $(window).on('load',function(){
-            $('#myModal').modal('show');
-        });
+        // $(window).on('load',function(){
+        //     $('#myModal').modal('show');
+        // });
 
 	    $(function(){
 			$("#number").change(function(){
@@ -107,7 +107,26 @@
 </head>
 <body>
     <h1>新規登録</h1>
-
+    @if(Session::has('flashmessage'))
+        <!-- モーダルウィンドウの中身 -->
+        <div class="modal fade" id="myModal" tabindex="-1"
+            role="dialog" aria-labelledby="label1" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        {{ session('flashmessage') }}
+                    </div>
+                    <div class="modal-footer text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     <form action="/register" method="post" id="regiForm">
         <h3>氏名</h3>
         <span style="color:navy;">ワクチン接種希望者の氏名を入力してください。</span><br>
