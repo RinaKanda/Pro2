@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Auth;
 //use Model
 use App\Models\place;
 use App\Models\reservation_data;
@@ -54,11 +55,11 @@ class VaccineController extends Controller
         } 
     }
     //ログイン
-    public function login(Request $request){
-        $keyReg = $request->input('obje');
-        $misscheck = "✕";
-        return view('/login', compact('keyReg','misscheck'));
-    }
+    // public function login(Request $request){
+    //     $keyReg = $request->input('obje');
+    //     $misscheck = "✕";
+    //     return view('/login', compact('keyReg','misscheck'));
+    // }
     //新規予約画面へ
     public function newRegister(Request $request){
         $keyReg = $request->input('from');
@@ -142,55 +143,63 @@ class VaccineController extends Controller
     // }
 
     //日選択
-    public function day(Request $request){
-        $key = $request->input('place');
-        //渡す値
-        $resPid = $request->input('Pid');
-        // $resdatas = reservation_data::where('place_id',$key)->get();
-        $place = place::select('place_name')->where('place_id',$key)->get();
-        //現在日時
-        $now = new Carbon('today');
-        $resdatas = reservation_data::select('reservation_date')->where('place_id',$key)->whereDate('reservation_date',">=",$now)->distinct()->get();
+    // public function day(Request $request){
+    //     $key = $request->input('place');
+    //     //渡す値
+    //     $resPid = $request->input('Pid');
+    //     // $resdatas = reservation_data::where('place_id',$key)->get();
+    //     $place = place::select('place_name')->where('place_id',$key)->get();
+    //     //現在日時
+    //     $now = new Carbon('today');
+    //     $resdatas = reservation_data::select('reservation_date')->where('place_id',$key)->whereDate('reservation_date',">=",$now)->distinct()->get();
         
-        $keynum = 0;
-        foreach($resdatas as $value){
-            //placeid
-            $resdatas[$keynum]['place_id'] = $key;
-            //日付データ関連
-            $resdatas[$keynum]['year'] =  date('Y', strtotime($resdatas[$keynum]['reservation_date']));
-            $resdatas[$keynum]['month'] =  date('m', strtotime($resdatas[$keynum]['reservation_date']));
-            //キャパ計算
-            $cap = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('capacity');
-            $resdatas[$keynum]['capacity'] = $cap ;
-            //予約可能人数計算
-            $Reserved = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('reserve_counts');
-            $cancel = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('cancel');
-            $resdatas[$keynum]['reserve_avail'] = $cap - $Reserved + $cancel;
-            //割合
-            $resdatas[$keynum]['ratio'] = $Reserved / $cap ;
-            //予約6割以上で△
-            if($resdatas[$keynum]['ratio'] == 1){
-                $resdatas[$keynum]['mark'] = "✕";
-            } else if($resdatas[$keynum]['ratio'] >= 0.6){
-                $resdatas[$keynum]['mark'] = "△";
-            } else {
-                $resdatas[$keynum]['mark'] = '○';
-            }
-            $keynum++;
+    //     $keynum = 0;
+    //     foreach($resdatas as $value){
+    //         //placeid
+    //         $resdatas[$keynum]['place_id'] = $key;
+    //         //日付データ関連
+    //         $resdatas[$keynum]['year'] =  date('Y', strtotime($resdatas[$keynum]['reservation_date']));
+    //         $resdatas[$keynum]['month'] =  date('m', strtotime($resdatas[$keynum]['reservation_date']));
+    //         //キャパ計算
+    //         $cap = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('capacity');
+    //         $resdatas[$keynum]['capacity'] = $cap ;
+    //         //予約可能人数計算
+    //         $Reserved = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('reserve_counts');
+    //         $cancel = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('cancel');
+    //         $resdatas[$keynum]['reserve_avail'] = $cap - $Reserved + $cancel;
+    //         //割合
+    //         $resdatas[$keynum]['ratio'] = $Reserved / $cap ;
+    //         //予約6割以上で△
+    //         if($resdatas[$keynum]['ratio'] == 1){
+    //             $resdatas[$keynum]['mark'] = "✕";
+    //         } else if($resdatas[$keynum]['ratio'] >= 0.6){
+    //             $resdatas[$keynum]['mark'] = "△";
+    //         } else {
+    //             $resdatas[$keynum]['mark'] = '○';
+    //         }
+    //         $keynum++;
              
-        }
-        return view('vaccine/selectDay',compact('resdatas','place','resPid'));
-    }
+    //     }
+    //     return view('vaccine/selectDay',compact('resdatas','place','resPid'));
+    // }
 
     //時間選択
     public function Time(Request $request){
+        //  ユーザ認証関連
+            //ログイン情報取得
+            $auths = Auth::user();
+
         $key = $request->input('place');
         $keyday=$request->input('date');
+        // echo $key;
+        // echo $keyday;
         //渡す用
         $place = place::select('place_name')->where('place_id',$key)->get();
         $date =   $keyday; 
         $resdatas = reservation_data::where('reservation_date',$keyday)->where('place_id',$key)->get();
         $resPid = $request->input('Pid');
+        // echo $place;
+        // echo $date;
         //time
         $now = new Carbon('now');
         if($keyday == $now){
@@ -213,16 +222,46 @@ class VaccineController extends Controller
             $resdatas[$keynum]['reserve_avail'] = $cap - $Reserved + $cancel;
             $keynum++;   
         }    
-        return view('vaccine/selectTime',compact('resdatas','place','date','resPid'));
+        // echo $place;
+        //  ユーザの予約
+        if ( Auth::check() ) {
+            // ログイン済みのときの処理
+            $residgets = reserve::select('reservation_data_id')->where('reserve_person_id',$auths->id)->get();
+
+            $keynum = 0;
+            $reserves = null;
+            foreach($residgets as $residget){
+                $reserves[$keynum] = reservation_data::where('reservation_data_id',$residget['reservation_data_id'])->first();
+                //場所の名前
+                $pid = $reserves[$keynum]['place_id'];
+                // echo $pid;
+                // echo "<br><br>1" . $reserves[$keynum];
+                $pname = place::where('place_id',$pid)->first();
+                $reserves[$keynum]['place_name'] = $pname['place_name'];
+                // echo "<br>2" . $reserves[$keynum];
+                $keynum++;
+            }
+            
+            return view('vaccine/selectTime',compact('place','resdatas','date','auths','reserves'));
+        } else {
+          // ログインしていないときの処理
+          return view('vaccine/selectTime',compact('place','resdatas','date','auths'));
+          }
+
     }
 
     //予約確認
     public function confirm(Request $request){
+
+         //  ユーザ認証関連
+            //ログイン情報取得
+            $auths = Auth::user();
+
         $keyDid = $request->input('Did');
-        $keyPid = $request->input('Pid');
+        // $keyPid = $request->input('Pid');
         //チケットナンバー
-        $userid = reserve_person::where('Reserve_person_id',$keyPid)->get();
-        $Tnum = $userid[0]['tickets_number'];
+        // $userid = reserve_person::where('Reserve_person_id',$keyPid)->get();
+        // $Tnum = $userid[0]['tickets_number'];
         //日時
         $resdata = reservation_data::where('reservation_data_id',$keyDid)->get();
         $date = $resdata[0]['reservation_date'];
@@ -233,9 +272,36 @@ class VaccineController extends Controller
         $pl = place::where('place_id',$keypl[0]['place_id'])->get();
         $place = $pl[0]['place_name'];
         $placeid = $pl[0]['place_id'];
-        return view('reserveConfirm',compact('keyDid','keyPid','Tnum','date','time','place','placeid'));
+
+        //  ユーザの予約
+        if ( Auth::check() ) {
+            // ログイン済みのときの処理
+            $residgets = reserve::select('reservation_data_id')->where('reserve_person_id',$auths->id)->get();
+
+            $keynum = 0;
+            $reserves = null;
+            foreach($residgets as $residget){
+                $reserves[$keynum] = reservation_data::where('reservation_data_id',$residget['reservation_data_id'])->first();
+                //場所の名前
+                $pid = $reserves[$keynum]['place_id'];
+                // echo $pid;
+                // echo "<br><br>1" . $reserves[$keynum];
+                $pname = place::where('place_id',$pid)->first();
+                $reserves[$keynum]['place_name'] = $pname['place_name'];
+                // echo "<br>2" . $reserves[$keynum];
+                $keynum++;
+            }
+
+            return view('reserveConfirm',compact('keyDid','date','time','place','placeid','auths','reserves'));
+        } else {
+
+        // return view('reserveConfirm',compact('keyDid','keyPid','Tnum','date','time','place','placeid'));
+            return view('reserveConfirm',compact('keyDid','date','time','place','placeid','auths'));
+        }
     }
 
+    
+    
     public function resRegister(Request $request){
         $reservation_data_id = $request->input('Did');
         $reserve_person_id = $request->input('Pid');
