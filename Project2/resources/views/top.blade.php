@@ -1,3 +1,42 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+    function select(name,id){
+            $('#selected').text(name);  
+            $('#selectedd').text("");
+            // console.log(id);
+            $("#place").val(id);
+            $("*").removeClass("selectedd");   
+            $("#date").val("");
+            if($("#date").val() == ""){
+                document.getElementById("button").disabled = true;
+            }
+        }
+        function selectt(day,mark,placeI,placeN){
+            // console.log(mark);
+            // console.log(placeN);
+            if(mark !=="✕"){
+                if($('.selected').id != placeI){
+                    $("*").removeClass("selected");
+                    $('#' + placeI).addClass("selected");
+                   
+                }
+                $('#selectedd').text(day);
+                $('#selected').text(placeN); 
+                $('#date').val(day);
+                $("#place").val(placeI);
+                
+                //どちらも選択されたら
+                if(($('#selected').text() != "") && ($('#selected').text() != "")){
+                    // console.log("tuua");
+                    document.getElementById("button").disabled = false;
+                }
+            } else {
+                alert(placeN + "の" + day +"は空きがありません！");
+                // $('#selectedd').text("");
+            }
+           
+        }
+</script>
 @extends('layouts.reserlay')
 @section('content')
    <div id="sub">

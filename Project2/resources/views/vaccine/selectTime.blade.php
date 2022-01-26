@@ -1,12 +1,14 @@
 <!-- <!DOCTYPE html>
 <html lang="ja">
 <head>
-<link rel="stylesheet" type="text/css" href="/css/all.css">
+<link rel="stylesheet" type="text/css" href="/css/all.css">-->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <title>時間選択</title>-->
+    <!--<title>時間選択</title>-->
     <script>
-        function select(res){
+        function select(time,res){
+            console.log(time);
             var keydid = res;
+            $('#selected').text(time);
             $(function(){
                 $("#Did").val(keydid);
             })
@@ -28,13 +30,13 @@
 @section('content')
         <div id="sub">
             <div class="Ssize">
-            予約したい場所をクリックすることで、その場所の日毎の空き状況を確認できます。<br>
-            ○：余裕あり　△:予約残少　✕:空き無し<br>
-            予約したい場所、日付が決定したら「決定」ボタンを押してください。<br>
+            現在選択している病院、日付の時間別空き状況が見れます。<br>
+            予約したい時間が決定したら「決定」ボタンを押してください。<br>
+            病院、日付を選択しなおしたい時は<a href="/">こちら</a><br>
             </div>
-            @foreach($place as $place)
+        @foreach($place as $place)
             <div class="th">今選択している病院:<span id="selectedd">{{ $place->place_name }}</span></div>
-            @endforeach
+        @endforeach
         <div class="th" >今選択している日付:<span id="selectedd">{{ $date }}</span></div>
         <div class="th">今選択している時間:<span id="selected"></span></div>
         
@@ -60,7 +62,7 @@
             </tr> 
             
             @foreach($resdatas as $resdata)
-                <tr class="colums" onclick="select({{ $resdata->reservation_data_id }})">
+                <tr class="colums" onclick="select('{{ $resdata->reservation_time }}',{{ $resdata->reservation_data_id }})">
                     <td>{{ $resdata->reservation_time }}</td>
                     <td>{{ $resdata->reserve_avail }}</td>
                 </tr>

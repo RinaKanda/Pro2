@@ -198,7 +198,7 @@ class VaccineController extends Controller
         $date =   $keyday; 
         $resdatas = reservation_data::where('reservation_date',$keyday)->where('place_id',$key)->get();
         $resPid = $request->input('Pid');
-        echo $place;
+        // echo $place;
         // echo $date;
         //time
         $now = new Carbon('now');
