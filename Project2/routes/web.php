@@ -50,8 +50,8 @@ Route::post('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
 
 //処理のみ
 Route::post('/register', 'App\Http\Controllers\VaccineController@register');
-Route::get('/resRegister','App\Http\Controllers\VaccineController@resRegister');
-Route::post('/resRegister','App\Http\Controllers\VaccineController@resRegister');
+Route::get('/top','App\Http\Controllers\VaccineController@resRegister');
+Route::post('/top','App\Http\Controllers\VaccineController@resRegister');
 
 
 //テスト

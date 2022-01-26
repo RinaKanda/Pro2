@@ -26,6 +26,8 @@ class topController extends Controller
         $now = new Carbon('today');
         $keynum2 = 0;
 
+        $regok = 0;
+
         foreach($places as $place){
             $key = $place->place_id;
             // echo $key;
@@ -84,10 +86,10 @@ class topController extends Controller
                 $keynum++;
             }
             
-            return view('/top',compact('places','resdatas','auths','reserves'));
+            return view('/top',compact('places','resdatas','auths','reserves','regok'));
         } else {
           // ログインしていないときの処理
-          return view('/top',compact('places','resdatas','auths'));
+          return view('/top',compact('places','resdatas','auths','regok'));
           }
         
     }

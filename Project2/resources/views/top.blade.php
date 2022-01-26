@@ -15,6 +15,10 @@
         }
 </style>
 <script>
+    if('{{$regok}}' == 1){
+        alert("予約完了しました！");
+        
+    }
     function select(name,id){
             $('#selected').text(name);  
             $('#selectedd').text("");
