@@ -30,6 +30,7 @@ Route::get('/index', function () {//テスト追加
 
 //処理有
 Route::get('/','App\Http\Controllers\TopController@toppage');
+Route::post('/','App\Http\Controllers\TopController@toppage');
 
 Route::post('/newRegister','App\Http\Controllers\VaccineController@newRegister');
 Route::get('/newRegister','App\Http\Controllers\VaccineController@newRegister');
