@@ -226,7 +226,7 @@ class VaccineController extends Controller
         //  ユーザの予約
         if ( Auth::check() ) {
             // ログイン済みのときの処理
-            $residgets = reserve::select('reservation_data_id')->where('reserve_person_id',$auths->id)->get();
+            $residgets = reserve::select('reservation_data_id')->where('users_id',$auths->id)->get();
 
             $keynum = 0;
             $reserves = null;
@@ -276,7 +276,7 @@ class VaccineController extends Controller
         //  ユーザの予約
         if ( Auth::check() ) {
             // ログイン済みのときの処理
-            $residgets = reserve::select('reservation_data_id')->where('reserve_person_id',$auths->id)->get();
+            $residgets = reserve::select('reservation_data_id')->where('users_id',$auths->id)->get();
 
             $keynum = 0;
             $reserves = null;
@@ -301,7 +301,7 @@ class VaccineController extends Controller
     }
 
     
-    
+
     public function resRegister(Request $request){
         $reservation_data_id = $request->input('Did');
         $reserve_person_id = $request->input('Pid');
@@ -310,7 +310,7 @@ class VaccineController extends Controller
 
         DB::table('reserves')->insert([
             'reserve_id' => $rowCount+1,
-            'reserve_person_id' => $reserve_person_id,
+            'users_id' => $reserve_person_id,
             'reservation_data_id' => $reservation_data_id,
             'created_at' => $today,
             'updated_at' => null,
