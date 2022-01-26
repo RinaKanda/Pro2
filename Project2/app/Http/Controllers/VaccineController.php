@@ -301,6 +301,7 @@ class VaccineController extends Controller
     }
 
     
+    
     public function resRegister(Request $request){
         $reservation_data_id = $request->input('Did');
         $reserve_person_id = $request->input('Pid');
