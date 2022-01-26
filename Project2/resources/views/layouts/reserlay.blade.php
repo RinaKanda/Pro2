@@ -42,6 +42,7 @@
             @endguest
 
             @auth
+            @if($reserves != null)
                 @foreach($reserves as $reserve) 
                 <div class="group">
                     接種券番号 <span class="lineon">{{ $auths ->tickets_number }}</span><br>
@@ -51,6 +52,11 @@
                     <a href="">削除</a> <a href="/">変更</a>
                 </div>
                 @endforeach
+
+            @else
+            <div class="th">予約は存在しません</div>
+            @endif
+
             @endauth
             <!-- <ul>
             <li>MENU</li>

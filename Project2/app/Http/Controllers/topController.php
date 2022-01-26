@@ -68,7 +68,7 @@ class topController extends Controller
         //  ユーザの予約
         if ( Auth::check() ) {
             // ログイン済みのときの処理
-            $residgets = reserve::select('reservation_data_id')->where('reserve_person_id',$auths->id)->get();
+            $residgets = reserve::select('reservation_data_id')->where('users_id',$auths->id)->get();
 
             $keynum = 0;
             $reserves = null;
