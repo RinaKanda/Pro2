@@ -252,11 +252,16 @@ class VaccineController extends Controller
 
     //予約確認
     public function confirm(Request $request){
+
+         //  ユーザ認証関連
+            //ログイン情報取得
+            $auths = Auth::user();
+
         $keyDid = $request->input('Did');
-        $keyPid = $request->input('Pid');
+        // $keyPid = $request->input('Pid');
         //チケットナンバー
-        $userid = reserve_person::where('Reserve_person_id',$keyPid)->get();
-        $Tnum = $userid[0]['tickets_number'];
+        // $userid = reserve_person::where('Reserve_person_id',$keyPid)->get();
+        // $Tnum = $userid[0]['tickets_number'];
         //日時
         $resdata = reservation_data::where('reservation_data_id',$keyDid)->get();
         $date = $resdata[0]['reservation_date'];
@@ -267,9 +272,35 @@ class VaccineController extends Controller
         $pl = place::where('place_id',$keypl[0]['place_id'])->get();
         $place = $pl[0]['place_name'];
         $placeid = $pl[0]['place_id'];
-        return view('reserveConfirm',compact('keyDid','keyPid','Tnum','date','time','place','placeid'));
+
+        //  ユーザの予約
+        if ( Auth::check() ) {
+            // ログイン済みのときの処理
+            $residgets = reserve::select('reservation_data_id')->where('reserve_person_id',$auths->id)->get();
+
+            $keynum = 0;
+            $reserves = null;
+            foreach($residgets as $residget){
+                $reserves[$keynum] = reservation_data::where('reservation_data_id',$residget['reservation_data_id'])->first();
+                //場所の名前
+                $pid = $reserves[$keynum]['place_id'];
+                // echo $pid;
+                // echo "<br><br>1" . $reserves[$keynum];
+                $pname = place::where('place_id',$pid)->first();
+                $reserves[$keynum]['place_name'] = $pname['place_name'];
+                // echo "<br>2" . $reserves[$keynum];
+                $keynum++;
+            }
+
+            return view('reserveConfirm',compact('keyDid','date','time','place','placeid','auths','reserves'));
+        } else {
+
+        // return view('reserveConfirm',compact('keyDid','keyPid','Tnum','date','time','place','placeid'));
+            return view('reserveConfirm',compact('keyDid','date','time','place','placeid','auths'));
+        }
     }
 
+    
     public function resRegister(Request $request){
         $reservation_data_id = $request->input('Did');
         $reserve_person_id = $request->input('Pid');

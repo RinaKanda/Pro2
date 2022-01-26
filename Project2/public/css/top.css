@@ -32,31 +32,21 @@ button {
 }
 
 /* new */
-.wrapper {
-height: 55%;
-width: 80%;
-/* weight:800px; */
-/* overflow-x: hidden; */
 
-/* overflow:scroll; */
-/* position: relative; */
-position:fixed;
-left:30%;
-/* top:250px; */
- /* margin-bottom:50px; */
-}
 .overlay {
-content: "";
+/* content: "";
 display: block;
 width: 0;
-height: 0;
-background-color: rgba(0, 0, 0, 0.5);
-position: absolute;
+height: 0; */
+background-color: rgba(0, 0, 0, 0.3);
+/* position: absolute;
 top: 0;
 left: 0;
 z-index: 2;
 opacity: 0;
-transition: opacity .5s;
+transition: opacity .5s; */
+opacity: 0.33;
+/* background-color:blue; */
 }
 .overlay.open {
 width: 100%;

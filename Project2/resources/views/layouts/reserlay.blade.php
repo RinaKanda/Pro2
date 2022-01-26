@@ -59,7 +59,7 @@
             </ul> -->
         </nav>
         </div>
-        <div class="overlay"></div>
+        <!-- <div class="overlay"></div> -->
     </div>
     @yield('content')
 </body>   

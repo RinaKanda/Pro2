@@ -1,4 +1,19 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<style>
+    .wrapper {
+        height: 50%;
+        width: 80%;
+        /* weight:800px; */
+        /* overflow-x: hidden; */
+
+        /* overflow:scroll; */
+        /* position: relative; */
+        position:fixed;
+        left:30%;
+        /* top:250px; */
+        /* margin-bottom:50px; */
+        }
+</style>
 <script>
     function select(name,id){
             $('#selected').text(name);  
@@ -87,7 +102,7 @@
                                     
                                      <td>{{ $res->reservation_date }}</td>   
                                      <td>{{ $res->mark }}</td> 
-                                     <td>{{ $res->place_id}}</td>
+                                     <!-- <td>{{ $res->place_id}}</td> -->
                                      <!-- <td>選択</td>   -->
                                 </div>
                                 <!-- </td> -->
