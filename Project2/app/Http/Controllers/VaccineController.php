@@ -11,6 +11,7 @@ use App\Models\place;
 use App\Models\reservation_data;
 use App\Models\reserve;
 use App\Models\reserve_person;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 
