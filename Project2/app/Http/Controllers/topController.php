@@ -83,7 +83,7 @@ class topController extends Controller
                 $pname = place::where('place_id',$pid)->first();
                 $reserves[$keynum]['place_name'] = $pname['place_name'];
                 // echo "<br>2" . $reserves[$keynum];
-                $rid = reserve::select('reserve_id')->where('reservation_data_id',$residget['reservation_data_id'])->get();
+                $rid = reserve::select('reserve_id')->where('reservation_data_id',$residget['reservation_data_id'])->first();
                 $reserves[$keynum]['reserve_id'] = $rid['reserve_id'];
                 $keynum++;
             }
