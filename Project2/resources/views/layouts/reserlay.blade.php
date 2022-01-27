@@ -6,7 +6,20 @@
 <link rel="stylesheet" type="text/css" href="/css/top.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript" src="js/layout.js"></script>
-
+<style>
+    .btn{
+            /* 一旦リセット */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border: 0;
+            border-radius: 0; 
+            margin: 5px;
+            background-color:lightgrey;
+            color:black;
+            font-size:13px;
+        }
+</style>
 </head>
 
 <body>
@@ -45,11 +58,19 @@
             @if($reserves != null)
                 @foreach($reserves as $reserve) 
                 <div class="group">
+                    <form method="post">
+                        @csrf
                     接種券番号 <span class="lineon">{{ $auths ->tickets_number }}</span><br>
                     生年月日 <span class="lineon">{{ $auths ->birthday }}</span><br>
                     予約会場 <span class="lineon">{{ $reserve ->place_name }}</span><br>
                     予約日時<br> <span class="lineon">{{ $reserve ->reservation_date }}  {{ $reserve ->reservation_time }}</span><br>
-                    <a href="">削除</a> <a href="/">変更</a>
+                    <!-- <a href="/mypageD">削除</a> <a href="/change">変更</a> -->
+                    <input type="hidden" name="keyres" value="{{ $reserve->reservation_data_id }}">
+                    <span class="inlineSet">
+                        <button formaction="mypageD" type="submit" class="btn">削除</button>
+                        <button formaction="" type="submit" class="btn">変更</button>
+                    </span>
+                    </form>
                 </div>
                 @endforeach
 
