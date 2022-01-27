@@ -19,12 +19,10 @@ class dataController extends Controller
     public function delete(Request $request){
          //  ユーザ認証関連
             //ログイン情報取得
+
             $auths = Auth::user();//ログイン情報
 
             $keyDid = $request->input('keyres');//リザーブズid
-
-
-
             
             $reserves = null;
             $regok = 2;
