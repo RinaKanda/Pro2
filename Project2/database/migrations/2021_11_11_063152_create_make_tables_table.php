@@ -37,6 +37,7 @@ class CreateMakeTablesTable extends Migration
             $table->integer('reservation_data_id');
             $table->date('created_at');
             $table->date('updated_at')->nullable();
+            $table->integer('cancel')->default(0);
 
             $table->index('users_id');
             $table->dropPrimary();
