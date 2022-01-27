@@ -49,9 +49,14 @@ class LoginController extends Controller
     }
 
 
-    public function redirectPath()
+    /* public function redirectPath()
     {
         return '/';
+    } */
+  
+    public function redirectPath()
+    {
+        $path = \Session::pull('url.intended');
+        return $path;
     }
-
 }
