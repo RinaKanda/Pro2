@@ -42,7 +42,8 @@ Route::post('/selectPlace','App\Http\Controllers\VaccineController@checkuser');
 // Route::post('/mypage','App\Http\Controllers\Vaccinecontroller@checkuser');
 Route::get('/selectPlace','App\Http\Controllers\VaccineController@place');
 Route::post('/selectDay','App\Http\Controllers\Vaccinecontroller@day');
-// Route::get('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
+
+Route::get('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
 Route::post('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
 // Route::get('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
 Route::post('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');

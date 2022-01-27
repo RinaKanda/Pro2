@@ -29,7 +29,7 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
-    protected $redirectTo = '/';
+    // protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -57,13 +57,13 @@ class LoginController extends Controller
         // return '/';
     }
 
-    // public function showLoginForm()
-    // {
-    //     if (!session()->has('url.intended')) {
-    //         session(['url.intended' => url()->previous()]);
-    //     }
-    //     return view('auth.login');
-    // }
+    public function showLoginForm()
+    {
+        if (!session()->has('url.intended')) {
+            session(['url.intended' => url()->previous()]);
+        }
+        return view('auth.login');
+    }
 
 
 }
