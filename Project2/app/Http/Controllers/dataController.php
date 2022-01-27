@@ -77,7 +77,7 @@ class dataController extends Controller
             }
             //  ユーザの予約 ここは確実にログイン済み
                 // ログイン済みのときの処理
-                $residgets = reserve::select('reservation_data_id')->where('users_id',$auths->id)->get();
+                $residgets = reserve::select('reservation_data_id')->where('users_id',$auths->id)->where('cancel',0)->get();
                 $keynum = 0;
                 $reserves = null;
                 foreach($residgets as $residget){
