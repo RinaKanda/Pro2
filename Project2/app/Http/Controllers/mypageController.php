@@ -24,7 +24,8 @@ class mypageController extends Controller
 
             $keyDid = $request->input('keyresd');//reservation_data_id
             $keyres = $request->input ('keyres');//reserve_id
-            // echo $keyDid;
+
+            echo $keyres;
         //日時
         $resdata = reservation_data::where('reservation_data_id',$keyDid)->get();
         $date = $resdata[0]['reservation_date'];
