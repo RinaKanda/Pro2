@@ -64,6 +64,7 @@
                     生年月日 <span class="lineon">{{ $auths ->birthday }}</span><br>
                     予約会場 <span class="lineon">{{ $reserve ->place_name }}</span><br>
                     予約日時<br> <span class="lineon">{{ $reserve ->reservation_date }}  {{ $reserve ->reservation_time }}</span><br>
+                    
                     <!-- <a href="/mypageD">削除</a> <a href="/change">変更</a> -->
                     <input type="hidden" name="keyresd" value="{{ $reserve->reservation_data_id }}">
                     <input type="hidden" name="keyres" value="{{$reserve->reserve_id}}">
