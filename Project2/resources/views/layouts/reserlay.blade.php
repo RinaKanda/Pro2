@@ -65,7 +65,8 @@
                     予約会場 <span class="lineon">{{ $reserve ->place_name }}</span><br>
                     予約日時<br> <span class="lineon">{{ $reserve ->reservation_date }}  {{ $reserve ->reservation_time }}</span><br>
                     <!-- <a href="/mypageD">削除</a> <a href="/change">変更</a> -->
-                    <input type="hidden" name="keyres" value="{{ $reserve->reserve_id }}">
+                    <input type="hidden" name="keyresd" value="{{ $reserve->reservation_data_id }}">
+                    <input type="hidden" name="keyres" value="{{$reserve->reserve_id}}">
                     <span class="inlineSet">
                         <button formaction="mypageD" type="submit" class="btn">削除</button>
                         <button formaction="" type="submit" class="btn">変更</button>

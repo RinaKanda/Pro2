@@ -22,7 +22,9 @@ class dataController extends Controller
 
             $auths = Auth::user();//ログイン情報
 
-            $keyDid = $request->input('keyres');//リザーブズid
+            $keyDid = $request->input('keyresd');//reservation_data_id
+            $keyres = $request->input('keyres');//reserve_id
+
             
             $reserves = null;
             $regok = 2;
