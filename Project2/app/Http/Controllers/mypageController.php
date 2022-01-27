@@ -51,6 +51,8 @@ class mypageController extends Controller
                 // echo "<br><br>1" . $reserves[$keynum];
                 $pname = place::where('place_id',$pid)->first();
                 $reserves[$keynum]['place_name'] = $pname['place_name'];
+                $rid = reserve::select('reserve_id')->where('reservation_data_id',$residget['reservation_data_id'])->get();
+                $reserves[$keynum]['reserve_id'] = $rid['reserve_id'];
                 // echo "<br>2" . $reserves[$keynum];
                 $keynum++;
             }
