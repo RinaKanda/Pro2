@@ -17,7 +17,8 @@
 <script>
     if('{{$regok}}' == 1){
         alert("予約完了しました！");
-        
+    } else if('{{$regok}}' == 2){
+        alert("")
     }
     function select(name,id){
             $('#selected').text(name);  
@@ -62,7 +63,7 @@
         <div class="Ssize">
         予約したい場所をクリックすることで、その場所の日毎の空き状況を確認できます。<br>
         ○：余裕あり　△:予約残少　✕:空き無し<br>
-        予約したい場所、日付が決定したら「決定」ボタンを押してください。<br>
+        予約したい場所、日付が決定したら<span class="th">「決定」</span>ボタンを押してください。<br>
         </div>
         <div class="th">今選択している病院:<span id="selected"></span></div>
         <div class="th">今選択している日付:<span id="selectedd"></span></div>
