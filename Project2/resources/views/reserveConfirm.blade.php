@@ -140,7 +140,7 @@
                 <input type="hidden" class="Pid" name="Pid" value="value">
                 @csrf
                 @auth
-                <button formaction="/resRegister" type="submit" id="button" class="buttoncss">予約する</button>
+                <button formaction="/top" type="submit" id="button" class="buttoncss">予約する</button>
                 @endauth
                 @guest
                 </div>
