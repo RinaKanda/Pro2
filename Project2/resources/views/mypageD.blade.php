@@ -58,7 +58,8 @@
                     </span>
                 </div>
                 @csrf
-                <input type="hidden" id="Did" name="keyres" value="{{ $keyDid }}">
+                <input type="hidden" id="Did" name="keyresd" value="{{ $keyDid }}">
+                <input type="hidden" id="keyres" name="keyres" value="{{ $keyres }}">
                 <button formaction="/delete" type="submit" id="button" class="buttoncss tred">削除する</button>
             </form>    
         </div>

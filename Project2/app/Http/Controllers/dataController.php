@@ -32,6 +32,10 @@ class dataController extends Controller
                 'cancel' => 1
             ]);
 
+            reservation_data::increment('cancel')
+
+
+            
             $reserves = null;
             $regok = 2;
 

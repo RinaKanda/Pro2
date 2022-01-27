@@ -22,7 +22,8 @@ class mypageController extends Controller
             $auths = Auth::user();
             $reserves = null;
 
-            $keyDid = $request->input('keyres');
+            $keyDid = $request->input('keyresd');//reservation_data_id
+            $keyres = $request->input ('keyres');//reserve_id
             // echo $keyDid;
         //日時
         $resdata = reservation_data::where('reservation_data_id',$keyDid)->get();
@@ -53,7 +54,7 @@ class mypageController extends Controller
                 $keynum++;
             }
 
-            return view('mypageD',compact('keyDid','date','time','place','auths','reserves'));
+            return view('mypageD',compact('keyDid','date','time','place','auths','reserves','keyres'));
     }
 
 
