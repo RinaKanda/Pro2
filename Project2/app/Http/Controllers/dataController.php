@@ -22,20 +22,18 @@ class dataController extends Controller
 
             $auths = Auth::user();//ログイン情報
 
-            $keyDid = $request->input('keyres');//reserve_id
+            $keyDid = $request->input('keyresd');//reservation_data_id
+            $keyres = $request->input ('keyres');//reserve_id
+           
             $today = date("Y-m-d");
-            $authsId =$auths->id;
-            echo $keyDid;
 
-            DB::table('reserves')->where('reserve_id',$keyDid)->where('users_id',$authsId)->update([
+            DB::table('reserves')->where('reserve_id',$keyres)->where('users_id',$auths->id)->update([
                 'updated_at' => $today,
                 'cancel' => 1
             ]);
 
-            reservation_data::increment('cancel');
+            //reservation_data::increment('cancel');
 
-
-            
             $reserves = null;
             $regok = 2;
 
