@@ -26,8 +26,10 @@ class dataController extends Controller
             $keyres = $request->input ('keyres');//reserve_id
            
             $today = date("Y-m-d");
+            $authsID = $auths->id;
+            echo $keyres;
 
-            DB::table('reserves')->where('reserve_id',$keyres)->where('users_id',$auths->id)->update([
+            DB::table('reserves')->where('reserve_id',$keyres)->where('users_id',$authsID)->update([
                 'updated_at' => $today,
                 'cancel' => 1
             ]);
