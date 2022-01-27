@@ -18,6 +18,11 @@
             /* top:250px; */
             /* margin-bottom:50px; */
             }
+            .thb{
+                font-weight:bold;
+                text-align:center;
+                opacity:0.5;
+            }
     </style>
     <script>
         function select(time,res){
@@ -46,13 +51,13 @@
         <div id="sub">
             <div class="Ssize">
             現在選択している病院、日付の時間別空き状況が見れます。<br>
-            予約したい時間が決定したら「決定」ボタンを押してください。<br>
+            予約したい時間が決定したら<span class="th">「決定」</span>ボタンを押してください。<br>
             病院、日付を選択しなおしたい時は<a href="/">こちら</a><br>
             </div>
         @foreach($place as $place)
-            <div class="th">今選択している病院:<span id="selectedd">{{ $place->place_name }}</span></div>
+            <div class="thb">今選択している病院:<span id="selectedd">{{ $place->place_name }}</span></div>
         @endforeach
-        <div class="th" >今選択している日付:<span id="selectedd">{{ $date }}</span></div>
+        <div class="thb" >今選択している日付:<span id="selectedd">{{ $date }}</span></div>
         <div class="th">今選択している時間:<span id="selected"></span></div>
         
         <form action = "/reserveConfirm" method="post">
