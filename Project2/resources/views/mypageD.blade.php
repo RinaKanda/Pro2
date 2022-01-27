@@ -37,7 +37,7 @@
             <form method="post">
                 <div class="space">
                     <span class="th">接種券番号:{{ $auths->tickets_number }}
-                        <!-- <input type="hidden" class="Pid" name="Pid" value="value"> -->
+                       
                     </span>
                    
                 </div>
