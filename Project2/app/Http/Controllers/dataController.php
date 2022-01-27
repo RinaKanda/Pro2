@@ -79,7 +79,7 @@ class dataController extends Controller
             }
             //  ユーザの予約 ここは確実にログイン済み
                 // ログイン済みのときの処理
-                $residgets = reserve::select('reservation_data_id')->where('users_id',$auths->id)->where('cancel',1)->get();
+                $residgets = reserve::select('reservation_data_id')->where('users_id',$auths->id)->where('cancel',0)->get();
                 $keynum = 0;
                 $reserves = null;
                 foreach($residgets as $residget){
@@ -93,6 +93,8 @@ class dataController extends Controller
                     $rid = reserve::select('reserve_id')->where('reservation_data_id',$residget['reservation_data_id'])->first();
                     $reserves[$keynum]['reserve_id'] = $rid['reserve_id'];
                     // echo "<br>2" . $reserves[$keynum];
+                    echo $rid['reserve_id'];
+                    echo "<br>";
                     $keynum++;
                 }
                 return view('/top',compact('places','resdatas','auths','reserves','regok'));

@@ -17,8 +17,8 @@
 <script>
     if('{{$regok}}' == 1){
         alert("予約完了しました！");
-    } else if('{{$regok}}' == 2){
-        alert("")
+    // } else if('{{$regok}}' == 2){
+    //     alert("")
     }
     function select(name,id){
             $('#selected').text(name);  
