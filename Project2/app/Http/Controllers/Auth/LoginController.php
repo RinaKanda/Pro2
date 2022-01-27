@@ -7,7 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Illuminate\Http\Request;
-
+use Auth;
 class LoginController extends Controller
 {
     /*
@@ -40,7 +40,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
+    
 
 
     public function username()
@@ -51,7 +51,18 @@ class LoginController extends Controller
 
     public function redirectPath()
     {
-        return '/';
+        $path = \Session::pull('url.intended');
+        echo $path;
+        return $path;
+        // return '/';
     }
+
+    // public function showLoginForm()
+    // {
+    //     if (!session()->has('url.intended')) {
+    //         session(['url.intended' => url()->previous()]);
+    //     }
+    //     return view('auth.login');
+    // }
 
 }

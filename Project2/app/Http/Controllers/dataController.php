@@ -20,11 +20,12 @@ class dataController extends Controller
          //  ユーザ認証関連
             //ログイン情報取得
             $auths = Auth::user();
-            $reserves = null;
-
             $keyDid = $request->input('keyres');
+           
+            $reserves = null;
             $regok = 2;
 
+            
 
     }
 }
