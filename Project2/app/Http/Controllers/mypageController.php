@@ -16,7 +16,14 @@ use Illuminate\Support\Facades\DB;
 
 class mypageController extends Controller
 {
-    public function delete(Request $request){
+    public function display(Request $request){
+        //toを決める
+        $keyto = $request->input('keyto');
+        if ($request->get('dataget') == 'delete') {
+            echo "delete";
+        } else if($request->get('dataget') == 'change'){
+            echo "change";
+        }
         //  ユーザ認証関連
             //ログイン情報取得
             $auths = Auth::user();
@@ -25,7 +32,7 @@ class mypageController extends Controller
             $keyDid = $request->input('keyresd');//reservation_data_id
             $keyres = $request->input ('keyres');//reserve_id
 
-            echo $keyres;
+            // echo $keyres;
         //日時
         $resdata = reservation_data::where('reservation_data_id',$keyDid)->get();
         $date = $resdata[0]['reservation_date'];

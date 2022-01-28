@@ -68,9 +68,10 @@
                     <!-- <a href="/mypageD">削除</a> <a href="/change">変更</a> -->
                     <input type="hidden" name="keyresd" value="{{ $reserve->reservation_data_id }}">
                     <input type="hidden" name="keyres" value="{{$reserve->reserve_id}}">
+                    <input type="hidden" name="keyto" value="1">
                     <span class="inlineSet">
-                        <button formaction="mypageD" type="submit" class="btn">削除</button>
-                        <button formaction="" type="submit" class="btn">変更</button>
+                        <button name="dataget" formaction="mypageD" type="submit" class="btn" value="delete">削除</button>
+                        <button name="dataget" formaction="mypageC" type="submit" class="btn" value="change">変更</button>
                     </span>
                     </form>
                 </div>
@@ -88,7 +89,7 @@
             </ul> -->
         </nav>
         </div>
-        <!-- <div class="overlay"></div> -->
+        <div class="overlayout"></div>
     </div>
     @yield('content')
 </body>   

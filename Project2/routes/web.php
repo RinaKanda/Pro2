@@ -49,9 +49,12 @@ Route::post('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
 Route::post('/reserveConfirm','App\Http\Controllers\Vaccinecontroller@Confirm');
 // Route::post('/mypage','App\Http\Controllers\Vaccinecontroller@mypage');
 
-
-Route::post('/mypageD','App\Http\Controllers\mypageController@delete');
+//delete関連
+Route::post('/dataget','App\Http\Controllers\mypageController@display');
 Route::post('/delete','App\Http\Controllers\dataController@delete');
+
+//change関連
+Route::post('/mypageC','App\Http\Controllers\mypageController@display');
 
 
 //処理のみ
