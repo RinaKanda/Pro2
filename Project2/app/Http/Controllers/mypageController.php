@@ -17,13 +17,7 @@ use Illuminate\Support\Facades\DB;
 class mypageController extends Controller
 {
     public function display(Request $request){
-        //toを決める
-        $keyto = $request->input('keyto');
-        if ($request->get('dataget') == 'delete') {
-            echo "delete";
-        } else if($request->get('dataget') == 'change'){
-            echo "change";
-        }
+        
         //  ユーザ認証関連
             //ログイン情報取得
             $auths = Auth::user();
@@ -64,8 +58,25 @@ class mypageController extends Controller
                 // echo "<br>2" . $reserves[$keynum];
                 $keynum++;
             }
+            //押されたボタンによってview変える
+            if ($request->get('dataget') == 'delete') {
+                return view('mypageD',compact('keyDid','date','time','place','auths','reserves','keyres'));
+            } else if($request->get('dataget') == 'change'){
+                session(['from' => 'change']);
+                return view('mypageC',compact('keyDid','date','time','place','placeid','auths','reserves','keyres'));
+            }
+            
+    }
+    public function confirm(Request $request){
+        $prekeyDid = $request->input('preDid');//変更前のreservation_data_id
+        $keyDid = $request->input('Did');//reservation_data_id
+        $keyres = $request->input ('keyres');//reserve_id
 
-            return view('mypageD',compact('keyDid','date','time','place','auths','reserves','keyres'));
+        echo "<br>変更前reservation_data_id:" . $prekeyDid;
+        echo "<br>次のreservation_data_id:" . $keyDid;
+        echo "<br>reserve_id:" . $keyres;
+
+        return view('/trash/mailChange');
     }
 
 

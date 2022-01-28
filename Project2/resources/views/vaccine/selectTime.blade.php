@@ -59,10 +59,14 @@
         @endforeach
         <div class="thb" >今選択している日付:<span id="selectedd">{{ $date }}</span></div>
         <div class="th">今選択している時間:<span id="selected"></span></div>
-        
+        @if( Session::get('from')  == 'change')
+        <form action = "/changeConfirm" method="post">
+        @endif
         <form action = "/reserveConfirm" method="post">
             <!-- <input type="hidden" id="date" name="date" value="value">
             <input type="hidden" id="place" name="place" value="val"> -->
+            <input type="hidden" id="preDid" name="preDid" value="{{ $keyDid }}">
+            <input type="hidden" id="keyres" name="keyres" value="{{ $keyres }}">
             <input type="hidden" id="Did" name="Did" value="val">
                 @csrf
             <button type="submit" id="button" class="buttoncss" disabled>決定</button>
