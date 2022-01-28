@@ -27,14 +27,13 @@ class dataController extends Controller
            
             $today = date("Y-m-d");
             $authsID = $auths->id;
-            echo $keyres;
 
             DB::table('reserves')->where('reserve_id',$keyres)->where('users_id',$authsID)->update([
                 'updated_at' => $today,
                 'cancel' => 1
             ]);
 
-            //reservation_data::increment('cancel');
+            DB::table('reservation_datas')->where('reservation_data_id',$keyDid)->increment('cancel');
 
             $reserves = null;
             $regok = 2;
