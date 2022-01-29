@@ -1,46 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace app\Common;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Carbon\Carbon;
-use Auth;
-//use Model
 use App\Models\place;
 use App\Models\reservation_data;
 use App\Models\reserve;
 use App\Models\reserve_person;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
-// use App\Common\gettopClass;
-
-class topController extends Controller
+class gettopClass
 {
-     //top
-     public function toppage(Request $request){
-        //  ユーザ認証関連
-            //ログイン情報取得
-            $auths = Auth::user();
-
-        //  予約情報関連
-        $places = place::all();
-        $now = new Carbon('today');
-        $keynum2 = 0;
-
-        //changeから来たか判定
-        if(session()->get('from') != null){
-            $keyDid = $request->input('keyresd');
-            $keyres = $request->input('keyres');
-        } else{
-            $keyDid = null;
-            $keyres = null;
-        }
-        //判定用など
-        $regok = 0;
-        echo $keyDid;
-        // gettopClass::gettop();
-
+    public static function gettop()
+    {
         foreach($places as $place){
             $key = $place->place_id;
             // echo $key;
@@ -80,35 +52,5 @@ class topController extends Controller
             $keynum2++;
         }
         
-        //  ユーザの予約
-        if ( Auth::check() ) {
-            // ログイン済みのときの処理
-            $residgets = reserve::select('reservation_data_id')->where('users_id',$auths->id)->where('cancel',0)->get();
-
-            $keynum = 0;
-            $reserves = null;
-            foreach($residgets as $residget){
-                $reserves[$keynum] = reservation_data::where('reservation_data_id',$residget['reservation_data_id'])->first();
-                //場所の名前
-                $pid = $reserves[$keynum]['place_id'];
-                // echo $pid;
-                // echo "<br><br>1" . $reserves[$keynum];
-                $pname = place::where('place_id',$pid)->first();
-                $reserves[$keynum]['place_name'] = $pname['place_name'];
-                // echo "<br>2" . $reserves[$keynum];
-                $rid = reserve::select('reserve_id')->where('reservation_data_id',$residget['reservation_data_id'])->first();
-                $reserves[$keynum]['reserve_id'] = $rid['reserve_id'];
-                $keynum++;
-            }
-            
-            return view('/top',compact('places','resdatas','auths','reserves','regok','keyDid','keyres'));
-        } else {
-          // ログインしていないときの処理
-          return view('/top',compact('places','resdatas','auths','regok','keyDid','keyres'));
-          }
-        
     }
-
-    
-
 }
