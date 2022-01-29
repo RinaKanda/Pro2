@@ -19,11 +19,19 @@ class dataController extends Controller
     public function delete(Request $request){
          //  ユーザ認証関連
             //ログイン情報取得
-
             $auths = Auth::user();//ログイン情報
 
             $keyDid = $request->input('keyresd');//reservation_data_id
             $keyres = $request->input ('keyres');//reserve_id
+
+            //chageじゃないとき
+            if(session()->get('from') != null){
+                $keyDid = $request->input('keyresd');
+                $keyres = $request->input('keyres');
+            } else{
+                $keyDid = null;
+                $keyres = null;
+            }
            
             $today = date("Y-m-d");
 
@@ -92,11 +100,11 @@ class dataController extends Controller
                     $rid = reserve::select('reserve_id')->where('reservation_data_id',$residget['reservation_data_id'])->first();
                     $reserves[$keynum]['reserve_id'] = $rid['reserve_id'];
                     // echo "<br>2" . $reserves[$keynum];
-                    echo $rid['reserve_id'];
-                    echo "<br>";
+                    // echo $rid['reserve_id'];
+                    // echo "<br>";
                     $keynum++;
                 }
-                return view('/top',compact('places','resdatas','auths','reserves','regok'));
+                return view('/top',compact('places','resdatas','auths','reserves','regok','keyDid','keyres'));
     }
 
     public function change(Request $request){
