@@ -192,9 +192,9 @@ class VaccineController extends Controller
 
         $key = $request->input('place');
         $keyday = $request->input('date');
-        $keyDid = $request->input('keyresd');
+        $prekeyDid = $request->input('prekeyDid');
+        echo $prekeyDid;
         $keyres = $request->input('keyres');
-        echo $keyDid;
         
         //渡す用
         $place = place::select('place_name')->where('place_id',$key)->get();
@@ -249,10 +249,10 @@ class VaccineController extends Controller
                 $keynum++;
             }
             
-            return view('vaccine/selectTime',compact('place','resdatas','date','auths','reserves','keyDid','keyres'));
+            return view('vaccine/selectTime',compact('place','resdatas','date','auths','reserves','prekeyDid','keyres'));
         } else {
           // ログインしていないときの処理
-          return view('vaccine/selectTime',compact('place','resdatas','date','auths','keyDid','keyres'));
+          return view('vaccine/selectTime',compact('place','resdatas','date','auths','prekeyDid','keyres'));
           }
 
     }

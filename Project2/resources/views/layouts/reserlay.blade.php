@@ -24,7 +24,8 @@
 
 <body>
     <title>〇〇市ワクチン予約サイト</title>
-    <div id="head"><span id="title">〇〇市ワクチン予約サイト</span>
+    <div id="head">
+    <div id="titlepos"><span id="title">〇〇市ワクチン予約サイト</span>
         <div id ="link">
             @guest
             <a href="/register">新規登録</a> /
@@ -34,6 +35,7 @@
             <a href="/logout">ログアウト</a>
             @endauth
         </div>
+    </div>
     </div>
     <div class="menu-trigger" href="">
             <div id="reser">

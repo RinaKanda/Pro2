@@ -229,7 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         //共通関数
-        'sayHelloClass' => app\Common\sayHelloClas::class,
+        'gettoClass' => app\Common\gettopClass::class,
 
     ],
 
