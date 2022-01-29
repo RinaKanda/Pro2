@@ -191,9 +191,11 @@ class VaccineController extends Controller
             $auths = Auth::user();
 
         $key = $request->input('place');
-        $keyday=$request->input('date');
-        // echo $key;
-        // echo $keyday;
+        $keyday = $request->input('date');
+        $keyDid = $request->input('keyresd');
+        $keyres = $request->input('keyres');
+        echo $keyDid;
+        
         //渡す用
         $place = place::select('place_name')->where('place_id',$key)->get();
         $date =   $keyday; 
@@ -224,6 +226,8 @@ class VaccineController extends Controller
             $keynum++;   
         }    
         // echo $place;
+
+        
         //  ユーザの予約
         if ( Auth::check() ) {
             // ログイン済みのときの処理
@@ -245,10 +249,10 @@ class VaccineController extends Controller
                 $keynum++;
             }
             
-            return view('vaccine/selectTime',compact('place','resdatas','date','auths','reserves'));
+            return view('vaccine/selectTime',compact('place','resdatas','date','auths','reserves','keyDid','keyres'));
         } else {
           // ログインしていないときの処理
-          return view('vaccine/selectTime',compact('place','resdatas','date','auths'));
+          return view('vaccine/selectTime',compact('place','resdatas','date','auths','keyDid','keyres'));
           }
 
     }
@@ -287,7 +291,7 @@ class VaccineController extends Controller
                 // echo "<br><br>1" . $reserves[$keynum];
                 $pname = place::where('place_id',$pid)->first();
                 $reserves[$keynum]['place_name'] = $pname['place_name'];
-                $rid = reserve::select('reserve_id')->where('reservation_data_id',$residget['reservation_data_id'])->get();
+                $rid = reserve::select('reserve_id')->where('reservation_data_id',$residget['reservation_data_id'])->first();
                 $reserves[$keynum]['reserve_id'] = $rid['reserve_id'];
                 // echo "<br>2" . $reserves[$keynum];
                 $keynum++;
@@ -307,6 +311,15 @@ class VaccineController extends Controller
         //  ユーザ認証関連
             //ログイン情報取得
             $auths = Auth::user();
+
+            //chageじゃないとき
+            if(session()->get('from') != null){
+                $keyDid = $request->input('keyresd');
+                $keyres = $request->input('keyres');
+            } else{
+                $keyDid = null;
+                $keyres = null;
+            }
 
         $reservation_data_id = $request->input('Did');
         $reserve_person_id = $auths->id;
@@ -386,7 +399,7 @@ class VaccineController extends Controller
                 $keynum++;
             }
             
-            return view('/top',compact('places','resdatas','auths','reserves','regok')); 
+            return view('/top',compact('places','resdatas','auths','reserves','regok','keyDid','keyres')); 
     }
 
    
