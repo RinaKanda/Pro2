@@ -68,7 +68,7 @@ class mypageController extends Controller
     }
     public function confirm(Request $request){
 
-        $prekeyDid = $request->input('preDid');//変更前のreservation_data_id
+        $prekeyDid = $request->input('prekeyDid');//変更前のreservation_data_id
         $keyDid = $request->input('Did');//reservation_data_id
         $keyres = $request->input ('keyres');//reserve_id
 
@@ -130,7 +130,7 @@ class mypageController extends Controller
         // echo $date;
         // echo "";
 
-        return view('changeConfirm',compact('keyDid','keyres','afterdata','auths','reserves','predata'));
+        return view('changeConfirm',compact('prekeyDid','keyDid','keyres','afterdata','auths','reserves','predata'));
     }
 
 

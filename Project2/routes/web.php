@@ -56,6 +56,7 @@ Route::post('/delete','App\Http\Controllers\dataController@delete');
 //change関連
 Route::post('/mypageC','App\Http\Controllers\mypageController@display');
 Route::post('/changeConfirm','App\Http\Controllers\mypageController@confirm');
+Route::post('/change','App\Http\Controllers\dataController@change');
 
 
 //処理のみ

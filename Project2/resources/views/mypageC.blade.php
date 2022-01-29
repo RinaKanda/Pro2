@@ -52,7 +52,7 @@
                     </span>
                     @endauth
                 </div>
-                <input type="hidden" id="Did" name="keyresd" value="{{ $keyDid }}">
+                <input type="hidden" id="Did" name="prekeyDid" value="{{ $keyDid }}">
                 <input type="hidden" id="keyres" name="keyres" value="{{ $keyres }}">
 
                 <div class="space">
@@ -82,19 +82,8 @@
                         </span>
                     </span>
                 </div>
-                @csrf
-                <input type="hidden" id="Did" name="Did" value="{{$keyDid}}">
-                @csrf
-                @auth
-                <button formaction="/top" type="submit" id="button" class="buttoncss">予約する</button>
-                @endauth
-                @guest
-                </div>
-                <span> 
-                    <span class="tred">予約するためにはログインが必要です。<button formaction="/resRegister" type="submit" id="button" class="buttonconf" disabled>予約する</button></span>
-                    <br>ログインは<a href="/login">こちら</a>
-                </span> 
-                @endguest
+                @csrf               
+
             </form>    
         </div>
         </main>

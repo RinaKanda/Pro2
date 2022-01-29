@@ -30,15 +30,15 @@ class topController extends Controller
 
         //changeから来たか判定
         if(session()->get('from') != null){
-            $keyDid = $request->input('keyresd');
+            $prekeyDid = $request->input('prekeyDid');
             $keyres = $request->input('keyres');
         } else{
-            $keyDid = null;
+            $prekeyDid = null;
             $keyres = null;
         }
         //判定用など
         $regok = 0;
-        echo $keyDid;
+        // echo $keyDid;
         // gettopClass::gettop();
 
         foreach($places as $place){
@@ -101,10 +101,10 @@ class topController extends Controller
                 $keynum++;
             }
             
-            return view('/top',compact('places','resdatas','auths','reserves','regok','keyDid','keyres'));
+            return view('/top',compact('places','resdatas','auths','reserves','regok','prekeyDid','keyres'));
         } else {
           // ログインしていないときの処理
-          return view('/top',compact('places','resdatas','auths','regok','keyDid','keyres'));
+          return view('/top',compact('places','resdatas','auths','regok','prekeyDid','keyres'));
           }
         
     }

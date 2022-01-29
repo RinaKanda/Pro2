@@ -1,12 +1,11 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <style>
     .wrapper {
-        height: 50%;
+        height:50%;
+        /* height: auto; */
         width: 80%;
-        /* weight:800px; */
         /* overflow-x: hidden; */
-
-        /* overflow:scroll; */
+        overflow:auto;
         /* position: relative; */
         position:fixed;
         left:30%;
@@ -17,8 +16,10 @@
 <script>
     if('{{$regok}}' == 1){
         alert("予約完了しました！");
-    // } else if('{{$regok}}' == 2){
-    //     alert("")
+    } else if('{{$regok}}' == 2){
+        alert("削除完了しました！");
+    } else if('{{$regok}}' == 3){
+        alert('予約を変更しました！');
     }
 
     function select(name,id){
@@ -61,11 +62,11 @@
 @extends('layouts.reserlay')
 @section('content')
    <div id="sub">
+   <!-- <div id="head"><span id="title">〇〇市ワクチン予約サイト</span></div> -->
         <div class="Ssize">
         予約したい場所をクリックすることで、その場所の日毎の空き状況を確認できます。<br>
         ○：余裕あり　△:予約残少　✕:空き無し<br>
-        予約したい場所、日付が決定したら<span class="th">「決定」</span>ボタンを押してください。<br>
-        {{ Session::get('from') }}から来たよ    
+        予約したい場所、日付が決定したら<span class="th">「決定」</span>ボタンを押してください。<br>    
     </div>
         <div class="th">今選択している病院:<span id="selected"></span></div>
         <div class="th">今選択している日付:<span id="selectedd"></span></div>
@@ -73,8 +74,10 @@
         <form action = "/selectTime" method="post">
             <input type="hidden" id="date" name="date" value="value">
             <input type="hidden" id="place" name="place" value="val">
-            <input type="hidden" id="preDid" name="keyresd" value="{{ $keyDid }}">
+            @if(Session::get('from') != null))
+            <input type="hidden" id="preDid" name="prekeyDid" value="{{ $prekeyDid }}">
             <input type="hidden" id="keyres" name="keyres" value="{{ $keyres }}">
+            @endif
                 @csrf
             <button type="submit" id="button" class="buttoncss" disabled>決定</button>
         </form>
