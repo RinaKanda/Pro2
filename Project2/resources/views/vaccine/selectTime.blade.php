@@ -49,6 +49,7 @@
 @extends('layouts.reserlay')
 @section('content')
         <div id="sub">
+            <div id="head"><span id="title">〇〇市ワクチン予約サイト</span></div>
             <div class="Ssize">
             現在選択している病院、日付の時間別空き状況が見れます。<br>
             予約したい時間が決定したら<span class="th">「決定」</span>ボタンを押してください。<br>
@@ -65,7 +66,7 @@
         <form action = "/reserveConfirm" method="post">
             <!-- <input type="hidden" id="date" name="date" value="value">
             <input type="hidden" id="place" name="place" value="val"> -->
-            <input type="hidden" id="preDid" name="preDid" value="{{ $keyDid }}">
+            <input type="hidden" id="preDid" name="prekeyDid" value="{{ $prekeyDid }}">
             <input type="hidden" id="keyres" name="keyres" value="{{ $keyres }}">
             <input type="hidden" id="Did" name="Did" value="val">
                 @csrf
