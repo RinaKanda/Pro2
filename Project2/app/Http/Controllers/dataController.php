@@ -23,15 +23,7 @@ class dataController extends Controller
 
             $keyDid = $request->input('keyresd');//reservation_data_id
             $keyres = $request->input ('keyres');//reserve_id
-
-            //chageじゃないとき
-            if(session()->get('from') != null){
-                $keyDid = $request->input('keyresd');
-                $keyres = $request->input('keyres');
-            } else{
-                $keyDid = null;
-                $keyres = null;
-            }
+            
            
             $today = date("Y-m-d");
 
