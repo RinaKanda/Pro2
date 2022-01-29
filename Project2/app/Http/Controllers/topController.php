@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class topController extends Controller
 {
      //top
-     public function toppage(){
+     public function toppage(Request $request){
         //  ユーザ認証関連
             //ログイン情報取得
             $auths = Auth::user();
@@ -26,7 +26,18 @@ class topController extends Controller
         $now = new Carbon('today');
         $keynum2 = 0;
 
+        //changeから来たか判定
+        if(session()->get('from') != null){
+            $keyDid = $request->input('keyresd');
+            $keyres = $request->input('keyres');
+        } else{
+            $keyDid = null;
+            $keyres = null;
+        }
+        //判定用など
         $regok = 0;
+        echo $keyDid;
+        
 
         foreach($places as $place){
             $key = $place->place_id;
@@ -88,10 +99,10 @@ class topController extends Controller
                 $keynum++;
             }
             
-            return view('/top',compact('places','resdatas','auths','reserves','regok'));
+            return view('/top',compact('places','resdatas','auths','reserves','regok','keyDid','keyres'));
         } else {
           // ログインしていないときの処理
-          return view('/top',compact('places','resdatas','auths','regok'));
+          return view('/top',compact('places','resdatas','auths','regok','keyDid','keyres'));
           }
         
     }

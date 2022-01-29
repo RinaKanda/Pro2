@@ -26,6 +26,7 @@
 @extends('layouts.reserlay')
 @section('content')
 <div id="sub">
+    削除
             <div class="Ssize">
             削除する内容に間違いがないことを確認してください。<br>
             間違いがなければ<span class="th">「削除する」</span>をクリックしてください。 <br>

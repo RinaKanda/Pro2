@@ -35,6 +35,7 @@ class dataController extends Controller
 
             DB::table('reservation_datas')->where('reservation_data_id',$keyDid)->increment('cancel');
 
+            //topへの処理
             $reserves = null;
             $regok = 2;
 
@@ -97,5 +98,9 @@ class dataController extends Controller
                     $keynum++;
                 }
                 return view('/top',compact('places','resdatas','auths','reserves','regok'));
+    }
+
+    public function change(Request $request){
+
     }
 }

@@ -20,6 +20,7 @@
     // } else if('{{$regok}}' == 2){
     //     alert("")
     }
+
     function select(name,id){
             $('#selected').text(name);  
             $('#selectedd').text("");
@@ -64,13 +65,16 @@
         予約したい場所をクリックすることで、その場所の日毎の空き状況を確認できます。<br>
         ○：余裕あり　△:予約残少　✕:空き無し<br>
         予約したい場所、日付が決定したら<span class="th">「決定」</span>ボタンを押してください。<br>
-        </div>
+        {{ Session::get('from') }}から来たよ    
+    </div>
         <div class="th">今選択している病院:<span id="selected"></span></div>
         <div class="th">今選択している日付:<span id="selectedd"></span></div>
         
         <form action = "/selectTime" method="post">
             <input type="hidden" id="date" name="date" value="value">
             <input type="hidden" id="place" name="place" value="val">
+            <input type="hidden" id="preDid" name="keyresd" value="{{ $keyDid }}">
+            <input type="hidden" id="keyres" name="keyres" value="{{ $keyres }}">
                 @csrf
             <button type="submit" id="button" class="buttoncss" disabled>決定</button>
         </form>
