@@ -28,12 +28,6 @@ class dataController extends Controller
             $today = date("Y-m-d");
             $authsID = $auths->id;
 
-            if($keyres == null){
-                echo('ないよ');
-            }else{
-                echo('あるよ');
-            }
-
             DB::table('reserves')->where('reserve_id',$keyres)->where('users_id',$authsID)->update([
                 'updated_at' => $today,
                 'cancel' => 1
