@@ -36,6 +36,11 @@ class topController extends Controller
             $prekeyDid = null;
             $keyres = null;
         }
+        //login
+        if(session()->get('login') == 'login'){
+            session()->forget('login');
+        }
+        
         //判定用など
         $regok = 0;
         // echo $keyDid;

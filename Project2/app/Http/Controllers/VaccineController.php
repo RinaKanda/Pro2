@@ -190,21 +190,26 @@ class VaccineController extends Controller
             //ログイン情報取得
             $auths = Auth::user();
 
-        $key = $request->input('place');
-        $keyday = $request->input('date');
-        $prekeyDid = $request->input('prekeyDid');
-        $keyres = $request->input('keyres');
+        if(session()->get('login') == null){
+            echo "not login";
+
+            $key = $request->input('place');
+            $keyday = $request->input('date');
+            $prekeyDid = $request->input('prekeyDid');
+            $keyres = $request->input('keyres');
         
         //渡す用
         $pl = place::where('place_id',$key)->get();
-        // $plac = $pl[0]['place_name'];
+       $plac = $pl[0]['place_name'];
+       echo $plac;
         $place = place::select('place_name')->where('place_id',$key)->get();
         $date =   $keyday; 
         $resdatas = reservation_data::where('reservation_date',$keyday)->where('place_id',$key)->get();
         $resPid = $request->input('Pid');
         
-        // session(['place' => $plac]);
-
+        session(['key' => $key]);
+        session(['place' => $plac]);
+        session(['date' => $date]);
 
         //time
         $now = new Carbon('now');
@@ -229,6 +234,45 @@ class VaccineController extends Controller
         }    
         // echo $place;
 
+    } else { //loginから来たら
+
+        echo "login";
+        $key = session()->get('key');
+        $keyday = session()->get('date');
+        $prekeyDid = null;
+        $keyres = null;
+        
+        //渡す用
+        $pl = place::where('place_id',$key)->get();
+        // $plac = $pl[0]['place_name'];
+        $place = place::select('place_name')->where('place_id',$key)->get();
+        $date =   $keyday; 
+        $resdatas = reservation_data::where('reservation_date',$keyday)->where('place_id',$key)->get();
+        $resPid = $request->input('Pid');
+        
+        
+        //time
+        $now = new Carbon('now');
+        $keynum = 0;
+        if($keyday == $now){
+            $resdatas[$keynum]['reservation_time'] = reservation_data::where('reservation_date',$keyday)->where('place_id',$key)->whereDate('reservation_date',">=",$now)->get();
+        }
+
+        foreach($resdatas as $value){
+            //placeid
+            $resdatas[$keynum]['place_id'] = $key;
+            //date
+            $resdatas[$keynum]['reservation_date'] = $keyday;
+            //キャパ計算
+            $cap = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->where('reservation_time',$value['reservation_time'])->sum('capacity');
+            $resdatas[$keynum]['capacity'] = $cap ;
+            //予約可能人数計算
+            $Reserved = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->where('reservation_time',$value['reservation_time'])->sum('reserve_counts');
+            $cancel = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->where('reservation_time',$value['reservation_time'])->sum('cancel');
+            $resdatas[$keynum]['reserve_avail'] = $cap - $Reserved + $cancel;
+            $keynum++;   
+        }    
+    }
         //  ユーザの予約
         if ( Auth::check() ) {
             // ログイン済みのときの処理

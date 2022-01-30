@@ -52,6 +52,7 @@ class LoginController extends Controller
      public function redirectPath()
     {
         $path = \Session::pull('url.intended');
+        session(['login' => "login"]);
         echo $path;
         return $path;
         // return '/';
@@ -60,7 +61,8 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         if (!session()->has('url.intended')) {
-            session(['url.intended' => url()->previous()]);
+            // session(['url.intended' => url()->previous()]);
+            session(['url.intended' => $_SERVER['HTTP_REFERER']]);
         }
         return view('auth.login');
     }
