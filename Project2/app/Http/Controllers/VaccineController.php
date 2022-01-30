@@ -193,7 +193,6 @@ class VaccineController extends Controller
         $key = $request->input('place');
         $keyday = $request->input('date');
         $prekeyDid = $request->input('prekeyDid');
-        echo $prekeyDid;
         $keyres = $request->input('keyres');
         
         //渡す用
@@ -205,28 +204,26 @@ class VaccineController extends Controller
         // echo $date;
         //time
         $now = new Carbon('now');
+        $keynum = 0;
         if($keyday == $now){
             $resdatas[$keynum]['reservation_time'] = reservation_data::where('reservation_date',$keyday)->where('place_id',$key)->whereDate('reservation_date',">=",$now)->get();
         }
 
-        $keynum = 0;
         foreach($resdatas as $value){
             //placeid
             $resdatas[$keynum]['place_id'] = $key;
             //date
             $resdatas[$keynum]['reservation_date'] = $keyday;
             //キャパ計算
-            $cap = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('capacity');
-
+            $cap = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->where('reservation_time',$value['reservation_time'])->sum('capacity');
             $resdatas[$keynum]['capacity'] = $cap ;
             //予約可能人数計算
-            $Reserved = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('reserve_counts');
-            $cancel = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->sum('cancel');
+            $Reserved = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->where('reservation_time',$value['reservation_time'])->sum('reserve_counts');
+            $cancel = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->where('reservation_time',$value['reservation_time'])->sum('cancel');
             $resdatas[$keynum]['reserve_avail'] = $cap - $Reserved + $cancel;
             $keynum++;   
         }    
         // echo $place;
-
         
         //  ユーザの予約
         if ( Auth::check() ) {
