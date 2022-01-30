@@ -196,12 +196,16 @@ class VaccineController extends Controller
         $keyres = $request->input('keyres');
         
         //渡す用
+        $pl = place::where('place_id',$key)->get();
+        // $plac = $pl[0]['place_name'];
         $place = place::select('place_name')->where('place_id',$key)->get();
         $date =   $keyday; 
         $resdatas = reservation_data::where('reservation_date',$keyday)->where('place_id',$key)->get();
         $resPid = $request->input('Pid');
-        // echo $place;
-        // echo $date;
+        
+        // session(['place' => $plac]);
+
+
         //time
         $now = new Carbon('now');
         $keynum = 0;
@@ -224,7 +228,7 @@ class VaccineController extends Controller
             $keynum++;   
         }    
         // echo $place;
-        
+
         //  ユーザの予約
         if ( Auth::check() ) {
             // ログイン済みのときの処理
