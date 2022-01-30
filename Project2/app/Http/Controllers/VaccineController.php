@@ -334,6 +334,7 @@ class VaccineController extends Controller
             'created_at' => $today,
             'updated_at' => null,
         ]);
+        DB::table('reservation_datas')->where('reservation_data_id',$reservation_data_id)->increment('reserve_counts');
         $regok = 1;
 
         //  予約情報関連

@@ -23,8 +23,6 @@ class dataController extends Controller
 
             $keyDid = $request->input('keyresd');//reservation_data_id
             $keyres = $request->input ('keyres');//reserve_id
-            
-           
             $today = date("Y-m-d");
 
             DB::table('reserves')->where('reserve_id',$keyres)->where('users_id',$auths->id)->update([
@@ -32,7 +30,7 @@ class dataController extends Controller
                 'cancel' => 1
             ]);
 
-            //reservation_data::increment('cancel');
+            DB::table('reservation_datas')->where('reservation_data_id',$keyDid)->increment('cancel');
 
             //topへの処理
             $reserves = null;
@@ -111,9 +109,27 @@ class dataController extends Controller
         
         //ここでDBの処理書いてください！！
 
+        $today = date("Y-m-d");
+        $rowCount = reserve::count();
 
+        //変更前の予約をキャンセル
+        DB::table('reserves')->where('reserve_id',$keyres)->where('users_id',$auths->id)->update([
+            'updated_at' => $today,
+            'cancel' => 1
+        ]);
 
+        DB::table('reservation_datas')->where('reservation_data_id',$prekeyDid)->increment('cancel');
 
+        //新規の予約を登録
+        DB::table('reserves')->insert([
+            'reserve_id' => $rowCount+1,
+            'users_id' => $auths->id,
+            'reservation_data_id' => $keyDid,
+            'created_at' => $today,
+            'updated_at' => null,
+        ]);
+
+        DB::table('reservation_datas')->where('reservation_data_id',$keyDid)->increment('reserve_counts');
 
          //topへの処理
          $reserves = null;
