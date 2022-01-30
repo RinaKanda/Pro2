@@ -328,6 +328,8 @@ class VaccineController extends Controller
         $place = $pl[0]['place_name'];
         $placeid = $pl[0]['place_id'];
 
+        session()->forget('login');  
+
         //  ユーザの予約
         if ( Auth::check() ) {
             // ログイン済みのときの処理
