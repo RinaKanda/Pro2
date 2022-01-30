@@ -85,11 +85,13 @@
             </tr> 
             
             @foreach($resdatas as $resdata)
+            @if($resdata->reserve_avail != 0)
                 <tr class="colums" onclick="select('{{ $resdata->reservation_time }}',{{ $resdata->reservation_data_id }})">
                     <td>{{ $resdata->reservation_time }}</td>
                     <td>{{ $resdata->reserve_avail }}</td>
                     <!-- <td>{{ $resdata }}</td> -->
                 </tr>
+            @endif
             @endforeach
 </tr>   
 </table>
