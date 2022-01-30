@@ -191,7 +191,7 @@ class VaccineController extends Controller
             $auths = Auth::user();
 
         if(session()->get('login') == null){
-            echo "not login";
+            // echo "not login";
 
             $key = $request->input('place');
             $keyday = $request->input('date');
@@ -200,8 +200,8 @@ class VaccineController extends Controller
         
         //渡す用
         $pl = place::where('place_id',$key)->get();
-       $plac = $pl[0]['place_name'];
-       echo $plac;
+        $plac = $pl[0]['place_name'];
+    //    echo $plac;
         $place = place::select('place_name')->where('place_id',$key)->get();
         $date =   $keyday; 
         $resdatas = reservation_data::where('reservation_date',$keyday)->where('place_id',$key)->get();
@@ -236,7 +236,7 @@ class VaccineController extends Controller
 
     } else { //loginから来たら
 
-        echo "login";
+        // echo "login";
         $key = session()->get('key');
         $keyday = session()->get('date');
         $prekeyDid = null;
@@ -248,7 +248,6 @@ class VaccineController extends Controller
         $place = place::select('place_name')->where('place_id',$key)->get();
         $date =   $keyday; 
         $resdatas = reservation_data::where('reservation_date',$keyday)->where('place_id',$key)->get();
-        $resPid = $request->input('Pid');
         
         
         //time
@@ -271,7 +270,8 @@ class VaccineController extends Controller
             $cancel = DB::table('reservation_datas')->where('place_id',$key)->where('reservation_date',$value['reservation_date'])->where('reservation_time',$value['reservation_time'])->sum('cancel');
             $resdatas[$keynum]['reserve_avail'] = $cap - $Reserved + $cancel;
             $keynum++;   
-        }    
+        } 
+        session()->forget('login');   
     }
         //  ユーザの予約
         if ( Auth::check() ) {
@@ -308,10 +308,17 @@ class VaccineController extends Controller
          //  ユーザ認証関連
             //ログイン情報取得
             $auths = Auth::user();
-        
-        $keyDid = $request->input('Did');
-        //日時
-        $resdata = reservation_data::where('reservation_data_id',$keyDid)->get();
+
+        if(session()->get('login') == null){
+            $keyDid = $request->input('Did');
+            session(['keyDid' => $keyDid]);
+       
+        } else {
+            $keyDid = session()->get('keyDid');
+
+        }
+         //日時
+         $resdata = reservation_data::where('reservation_data_id',$keyDid)->get();
         $date = $resdata[0]['reservation_date'];
         $time = $resdata[0]['reservation_time'];
         //病院名
@@ -320,6 +327,8 @@ class VaccineController extends Controller
         $pl = place::where('place_id',$keypl[0]['place_id'])->get();
         $place = $pl[0]['place_name'];
         $placeid = $pl[0]['place_id'];
+
+        session()->forget('login');  
 
         //  ユーザの予約
         if ( Auth::check() ) {
