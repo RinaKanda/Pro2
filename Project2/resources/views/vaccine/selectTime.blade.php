@@ -54,7 +54,7 @@
             現在選択している病院、日付の時間別空き状況が見れます。<br>
             予約したい時間が決定したら<span class="th">「決定」</span>ボタンを押してください。<br>
             病院、日付を選択しなおしたい時は<a href="/">こちら</a><br>
-            {{Session::get('place')}}
+      
             </div>
         @foreach($place as $place)
             <div class="thb">今選択している病院:<span id="selectedd">{{ $place->place_name }}</span></div>
