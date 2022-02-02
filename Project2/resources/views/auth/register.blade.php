@@ -11,6 +11,9 @@
         jQuery(document).ready(function(){
         jQuery("#regiForm").validationEngine();
         });
+        function ShowLength( str ) {
+            document.getElementById("inputlength").innerHTML = "現在:" + str.length + "文字入力";
+        }
     </script>
 
     <style>   
@@ -34,6 +37,9 @@
             box-sizing: border-box;
             cursor: pointer;
         }
+        .inlineSet{
+            display:inline-flex;
+        }   
     </style>
 
 @section('content')
@@ -103,12 +109,16 @@
 
                         <!-- 追加 -->
                         <div class="row mb-3">
-                            <label for="tickets_number" class="col-md-4 col-form-label text-md-end"><h3>{{ __('tickets_number') }}</h3></label>
-                            <span style="color:navy;">10桁の接種券番号を入力してください。</span>
-
-                            <div class="col-md-6">
-                                <input id="tickets_number" type="text" placeholder="10桁の接種券番号を入力" class="form-control validate[required,custom[number],minSize[10],maxSize[10]]]" name="tickets_number">
+                            <div>
+                                <label for="tickets_number" class="col-md-4 col-form-label text-md-end"><h3>{{ __('tickets_number') }}</h3></label>
+                                <span style="color:navy;">10桁の接種券番号を入力してください。</span>
+                                <span class="inlineSet"><span id="inputlength">現在:0文字入力</span></span>
                             </div>
+                            
+                            <div class="col-md-6">
+                                <input id="tickets_number" type="text" placeholder="10桁の接種券番号を入力" class="form-control validate[required,custom[number],minSize[10],maxSize[10]]]" name="tickets_number" onkeyup="ShowLength(value);">
+                            </div>
+                            
                         </div>
 
                         <div class="row mb-3">

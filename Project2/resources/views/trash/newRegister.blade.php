@@ -136,7 +136,7 @@
         <span style="color:navy;">10桁の接種券番号を入力してください。</span><br>
 
         <input type="text" name="number" value="" placeholder="10桁の接種券番号を入力" maxlength="" id="number" class=validate[required,custom[number],minSize[10],maxSize[10]]] onkeyup="ShowLength(value);">
-        <div class="inlineSet"><p id="inputlength">0文字入力</p></div>
+        <span class="inlineSet"><span id="inputlength">0文字入力</span></span>
 
         <h3>生年月日</h3>
         <span style="color:navy;">ワクチン接種希望者の生年月日を入力してください。</span><br>

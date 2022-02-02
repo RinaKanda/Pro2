@@ -58,6 +58,13 @@
 
             @auth
             @if($reserves != null)
+            @if(Session::get('from')  == 'change')
+            <div class="th">現在予約変更中です！他の機能を触ることができません。</div>
+            <div class="break">予約変更を終了する際は<a href="/break">こちら</a></div>
+            <br><br>
+            <div class="nonono">
+            @endif
+            <div class="th">予約一覧</div>
                 @foreach($reserves as $reserve) 
                 <div class="group">
                     <form method="post">
@@ -72,13 +79,20 @@
                     <input type="hidden" name="keyres" value="{{$reserve->reserve_id}}">
                     <input type="hidden" name="keyto" value="1">
                     <span class="inlineSet">
+                    @if(Session::get('from')  == 'change')
+                        <button name="dataget" formaction="mypageD" type="submit" class="btn" value="delete" disabled>削除</button>
+                        <button name="dataget" formaction="mypageC" type="submit" class="btn" value="change" disabled>変更</button>
+                    @else
                         <button name="dataget" formaction="mypageD" type="submit" class="btn" value="delete">削除</button>
                         <button name="dataget" formaction="mypageC" type="submit" class="btn" value="change">変更</button>
+                    @endif
                     </span>
                     </form>
                 </div>
                 @endforeach
-
+            @if(Session::get('from')  == 'change')
+            </div>
+            @endif
             @else
             <div class="th">予約は存在しません</div>
             @endif

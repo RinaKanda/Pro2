@@ -32,16 +32,16 @@ Route::get('/index', function () {//テスト追加
 Route::get('/','App\Http\Controllers\TopController@toppage');
 Route::post('/','App\Http\Controllers\TopController@toppage');
 
-Route::post('/newRegister','App\Http\Controllers\VaccineController@newRegister');
-Route::get('/newRegister','App\Http\Controllers\VaccineController@newRegister');
+// Route::post('/newRegister','App\Http\Controllers\VaccineController@newRegister');
+// Route::get('/newRegister','App\Http\Controllers\VaccineController@newRegister');
 
-Route::post('/newReserve','App\Http\Controllers\VaccineController@login');
-Route::post('/login','App\Http\Controllers\VaccineController@login');
+// Route::post('/newReserve','App\Http\Controllers\VaccineController@login');
+// Route::post('/login','App\Http\Controllers\VaccineController@login');
 
-Route::post('/selectPlace','App\Http\Controllers\VaccineController@checkuser');
+// Route::post('/selectPlace','App\Http\Controllers\VaccineController@checkuser');
 // Route::post('/mypage','App\Http\Controllers\Vaccinecontroller@checkuser');
-Route::get('/selectPlace','App\Http\Controllers\VaccineController@place');
-Route::post('/selectDay','App\Http\Controllers\Vaccinecontroller@day');
+// Route::get('/selectPlace','App\Http\Controllers\VaccineController@place');
+// Route::post('/selectDay','App\Http\Controllers\Vaccinecontroller@day');
 
 Route::get('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
 Route::post('/selectTime','App\Http\Controllers\Vaccinecontroller@Time');
@@ -57,6 +57,8 @@ Route::post('/delete','App\Http\Controllers\dataController@delete');
 Route::post('/mypageC','App\Http\Controllers\mypageController@display');
 Route::post('/changeConfirm','App\Http\Controllers\mypageController@confirm');
 Route::post('/change','App\Http\Controllers\dataController@change');
+
+Route::get('/break','App\Http\Controllers\dataController@break');
 
 
 //処理のみ
