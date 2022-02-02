@@ -20,6 +20,8 @@
         alert("削除完了しました！");
     } else if('{{$regok}}' == 3){
         alert('予約を変更しました！');
+    } else if('{{$regok}}' == 4){
+        alert('予約変更を中断しました');
     }
 
     function select(name,id){
@@ -74,7 +76,7 @@
         <form action = "/selectTime" method="post">
             <input type="hidden" id="date" name="date" value="value">
             <input type="hidden" id="place" name="place" value="val">
-            @if(Session::get('from') != null))
+            @if(Session::get('from') != null)
             <input type="hidden" id="preDid" name="prekeyDid" value="{{ $prekeyDid }}">
             <input type="hidden" id="keyres" name="keyres" value="{{ $keyres }}">
             @endif

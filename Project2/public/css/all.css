@@ -44,3 +44,18 @@ body{
     margin-left:10px;
     /* margin-bottom:10px; */
 }
+.inlineSet{
+    display:inline-block;
+}   
+/*change中*/
+.nonono{
+    opacity: 0.5;
+}
+.break{
+    
+    background-color: rgb(127, 255, 212,0.5);
+    text-align:center;
+}
+div a {
+    font-weight:bold;
+}

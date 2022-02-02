@@ -33,11 +33,10 @@
 @extends('layouts.reserlay')
 @section('content')
 <div id="sub">
-    変更
+    予約変更画面
             <div class="Ssize">
             変更したい予約であることを確認してください。<br>
             変更したい項目の横にある<span class="th">「変更する」</span>をクリックしてください。 <br>
-            {{ Session::get('from') }}から来たよ
             </div>        
    </div>
     <div class="wrapper">

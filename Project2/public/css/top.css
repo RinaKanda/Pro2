@@ -128,8 +128,8 @@ transform: translateY(-12px) rotate(45deg);
 nav {
 display:none;
 width: 27%;
-/* height: 75%; */
-height:auto;
+height: 75%;
+/* height:auto; */
 padding-top: 30px;
 overflow:auto;
 /* background-color: snow; */
