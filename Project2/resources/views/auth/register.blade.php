@@ -116,7 +116,7 @@
                             </div>
                             
                             <div class="col-md-6">
-                                <input id="tickets_number" type="text" placeholder="10桁の接種券番号を入力" class="form-control validate[required,custom[number],minSize[10],maxSize[10]]]" name="tickets_number" onkeyup="ShowLength(value);">
+                                <input id="tickets_number" type="text" placeholder="10桁の接種券番号を入力" class="form-control validate[required,custom[number],minSize[10],maxSize[10]]" name="tickets_number" onkeyup="ShowLength(value);">
                             </div>
                             
                         </div>

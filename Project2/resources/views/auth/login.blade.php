@@ -5,7 +5,16 @@
     <script src="/js/languages/jquery.validationEngine-ja.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript"></script>
-    <script type="text/javascript" src="js/all.js"></script>
+    <!-- <script type="text/javascript" src="js/all.js"></script> -->
+
+    <script>
+        jQuery(document).ready(function(){
+        jQuery("#regiForm").validationEngine();
+        });
+        function ShowLength( str ) {
+            document.getElementById("inputlength").innerHTML = "現在:" + str.length + "文字入力";
+        }
+    </script>
 
     <style>   
         body{
@@ -35,15 +44,18 @@
                 <div class="card-header"><h1>{{ __('Login') }}</h1></div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login') }}" id="regiForm">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="tickets_number" class="col-md-4 col-form-label text-md-end"><h3>{{ __('tickets_number') }}</h3></label>
-                            <span style="color:navy;">10桁の接種券番号を入力してください。</span>
+                            <div>
+                                <label for="tickets_number" class="col-md-4 col-form-label text-md-end"><h3>{{ __('tickets_number') }}</h3></label>
+                                <span style="color:navy;">10桁の接種券番号を入力してください。</span>
+                                <span class="inlineSet"><span id="inputlength">現在:0文字入力</span></span>
+                            </div>
 
                             <div class="col-md-6">
-                                <input id="tickets_number" placeholder="10桁の接種券番号を入力"　class="form-control @error('tickets_number') is-invalid @enderror" name="tickets_number" value="{{ old('tickets_number') }}" required autofocus>
+                                <input id="tickets_number" placeholder="10桁の接種券番号を入力" class="form-control @error('tickets_number') is-invalid @enderror validate[required,custom[number],minSize[10],maxSize[10]]" name="tickets_number" value="{{ old('tickets_number') }}" onkeyup="ShowLength(value);" autofocus>
 
                                 @error('tickets_number')
                                     <span class="invalid-feedback" role="alert">
@@ -58,7 +70,7 @@
                             <span style="color:navy;">登録時に入力したパスワードを入力してください。</span>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" placeholder="パスワードを入力"　class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" placeholder="パスワードを入力" class="form-control @error('password') is-invalid @enderror validate[required]" name="password" autocomplete="current-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
