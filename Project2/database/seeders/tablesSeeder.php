@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Schema;
 
 class tablesSeeder extends Seeder
 {
@@ -14,15 +16,11 @@ class tablesSeeder extends Seeder
      */
     public function run()
     {
-        //DB::table('reserves')->truncate();
-        //DB::table('reserve_people')->truncate();
-        //DB::table('reservation_datas')->truncate();
-        //DB::table('places')->truncate();
-
-        DB::table('reserves')->delete();
-        DB::table('reserve_people')->delete();
-        DB::table('reservation_datas')->delete();
-        DB::table('places')->delete();
+        Schema::disableForeignKeyConstraints();
+        DB::table('reserves')->truncate();
+        DB::table('reservation_datas')->truncate();
+        DB::table('places')->truncate();
+        Schema::enableForeignKeyConstraints();
 
         \DB::table('places')->insert([
                 ['place_id' => 1000,
@@ -732,33 +730,14 @@ class tablesSeeder extends Seeder
             ],
         ]);
 
-        DB::table('reserve_people')->insert([
-            ['Reserve_person_id' => 1,
-            'tickets_number' => '1234567890',
-            'birthday' => '2000-01-01',
-            'pass' => 'pass',
-            'email' => 'abc@gmail.com',
-            'family_name' => '田中',
-            'first_name' => '太郎',
-            ],
-            ['Reserve_person_id' => 2,
-            'tickets_number' => '0987654321',
-            'birthday' => '2000-01-02',
-            'pass' => 'word',
-            'email' => 'xyz@gmail.com',
-            'family_name' => '佐藤',
-            'first_name' => '花子',
-            ],
-        ]);
-
         DB::table('reserves')->insert([
             ['reserve_id' => 1,
-            'reserve_person_id' => 1,
+            'users_id' => 1,
             'reservation_data_id' => 100,
             'created_at' => '2022-03-15',
             ],
             ['reserve_id' => 2,
-            'reserve_person_id' => 1,
+            'users_id' => 1,
             'reservation_data_id' => 121,
             'created_at' => '2022-03-15',
             ],
