@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- 使わない -->
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -12,10 +13,7 @@
 </head>
 <script>
 	$(function(){
-        // var error = '{{$misscheck}}';
-        // if(error ==  ){
-        //     alert(error);
-        // }
+        
         var keyR = null;
         var keyR = '{{$keyReg}}';
         $("#keyreg").val(keyR);
